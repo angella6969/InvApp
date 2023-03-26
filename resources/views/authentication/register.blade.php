@@ -2,7 +2,7 @@
 
 @section('container')
 
-<div class="row justify-content-center">
+<div class="row justify-content-center align-items-center">
   <div class="col-lg-5">
     <main class="form-registration">
       <h1 class="h3 mb-3 fw-normal text-center">Form Registrasi</h1>
