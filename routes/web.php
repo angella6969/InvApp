@@ -18,11 +18,17 @@ use App\Http\Controllers\RegisController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/api', function () {
+    return view('api');
+});
 Route::post('/login',[loginController::class, 'authenticate' ]);
 Route::get('/login',[loginController::class, 'index' ])
             ->name('login')
             ->middleware('guest');
 
+Route::post('/logout',[LoginController::class, 'logout' ]);
 
 Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest');
 Route::post('/registrasi',[RegisController::class, 'store' ]);
+
+

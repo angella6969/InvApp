@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('email')->unique();
             $table->string('status')->default('inactive');
-            $table->foreignId('role_id')->nullable();
+            // $table->foreignId('role_id');
             $table->string('password');
             $table->timestamps();
         });
