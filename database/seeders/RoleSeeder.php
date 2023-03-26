@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
 {
@@ -12,6 +14,19 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Schema::disableForeignKeyConstraints();
+        role::truncate();
+        Schema::enableForeignKeyConstraints();
+
+        $data = [
+            'Super Admin','admin','client'
+        ];
+
+        foreach($data as $value)
+        {
+            role::insert([
+                'name'=> $value 
+            ]);
+        }
     }
 }
