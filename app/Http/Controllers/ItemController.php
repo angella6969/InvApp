@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\item;
+use App\Models\category;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
 
@@ -18,6 +19,12 @@ class ItemController extends Controller
                ->paginate(20)
                ->withQueryString()
        ]);
+
+//        return view('dashboard.categories.index',[
+//         "categories" => category::latest()
+//            ->paginate(20)
+//            ->withQueryString()
+//    ]);
     }
 
     /**

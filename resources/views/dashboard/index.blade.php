@@ -1,5 +1,5 @@
 
-@extends('template.dashboard.layout.main')
+@extends('dashboard.layout.main')
 
 @Section('container')
 

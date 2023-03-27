@@ -75,9 +75,15 @@ class loginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            if(Auth::user()->status != 'active'){
+                auth::logout();
+                return redirect('/login')->with('loginError','Akun Sudah terdaftar!!! Silahkan Hubungi Admin untuk mengaktifkan Akun');
+            }else{
+                
+                $request->session()->regenerate();
+                return redirect()->intended('/dashboard');
+            }
  
-            return redirect()->intended('/api');
         }
         return back()->with('loginError','Login Failed!');
     }

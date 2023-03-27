@@ -4,7 +4,7 @@
 @Section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Inventarisasi</h1>
+  <h1 class="h2">Halaman Categories</h1>
 </div>
 <div class="table-responsive col-lg-11">
 
@@ -15,30 +15,20 @@
   </div>
   @endif
 
-  <a href="/dashboard/item/create" class="btn btn-primary mb-2"> Add </a>
+  <a href="/dashboard/categories/create" class="btn btn-primary mb-2"> Add </a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th scope="col">No</th>
         <th scope="col">Nama</th>
-        {{-- <th scope="col">Kode</th> --}}
-        <th scope="col">Jenis Item</th>
-        <th scope="col">Status </th>
-        <th scope="col">Kepemilikan</th>
-        {{-- <th scope="col">jumlah</th> --}}
       </tr>
     </thead>
     <tbody>
-      @foreach ($items as $barang)
+      @foreach ($categories as $barang)
           
       <tr>
         <td>{{ $loop->iteration }}</td>
         <td >{{ $barang->nama }}</td>
-        {{-- <td >{{ $barang->kode_barang }}</td> --}}
-        <td >{{ $barang->kategory->nama}}</td>
-        {{-- <td class="text-center">{{ $barang->status->status }}</td> --}}
-        {{-- <td >{{ $barang->kepemilikan }}</td> --}}
-        {{-- <td class="text-center">{{ $barang->jumlah }}</td> --}}
 
         <td> 
           <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>
@@ -81,6 +71,6 @@
     </tbody>
   </table>
 </div>
-{{ $items->links() }}
+{{ $categories->links() }}
 
 @endsection

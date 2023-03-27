@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use Illuminate\Http\Request;
 
 class dashboardController extends Controller
@@ -12,6 +13,12 @@ class dashboardController extends Controller
     public function index()
     {
         return view('dashboard.index');
+
+    //     return view('dashboard.categories.index',[
+    //         "categories" => category::latest()
+    //            ->paginate(20)
+    //            ->withQueryString()
+    //    ]);
     }
 
     /**

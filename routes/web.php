@@ -1,10 +1,15 @@
 <?php
 
-use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\ItemController;
+// use auth;
+
+use App\Http\Controllers\CategoriesController;
+use App\Models\category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegisController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\dashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +23,11 @@ use App\Http\Controllers\RegisController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.categories.index',[
+        "categories" => category::latest()
+           ->paginate(20)
+           ->withQueryString()
+   ]);
 });
 Route::get('/api', function () {
     return view('api');
@@ -33,7 +42,8 @@ Route::post('/logout',[LoginController::class, 'logout' ]);
 Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest');
 Route::post('/registrasi',[RegisController::class, 'store' ]);
 
-Route::resource('/dashboard/item', ItemController::class);
-Route::resource('/dashboard', dashboardController::class)->middleware('Auth');
+Route::resource('/dashboard/item', ItemController::class)->middleware('auth');
+Route::resource('/dashboard', dashboardController::class)->middleware('auth');
+Route::resource('/dashboard/categories', CategoriesController::class)->middleware('auth');
 
 
