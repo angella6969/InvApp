@@ -10,7 +10,7 @@
         @csrf
 
         <div class="mb-2">
-          {{-- <label for="nama" class="form-label ">nama Item</label> --}}
+          <label for="nama" class="form-label ">nama Item</label>
           <input placeholder="Nama Barang" type="text" name='nama' class="form-control @error('nama') is-invalid @enderror" id="nama" required value="{{ old('nama') }}" >
           @error('nama')
               <div class="invalit-feedback">
@@ -21,7 +21,7 @@
         
 
       <div class="mb-2">
-        {{-- <label for="kode_barang" class="form-label ">kode Item</label> --}}
+        <label for="kode_barang" class="form-label ">kode Item</label>
         <input placeholder="kode Barang" type="text" name='kode_barang' class="form-control @error('kode_barang') is-invalid @enderror" id="kode_barang " required value="{{ old('kode_barang') }}" >
         @error('kode_barang')
             <div class="invalit-feedback">
@@ -30,10 +30,8 @@
             @enderror
       </div>
 
-      <div class="mb-2">
-        {{-- <label for="jenis_barang" class="form-label ">Jenis Item</label> --}}
-        {{-- <input placeholder="jenis Barang" type="text"name='jenis_barang'  class="form-control @error('jenis_barang') is-invalid @enderror" id="jenis_barang" required value="{{ old('jenis_barang') }}" > --}}
-        <select class="form-select" name= kategori_id>
+      {{-- <div class="mb-2">
+           <select class="form-select" name= kategori_id>
         @foreach ($kategoris as $item)
         @if(old('kategori_id') == $item->id)
           <option value="{{ $item->id }}" selected>{{ $item->nama }}</option>
@@ -48,9 +46,9 @@
               {{ $message }}
             </div>
             @enderror
-      </div>
+      </div> --}}
       <div class="mb-2">
-        {{-- <label for="status" class="form-label ">Status Item</label> --}}
+        <label for="status" class="form-label ">Status Item</label>
         <input placeholder="status Barang" type="text" name='status' class="form-control @error('status') is-invalid @enderror" id="status" required value="{{ old('status') }}" >
         @error('status')
             <div class="invalit-feedback">
@@ -59,7 +57,7 @@
             @enderror
       </div>
       <div class="mb-2">
-        {{-- <label for="kepemilikan" class="form-label ">kepemilikan Item</label> --}}
+        <label for="kepemilikan" class="form-label ">kepemilikan Item</label>
         <input placeholder="kepemilikan Barang" type="text" name='kepemilikan' class="form-control @error('kepemilikan') is-invalid @enderror" id="kepemilikan" required value="{{ old('kepemilikan') }}" >
         @error('kepemilikan')
             <div class="invalit-feedback">
@@ -68,7 +66,7 @@
             @enderror
       </div>
       <div class="mb-2">
-        {{-- <label for="jumlah" class="form-label ">jumlah Item</label> --}}
+        <label for="jumlah" class="form-label ">jumlah Item</label>
         <input placeholder="jumlah Barang" type="text" name='jumlah' class="form-control @error('jumlah') is-invalid @enderror" id="jumlah" required value="{{ old('jumlah') }}" >
         @error('jumlah')
             <div class="invalit-feedback">

@@ -17,6 +17,7 @@ class RoleController extends Controller
             "roles" => role::latest()
                ->paginate(20)
                ->withQueryString()
+               
        ]);
     }
 
