@@ -6,7 +6,8 @@
   </div>
 <div class="col-lg-8">
   
-    <form method="post" action="/dashboard">
+    <form method="post" action="/dashboard/{{ $categories->id }}">
+      @method('put')
         @csrf
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +17,7 @@
         @endif
         <div class="mb-2">
           <label for="nama" class="form-label ">Category Name</label>
-          <input placeholder="Category Name" type="text" name='name' class="form-control @error('name') is-invalid @enderror" id="name" required value="{{ old('name') }}" >
+          <input placeholder="Category Name" type="text" name='name' class="form-control @error('name') is-invalid @enderror" id="name" required value="{{ old('name',$categories->name) }}" >
           @error('name')
               <div class="invalit-feedback">
                 {{ $message }}

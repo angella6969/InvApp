@@ -6,7 +6,7 @@
   </div>
 <div class="col-lg-8">
   
-    <form method="post" action="/dashboard">
+    <form method="post" action="/dashboard/role">
         @csrf
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -15,7 +15,7 @@
         </div>
         @endif
         <div class="mb-2">
-          <label for="nama" class="form-label ">Category Name</label>
+          <label for="nama" class="form-label ">Role Name</label>
           <input placeholder="Category Name" type="text" name='name' class="form-control @error('name') is-invalid @enderror" id="name" required value="{{ old('name') }}" >
           @error('name')
               <div class="invalit-feedback">

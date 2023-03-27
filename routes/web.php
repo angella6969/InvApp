@@ -10,6 +10,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,7 @@ use App\Http\Controllers\dashboardController;
 */
 
 Route::get('/', function () {
-    return view('dashboard.categories.index',[
-        "categories" => category::latest()
-           ->paginate(20)
-           ->withQueryString()
-   ]);
+    return view('welcome');
 });
 Route::get('/api', function () {
     return view('api');
@@ -43,6 +40,7 @@ Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest'
 Route::post('/registrasi',[RegisController::class, 'store' ]);
 
 Route::resource('/dashboard/item', ItemController::class)->middleware('auth');
+Route::resource('/dashboard/role', RoleController::class)->middleware('auth');
 Route::resource('/dashboard', dashboardController::class)->middleware('auth');
 Route::resource('/dashboard/categories', CategoriesController::class)->middleware('auth');
 

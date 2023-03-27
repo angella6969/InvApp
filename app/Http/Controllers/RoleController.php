@@ -13,7 +13,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.role.index',[
+            "roles" => role::latest()
+               ->paginate(20)
+               ->withQueryString()
+       ]);
     }
 
     /**
@@ -21,7 +25,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('template.role.create',[
+            'roles' => role::all()
+            // 'statuses' => status::all()
+        ]);
     }
 
     /**
@@ -29,7 +36,12 @@ class RoleController extends Controller
      */
     public function store(StoreroleRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255'
+        ]);
+        // dd($request);
+        role::create($validatedData);
+        return redirect('/dashboard')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**
@@ -45,7 +57,9 @@ class RoleController extends Controller
      */
     public function edit(role $role)
     {
-        //
+        return view('dashboard.categories.edit',[
+            "role" => role::findOrFail($role)
+        ]);
     }
 
     /**
@@ -53,7 +67,12 @@ class RoleController extends Controller
      */
     public function update(UpdateroleRequest $request, role $role)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255'
+        ]);
+        // dd($request);
+        role::where('id',$role)->update($validatedData);
+        return redirect('/dashboard')->with('success', 'Berhasil Merubah Data');
     }
 
     /**
@@ -61,6 +80,7 @@ class RoleController extends Controller
      */
     public function destroy(role $role)
     {
-        //
+        role::destroy($role);
+        return redirect('/dashboard')->with('success', 'Berhasil Menghapus Data');
     }
 }

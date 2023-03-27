@@ -12,13 +12,13 @@ class dashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        // return view('dashboard.index');
 
-    //     return view('dashboard.categories.index',[
-    //         "categories" => category::latest()
-    //            ->paginate(20)
-    //            ->withQueryString()
-    //    ]);
+        return view('dashboard.categories.index',[
+            "categories" => category::latest()
+               ->paginate(20)
+               ->withQueryString()
+       ]);
     }
 
     /**
@@ -26,7 +26,10 @@ class dashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('template.categories.create',[
+            'categories' => category::all()
+            // 'statuses' => status::all()
+        ]);
     }
 
     /**
@@ -34,7 +37,12 @@ class dashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255'
+        ]);
+        // dd($request);
+        category::create($validatedData);
+        return redirect('/dashboard')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**
@@ -50,7 +58,9 @@ class dashboardController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('dashboard.categories.edit',[
+            "categories" => category::findOrFail($id)
+        ]);
     }
 
     /**
@@ -58,7 +68,12 @@ class dashboardController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255'
+        ]);
+        // dd($request);
+        category::where('id',$id)->update($validatedData);
+        return redirect('/dashboard')->with('success', 'Berhasil Merubah Data');
     }
 
     /**
@@ -66,6 +81,7 @@ class dashboardController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        category::destroy($id);
+        return redirect('/dashboard')->with('success', 'Berhasil Menghapus Data');
     }
 }
