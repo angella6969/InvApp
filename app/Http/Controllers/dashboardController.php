@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class dashboardController extends Controller
@@ -19,6 +20,12 @@ class dashboardController extends Controller
                ->paginate(20)
                ->withQueryString()
        ]);
+
+    //    return view('authentication.index',[
+    //     "users" => user::latest()
+    //     //    ->paginate(20)
+    //     //    ->withQueryString()
+//    ]);
     }
 
     /**
@@ -26,7 +33,7 @@ class dashboardController extends Controller
      */
     public function create()
     {
-        return view('template.categories.create',[
+        return view('categories.create',[
             'categories' => category::all()
             // 'statuses' => status::all()
         ]);
