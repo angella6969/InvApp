@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegisController;
@@ -30,5 +32,8 @@ Route::post('/logout',[LoginController::class, 'logout' ]);
 
 Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest');
 Route::post('/registrasi',[RegisController::class, 'store' ]);
+
+Route::resource('/dashboard/item', ItemController::class);
+Route::resource('/dashboard', dashboardController::class)->middleware('Auth');
 
 
