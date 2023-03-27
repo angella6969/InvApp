@@ -40,7 +40,7 @@
             </div>
             @enderror
         </div>
-        <div class="form-floating mb-1">
+        {{-- <div class="form-floating mb-1">
           <input type="text" name='role_id' class="form-control @error('role_id') is-invalid @enderror" id="floatingInput" placeholder="role_id" required value="{{ old('role_id') }}" >
           <label for="floatingInput">role_id</label>
           @error('role_id')
@@ -48,7 +48,7 @@
               {{ $message }}
             </div>
             @enderror
-        </div>
+        </div> --}}
 
 
         <div class="form-floating mb-1">
