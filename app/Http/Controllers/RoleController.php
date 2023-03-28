@@ -26,7 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('template.role.create',[
+        return view('dashboard.role.create',[
             'roles' => role::all()
             // 'statuses' => status::all()
         ]);
@@ -42,7 +42,7 @@ class RoleController extends Controller
         ]);
         // dd($request);
         role::create($validatedData);
-        return redirect('/dashboard')->with('success', 'Berhasil Menambahkan Data');
+        return redirect('/role')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**
@@ -58,8 +58,8 @@ class RoleController extends Controller
      */
     public function edit(role $role)
     {
-        return view('dashboard.categories.edit',[
-            "role" => role::findOrFail($role)
+        return view('dashboard.role.edit',[
+            "roles" => role::findOrFail($role)
         ]);
     }
 
@@ -73,7 +73,7 @@ class RoleController extends Controller
         ]);
         // dd($request);
         role::where('id',$role)->update($validatedData);
-        return redirect('/dashboard')->with('success', 'Berhasil Merubah Data');
+        return redirect('/role')->with('success', 'Berhasil Merubah Data');
     }
 
     /**

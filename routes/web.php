@@ -41,9 +41,9 @@ Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest'
 Route::post('/registrasi',[RegisController::class, 'store' ]);
 
 Route::resource('/dashboard/item', ItemController::class)->middleware('auth');
-Route::resource('/dashboard/role', RoleController::class)->middleware('auth');
+Route::resource('/role', RoleController::class)->middleware('auth');
 Route::resource('/dashboard', dashboardController::class)->middleware('auth');
-Route::resource('/dashboard/categories', CategoriesController::class)->middleware('auth');
+Route::resource('/categories', CategoriesController::class)->middleware('auth');
 Route::resource('/dashboard/users', UsersController::class)->middleware('auth');
 
 

@@ -19,12 +19,6 @@ class ItemController extends Controller
                ->paginate(20)
                ->withQueryString()
        ]);
-
-//        return view('dashboard.categories.index',[
-//         "categories" => category::latest()
-//            ->paginate(20)
-//            ->withQueryString()
-//    ]);
     }
 
     /**
@@ -32,7 +26,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('dashboard.item.create');
+        return view('dashboard.item.create',[
+            'categories' => category::all()
+       ]);
     }
 
     /**
@@ -40,7 +36,14 @@ class ItemController extends Controller
      */
     public function store(StoreitemRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255',
+            'item_code' =>'required|max:255|unique:items',
+            'category_id'=>['required'],
+        ]);
+        // dd($request);
+        item::create($validatedData);
+        return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**
@@ -54,9 +57,13 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(item $item)
+    public function edit(string $id)
     {
-        //
+        // dd($item);
+        return view('dashboard.item.edit',[
+            "items" => item::findOrFail($id),
+            'categories' => category::all()
+       ]);
     }
 
     /**
@@ -64,7 +71,21 @@ class ItemController extends Controller
      */
     public function update(UpdateitemRequest $request, item $item)
     {
-        //
+        $data = [
+            'name'=> 'required|max:255',
+            'item_code' =>'required|max:255',
+            'category_id'=>['required'],
+            'status'=>['required'],
+        ];
+        if( $request->item_code != $item->item_code )
+        {
+            $data['item_code'] = ['required','min:3','unique:items'];
+        }
+    
+        $validatedData = $request->validate($data);
+        // ddd($validatedData);
+        item::where('id',$item)->update($validatedData);
+        return redirect('/dashboard/item')->with('success', 'Berhasil Merubah Data');
     }
 
     /**

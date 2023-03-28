@@ -6,7 +6,7 @@
   </div>
 <div class="col-lg-8">
   
-    <form method="post" action="/dashboard/{{ $categories->id }}">
+    <form method="post" action="/categories/{{ $categories->id }}">
       @method('put')
         @csrf
         @if (session()->has('success'))

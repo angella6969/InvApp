@@ -6,13 +6,23 @@
   </div>
 <div class="col-lg-8">
   
-    <form method="post" action="/dashboard/item">
+    <form method="post" action="/dashboard/item/{{ $items->id }}">
+      @method('put')
         @csrf
 
         <div class="mb-2">
           <label for="name" class="form-label ">name Item</label>
-          <input placeholder="Item Name" type="text" name='name' class="form-control @error('name') is-invalid @enderror" id="name" required value="{{ old('name') }}" >
+          <input placeholder="Item Name" type="text" name='name' class="form-control @error('name') is-invalid @enderror" id="name" required value="{{ old('name',$items->name)}}" >
           @error('name')
+              <div class="invalit-feedback">
+                {{ $message }}
+              </div>
+              @enderror
+        </div>
+        <div class="mb-2">
+          <label for="status" class="form-label ">Status Item</label>
+          <input placeholder="status Item" type="text" name='status' class="form-control @error('status') is-invalid @enderror" id="status" required value="{{ old('status',$items->status)}}" >
+          @error('status')
               <div class="invalit-feedback">
                 {{ $message }}
               </div>
@@ -22,7 +32,7 @@
 
       <div class="mb-2">
         <label for="Item Code" class="form-label ">kode Item</label>
-        <input placeholder="Item Code" type="text" name='item_code' class="form-control @error('item_code') is-invalid @enderror" id="item_code " required value="{{ old('item_code') }}" >
+        <input placeholder="Item Code" type="text" name='item_code' class="form-control @error('item_code') is-invalid @enderror" id="item_code " required value="{{ old('item_code',$items->name)}}" >
         @error('item_code')
             <div class="invalit-feedback">
               {{ $message }}
@@ -32,10 +42,10 @@
 
       <div class="mb-2">
         <label for="Item Code" class="form-label ">Category Item</label>
-           <select class="form-select" name=category_id>
+           <select class="form-select" name=category_id id=category_id>
 
         @foreach ($categories as $item)
-        @if(old('category_id') == $item->id)
+        @if(old('category_id',$items->id ) == $item->id)
           <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
           @else
           <option value="{{ $item->id }}">{{ $item->name }}</option>

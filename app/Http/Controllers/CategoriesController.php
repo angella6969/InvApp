@@ -24,7 +24,10 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create',[
+            'categories' => category::all()
+            // 'statuses' => status::all()
+        ]);
     }
 
     /**
@@ -32,7 +35,12 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255'
+        ]);
+        // dd($request);
+        category::create($validatedData);
+        return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**
@@ -48,7 +56,9 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('dashboard.categories.edit',[
+            "categories" => category::findOrFail($id)
+        ]);
     }
 
     /**
@@ -56,7 +66,12 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255'
+        ]);
+        // dd($request);
+        category::where('id',$id)->update($validatedData);
+        return redirect('/categories')->with('success', 'Berhasil Merubah Data');
     }
 
     /**
@@ -64,6 +79,7 @@ class CategoriesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        category::destroy($id);
+        return redirect('/categories')->with('success', 'Berhasil Menghapus Data');
     }
 }

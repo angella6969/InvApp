@@ -37,7 +37,7 @@ class RegisController extends Controller
         ]);
         $validatedData['password'] = Hash::make( $validatedData['password']);
         User::create($validatedData);
-        return redirect('/login')->with('success', 'registration successfull! pleare login');
+        return redirect('/login')->with('success', 'registration successfull! Please Contact the Admin to Activated your akun');
     }
 
     /**
