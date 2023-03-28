@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('dashboard.item.index',[
+        return view('dashboard.item.index', [
             "items" => item::latest()
                ->paginate(20)
                ->withQueryString()
@@ -26,7 +26,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('dashboard.item.create',[
+        return view('dashboard.item.create', [
             'categories' => category::all()
        ]);
     }
@@ -60,7 +60,7 @@ class ItemController extends Controller
     public function edit(string $id)
     {
         // dd($item);
-        return view('dashboard.item.edit',[
+        return view('dashboard.item.edit', [
             "items" => item::findOrFail($id),
             'categories' => category::all()
        ]);
@@ -77,14 +77,14 @@ class ItemController extends Controller
             'category_id'=>['required'],
             'status'=>['required'],
         ];
-        if( $request->item_code != $item->item_code )
-        {
+        if ($request->item_code != $item->item_code) {
             $data['item_code'] = ['required','min:3','unique:items'];
         }
     
         $validatedData = $request->validate($data);
         // ddd($validatedData);
-        item::where('id',$item)->update($validatedData);
+        item::where('id', $item)->update($validatedData);
+
         return redirect('/dashboard/item')->with('success', 'Berhasil Merubah Data');
     }
 
