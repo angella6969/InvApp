@@ -11,10 +11,13 @@ class UsersController extends Controller
      */
     public function index()
     {
+        // return view('welcome');
         return view('authentication.index',[
-            'users' => user::all()
-            // 'statuses' => status::all()
-        ]);
+            "users" => User::latest()
+               ->paginate(20)
+               ->withQueryString()
+               
+       ]);
     }
 
     /**
@@ -22,7 +25,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        // return view('welcome');
+        return view('authentication.register',[
+            'users' => User::all()
+        ]);
     }
 
     /**

@@ -26,7 +26,7 @@ use App\Http\Controllers\CategoriesController;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('welcome');
 });
 Route::get('/api', function () {
     return view('api');
@@ -45,6 +45,6 @@ Route::resource('/dashboard/item', ItemController::class)->middleware('auth');
 Route::resource('/dashboard/role', RoleController::class)->middleware('auth');
 Route::resource('/dashboard', dashboardController::class)->middleware('auth');
 Route::resource('/categories', CategoriesController::class)->middleware('auth');
-Route::resource('/dashboard/users', UsersController::class)->middleware('auth');
+Route::resource('/users', UsersController::class)->middleware('auth');
 
 
