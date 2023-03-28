@@ -44,10 +44,10 @@
 
         <td> 
           <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>
-          {{-- <button action="" ><span ></span></button> --}}
+      
           
           <a href="/dashboard/item/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
-          <form action="/dashboard/inventarisasi/{{ $barang->id }}" class="d-inline" method="POST">
+          <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
             @csrf
             @method('DELETE')
             <button class="badge bg-danger border-0" onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span data-feather="x-circle"></span></button>

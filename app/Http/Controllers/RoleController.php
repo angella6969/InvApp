@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\item;
 use App\Models\role;
+use App\Models\category;
 use App\Http\Requests\StoreroleRequest;
 use App\Http\Requests\UpdateroleRequest;
 
@@ -40,9 +42,8 @@ class RoleController extends Controller
         $validatedData = $request->validate([
             'name'=> 'required|max:255'
         ]);
-        // dd($request);
         role::create($validatedData);
-        return redirect('/role')->with('success', 'Berhasil Menambahkan Data');
+        return redirect('/dashboard/role')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**
@@ -56,32 +57,38 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(role $role)
+    public function edit(string $id)
     {
+    //     // return view('welcome');
+    //     return view('dashboard.item.edit', [
+    //         "items" => item::findOrFail($role),
+    //         'categories' => category::all()
+    //    ]);
+
         return view('dashboard.role.edit',[
-            "roles" => role::findOrFail($role)
+            "roles" => role::findOrFail($id)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateroleRequest $request, role $role)
+    public function update(UpdateroleRequest $request, string $role)
     {
         $validatedData = $request->validate([
             'name'=> 'required|max:255'
         ]);
         // dd($request);
         role::where('id',$role)->update($validatedData);
-        return redirect('/role')->with('success', 'Berhasil Merubah Data');
+        return redirect('/dashboard/role')->with('success', 'Berhasil Merubah Data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(role $role)
+    public function destroy(string $role)
     {
         role::destroy($role);
-        return redirect('/dashboard')->with('success', 'Berhasil Menghapus Data');
+        return redirect('/dashboard/role')->with('success', 'Berhasil Menghapus Data');
     }
 }
