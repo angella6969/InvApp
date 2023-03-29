@@ -6,6 +6,7 @@ use App\Models\item;
 use App\Models\category;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
+use Brick\Math\BigInteger;
 
 class ItemController extends Controller
 {
@@ -69,20 +70,23 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateitemRequest $request, item $item)
+    public function update(UpdateitemRequest $request,string $item)
     {
+        // $items = item::all();
+        $items = item::findOrFail($item);
         $data = [
             'name'=> 'required|max:255',
-            'item_code' =>'required|max:255',
             'category_id'=>['required'],
             'status'=>['required'],
         ];
-        if ($request->item_code != $item->item_code) {
+        if ($request->item_code != $items->item_code) {
             $data['item_code'] = ['required','min:3','unique:items'];
         }
-    
+         
         $validatedData = $request->validate($data);
+
         item::where('id', $item)->update($validatedData);
+
 
         return redirect('/dashboard/item')->with('success', 'Berhasil Merubah Data');
     }
@@ -90,8 +94,9 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(item $item)
+    public function destroy(string $item)
     {
-        //
+        item::destroy($item);
+        return redirect('/dashboard/item')->with('success', 'Berhasil Menghapus Data');
     }
 }

@@ -2,7 +2,7 @@
 
 @Section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Create</h1>
+    <h1 class="h2">Edit Item Data : {{ $items->name }}</h1>
   </div>
 <div class="col-lg-8">
   
@@ -32,7 +32,7 @@
 
       <div class="mb-2">
         <label for="Item Code" class="form-label ">kode Item</label>
-        <input placeholder="Item Code" type="text" name='item_code' class="form-control @error('item_code') is-invalid @enderror" id="item_code " required value="{{ old('item_code',$items->name)}}" >
+        <input placeholder="Item Code" type="text" name='item_code' class="form-control @error('item_code') is-invalid @enderror" id="item_code " required value="{{ old('item_code',$items->item_code)}}" >
         @error('item_code')
             <div class="invalit-feedback">
               {{ $message }}

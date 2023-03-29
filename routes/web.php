@@ -2,16 +2,17 @@
 
 // use auth;
 
-use App\Http\Controllers\CategoriesController;
+use App\Models\role;
 use App\Models\category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegisController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,9 @@ Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest'
 Route::post('/registrasi',[RegisController::class, 'store' ]);
 
 Route::resource('/dashboard/item', ItemController::class)->middleware('auth');
-Route::resource('/role', RoleController::class)->middleware('auth');
+Route::resource('/dashboard/role', RoleController::class)->middleware('auth');
 Route::resource('/dashboard', dashboardController::class)->middleware('auth');
 Route::resource('/categories', CategoriesController::class)->middleware('auth');
-Route::resource('/dashboard/users', UsersController::class)->middleware('auth');
+Route::resource('/users', UsersController::class)->middleware('auth');
 
 

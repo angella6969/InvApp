@@ -6,7 +6,7 @@
   </div>
 <div class="col-lg-8">
   
-    <form method="post" action="/role">
+    <form method="post" action="/dashboard/role">
         @csrf
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
