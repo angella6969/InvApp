@@ -16,7 +16,7 @@ class dashboardController extends Controller
     public function index()
     {
         $categories = category::count();
-        $users = user::count()->where('role_id', 2);
+        $users = user::count();
         $items = item::count();
         $roles = role::count();
         return view('dashboard.index',compact('roles','categories','users','items'));

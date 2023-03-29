@@ -15,7 +15,7 @@
   </div>
   @endif
 
-  <a href="/dashboard/item/create" class="btn btn-primary mb-2"> Add </a>
+  <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus">  </span> New Item </a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
@@ -50,7 +50,7 @@
           <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
             @csrf
             @method('DELETE')
-            <button class="badge bg-danger border-0" onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span data-feather="x-circle"></span></button>
+            <button class="badge bg-danger border-0" onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span data-feather="file-minus"></span></button>
           </form>
 
         </td>

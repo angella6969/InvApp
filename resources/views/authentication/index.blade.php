@@ -15,7 +15,7 @@
   </div>
   @endif
 
-  <a href="/users/create" class="btn btn-primary mb-2"> Add Akun</a>
+  <a href="/users/create" class="btn btn-primary mb-2"><span data-feather="user-plus"></span> Add New User</a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
@@ -37,11 +37,11 @@
 
         <td> 
           <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>    
-          <a href="/users/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span>Activated Akun</a>
+          <a href="/users/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="user-check"></span></a>
           <form action="/users/{{ $barang->id }}" class="d-inline" method="POST">
             @csrf
             @method('DELETE')
-            <button class="badge bg-danger border-0" onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><i data-feather="trash-2"></i></button>
+            <button class="badge bg-danger border-0" onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><i data-feather="user-minus"></i></button>
           </form>
 
         </td>

@@ -15,7 +15,7 @@
   </div>
   @endif
 
-  <a href="/categories/create" class="btn btn-primary mb-2"> Add </a>
+  <a href="/categories/create" class="btn btn-primary mb-2"> Add New Category</a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>

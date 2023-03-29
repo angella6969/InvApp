@@ -29,6 +29,12 @@ use App\Http\Controllers\RentLogController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', function () {
+    return view('home.home');
+});
+Route::get('/home1', function () {
+    return view('home.home1');
+});
 Route::get('/api', function () {
     return view('api');
 });
