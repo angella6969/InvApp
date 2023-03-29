@@ -82,7 +82,6 @@ class ItemController extends Controller
         }
     
         $validatedData = $request->validate($data);
-        // ddd($validatedData);
         item::where('id', $item)->update($validatedData);
 
         return redirect('/dashboard/item')->with('success', 'Berhasil Merubah Data');
