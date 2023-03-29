@@ -13,7 +13,12 @@ class RentLogController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.rentItem.index', [
+            "logs" => rent_log::latest()
+               ->paginate(20)
+               ->withQueryString()
+               
+       ]);
     }
 
     /**

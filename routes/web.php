@@ -13,6 +13,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\RentLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +47,6 @@ Route::resource('/dashboard/role', RoleController::class)->middleware('auth');
 Route::resource('/dashboard', dashboardController::class)->middleware('auth');
 Route::resource('/categories', CategoriesController::class)->middleware('auth');
 Route::resource('/users', UsersController::class)->middleware('auth');
+Route::resource('/rent-item', RentLogController::class)->middleware('auth');
 
 

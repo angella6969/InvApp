@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\item;
+use App\Models\role;
 use App\Models\user;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,11 @@ class dashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $categories = category::count();
+        $users = user::count()->where('role_id', 2);
+        $items = item::count();
+        $roles = role::count();
+        return view('dashboard.index',compact('roles','categories','users','items'));
     }
 
     /**
