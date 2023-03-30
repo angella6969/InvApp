@@ -24,33 +24,36 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         item::factory(400)->create();
+        // category::factory(4)->create();
 
+        category::create([
+            'name' => 'Non Elektronik',
 
-        // Schema::disableForeignKeyConstraints();
-        // category::truncate();
-        // Schema::enableForeignKeyConstraints();
+        ]);
+        category::create([
+            'name' => 'Elektronik',
 
-    //     $data = [
-    //         'Non Elektronik','Electronik','software','hardware'
-    //     ];
+        ]);
+        category::create([
+            'name' => 'Software',
 
-    //     foreach($data as $value)
-    //     {
-    //         category::insert([
-    //             'name'=> $value 
-    //         ]);
-    //     }
+        ]);
+        category::create([
+            'name' => 'Hardware',
 
+        ]);
 
-    //     $data1 = [
-    //         'Super Admin','admin','client'
-    //     ];
+        role::create([
+            'name' => 'Super Admin',
 
-    //     foreach($data1 as $value1)
-    //     {
-    //         role::insert([
-    //             'name'=> $value1 
-    //         ]);
-    //     }
+        ]);
+        role::create([
+            'name' => 'Admin',
+
+        ]);
+        role::create([
+            'name' => 'user',
+
+        ]);
     }
 }

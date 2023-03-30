@@ -15,16 +15,12 @@ class dashboardController extends Controller
      */
     public function index()
     {
-        $categories = category::count();
-        $users = user::count();
-        $items = item::count();
-        $items1 = item::where('name','East')->count();
-        $items2 = item::where('name','Port')->count();
-        $items3 = item::where('name','North')->count();
-        $items4 = item::where('name','West')->count();
-        $roles = role::count();
+        $categories = category::all();
+        $users = user::all();
+        $items = item::all();
+        $roles = role::all();
 
-        return view('dashboard.index',compact('roles','categories','users','items','items2','items3','items4','items1'));
+        return view('dashboard.index',compact('roles','categories','users','items'));
 
     }
 
