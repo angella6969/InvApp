@@ -1,5 +1,5 @@
 
-    <div class="col-xl-3 col-md-6 ">
+    <div class="col-xl-3 col-md-6 mb-2">
         <div class="{{ $text2 }}">
             <div class="card-body">{{ $text }} 
                 <h3>{{ $text1 }}</h3>
