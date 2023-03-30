@@ -43,7 +43,7 @@
         {{-- <td class="text-center">{{ $barang->jumlah }}</td> --}}
 
         <td> 
-          <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>
+          {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button> --}}
       
           
           <a href="/dashboard/item/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>

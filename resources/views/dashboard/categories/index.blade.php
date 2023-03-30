@@ -31,7 +31,7 @@
         <td >{{ $barang->name }}</td>
 
         <td> 
-          <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>    
+          {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>     --}}
           <a href="/categories/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
           <form action="/categories/{{ $barang->id }}" class="d-inline" method="POST">
             @csrf

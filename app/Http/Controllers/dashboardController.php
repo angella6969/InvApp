@@ -19,7 +19,7 @@ class dashboardController extends Controller
         $users = user::count();
         $items = item::count();
         $roles = role::count();
-        return view('dashboard.index',compact('roles','categories','users','items'));
+        return view('dashboard.index', compact('roles', 'categories', 'users', 'items'));
     }
 
     /**

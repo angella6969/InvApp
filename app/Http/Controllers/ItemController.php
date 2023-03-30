@@ -60,7 +60,7 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        // dd($item);
+        
         return view('dashboard.item.edit', [
             "items" => item::findOrFail($id),
             'categories' => category::all()
@@ -72,7 +72,7 @@ class ItemController extends Controller
      */
     public function update(UpdateitemRequest $request,string $item)
     {
-        // $items = item::all();
+       
         $items = item::findOrFail($item);
         $data = [
             'name'=> 'required|max:255',

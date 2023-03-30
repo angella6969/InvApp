@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Halaman Role</h1>
 </div>
-<div class="table-responsive col-lg-11">
+<div class="table-responsive col-lg-8">
 
   @if (session()->has('success'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,8 +31,8 @@
         <td >{{ $barang->name }}</td>
 
         <td> 
-          <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>    
-          <a href="/dashboard/role/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+          {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>     --}}
+          {{-- <a href="/dashboard/role/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a> --}}
           <form action="/dashboard/role/{{ $barang->id }}" class="d-inline" method="POST">
             @csrf
             @method('DELETE')

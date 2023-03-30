@@ -11,12 +11,13 @@ class wrap extends Component
     /**
      * Create a new component instance.
      */
-    public $text, $text1, $text2, $url;
-    public function __construct($text, $text1, $text2, $url)
+    public $text, $text1, $text2, $text3, $url;
+    public function __construct($text, $text1, $text2, $text3, $url)
     {
         $this->text=$text;
         $this->text1=$text1;
         $this->text2=$text2;
+        $this->text3=$text3;
         $this->url=$url;
     }
 
