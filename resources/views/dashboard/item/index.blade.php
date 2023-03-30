@@ -24,6 +24,9 @@
         {{-- <th scope="col">Kode</th> --}}
         <th scope="col">Item Code</th>
         <th scope="col">Status </th>
+        <th scope="col">owner </th>
+        <th scope="col">location </th>
+        <th scope="col">brand </th>
         <th scope="col">category </th>
         <th scope="col">Action</th>
         {{-- <th scope="col">jumlah</th> --}}
@@ -37,6 +40,9 @@
         <td >{{ $barang->name }}</td>
         <td >{{ $barang->item_code }}</td>
         <td >{{ $barang->status }}</td>
+        <td >{{ $barang->owner }}</td>
+        <td >{{ $barang->location }}</td>
+        <td >{{ $barang->brand }}</td>
         <td >{{ $barang->Category->name}}</td>
         {{-- <td class="text-center">{{ $barang->status->status }}</td> --}}
         {{-- <td >{{ $barang->kepemilikan }}</td> --}}
