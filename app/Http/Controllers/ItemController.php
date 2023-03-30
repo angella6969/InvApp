@@ -6,9 +6,7 @@ use App\Models\item;
 use App\Models\category;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
-use Brick\Math\BigInteger;
 use Illuminate\Http\Request;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ItemController extends Controller
 {
