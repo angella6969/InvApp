@@ -1,19 +1,14 @@
 @extends('dashboard.layout.main')
 
+@Section('tittle')
+<title> | dashboard </title>
 @Section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Wellcame Back, {{ auth()->user()->name }} </h1>
     </div>
     <div class="container">
         <div class="row">
-            {{-- <x-wrap text="Total Category" text1="{{ $categories }}" url="/categories"
-                text2="card bg-success text-white  h-100" text3="" />
-            <x-wrap text="Total Users" text1="{{ $users }}" url="/users" text2="card bg-info text-white h-100"
-                text3="" />
-
-            <x-wrap text="Total Roles" text1="{{ $roles }}" url="/dashboard/role"
-                text2="card bg-warning text-white  h-100" text3="" /> --}}
-
+            
             <div class="col-xl-4 col-md-6 mb-2">
                 <div class="card bg-info text-white  h-100">
                     <div class="card-body">
