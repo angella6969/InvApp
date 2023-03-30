@@ -17,7 +17,13 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'=> $this->faker->cityPrefix()   ,
+            'category_id'=>mt_rand(1,4),
+            'item_code'=>$this->faker->ean8(),
+            'brand'=>$this->faker->state(),
+            'status'=>$this->faker->city() ,
+            'location'=>$this->faker->country() ,
+            'owner'=>$this->faker->firstNameMale() ,
         ];
     }
 }

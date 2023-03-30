@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('item_code');
+            $table->string('location');
+            $table->string('brand');
+            $table->string('owner');
             $table->string('status')->default('in stock');
             $table->foreignId('category_id');
             $table->timestamps();

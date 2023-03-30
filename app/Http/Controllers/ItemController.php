@@ -41,6 +41,9 @@ class ItemController extends Controller
             'name'=> 'required|max:255',
             'item_code' =>'required|max:255|unique:items',
             'category_id'=>['required'],
+            'brand'=>['required'],
+            'location'=>['required'],
+            'owner'=>['required'],
         ]);
         // dd($request);
         item::create($validatedData);
@@ -78,6 +81,9 @@ class ItemController extends Controller
             'name'=> 'required|max:255',
             'category_id'=>['required'],
             'status'=>['required'],
+            'brand'=>['required'],
+            'location'=>['required'],
+            'owner'=>['required'],
         ];
         if ($request->item_code != $items->item_code) {
             $data['item_code'] = ['required','min:3','unique:items'];
