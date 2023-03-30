@@ -18,13 +18,13 @@ class dashboardController extends Controller
         $categories = category::count();
         $users = user::count();
         $items = item::count();
-        $items1 = item::where('name','East')->count();
-        $items2 = item::where('name','Port')->count();
-        $items3 = item::where('name','North')->count();
-        $items4 = item::where('name','West')->count();
+        $rusak = item::where('status','rusak')->count();
+        $hilang = item::where('status','hilang')->count();
+        $terpinjam = item::where('status','terpinjam')->count();
+        $in_stock = item::where('status','in stock')->count();
         $roles = role::count();
 
-        return view('dashboard.index',compact('roles','categories','users','items','items2','items3','items4','items1'));
+        return view('dashboard.index',compact('roles','categories','users','items','hilang','terpinjam','in_stock','rusak'));
 
     }
 

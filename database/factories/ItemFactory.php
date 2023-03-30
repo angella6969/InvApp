@@ -21,7 +21,7 @@ class ItemFactory extends Factory
             'category_id'=>mt_rand(1,4),
             'item_code'=>$this->faker->ean8(),
             'brand'=>$this->faker->state(),
-            'status'=>$this->faker->city() ,
+            'status'=> $this->faker->randomElement(['rusak', 'hilang', 'terpinjam','in stock']),
             'location'=>$this->faker->country() ,
             'owner'=>$this->faker->firstNameMale() ,
         ];
