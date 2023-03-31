@@ -1,11 +1,11 @@
 @extends('dashboard.layout.main')
 
 @Section('tittle')
-<title> | dashboard </title>
+<title> | dashboard 12 </title>
 @Section('container')
-    {{-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Wellcame Back, {{ auth()->user()->name }} </h1>
-    </div> --}}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Wellcame Back,{{ auth()->user()->role->name }}  {{ auth()->user()->name }} </h1>
+    </div>
     <div class="container">
         <div class="row">
 
