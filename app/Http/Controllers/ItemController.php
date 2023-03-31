@@ -6,28 +6,19 @@ use App\Models\item;
 use App\Models\category;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
-use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        // $categories = category::all();
-        // if($request->categories || $request->name)
-        // {
-        //     $items = item::where('name','like','%'.$request->name.'%')->get();
-        // }
-        // else {
-        //     $items = item::latest()->get();
-        // }
-        // return view('dashboard.item.index',['items' => $items,'categories'=>$categories]);
+        // dd(request('all'));
         return view('dashboard.item.index', [
             'categories' => category::all(),
             "items" => item::latest()
+                ->Filter(request(['search','categories']))
                 ->paginate(20)
                 ->withQueryString()
         ]);
