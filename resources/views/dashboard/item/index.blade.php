@@ -65,7 +65,7 @@
                         <td>{{ $barang->owner }}</td>
                         <td>{{ $barang->location }}</td>
                         <td>{{ $barang->brand }}</td>
-                        <td>{{ $barang->Category->name }}</td>
+                        <td>{{ $barang->category->name }}</td>
 
                         <td>
                             {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#DetailModal"  --}}

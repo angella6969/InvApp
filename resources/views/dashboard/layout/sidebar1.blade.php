@@ -30,7 +30,7 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="/Users" class="nav-link">
+                          <a href="/users" class="nav-link">
                               <i class="far fa-circle nav-icon"></i>
                               <p>Users</p>
                           </a>
