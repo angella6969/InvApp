@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -53,7 +54,11 @@ class RegisController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('welcome');
+        // return view('authentication.register', [
+        //     "users" => User::findOrFail($id),
+        //     'roles' => role::all()
+        // ]);
     }
 
     /**

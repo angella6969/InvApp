@@ -23,26 +23,27 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/dashboard/item" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Items</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Users" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Users</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/categories" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Category</p>
-                            </a>
-                        </li>
-                    </ul>
+                   
+                </li>
+                <li class="nav-item menu-open">
+                    <li class="nav-item">
+                        <a href="/dashboard/item" class="nav-link active">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Items</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/users" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/categories" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Category</p>
+                        </a>
+                    </li>
                 </li>
             </ul>
         </nav>

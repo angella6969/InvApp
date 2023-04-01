@@ -12,7 +12,7 @@ class loginController extends Controller
      */
     public function index()
     {
-        return view('authentication.login');
+        return view('authentication.loginV');
     }
 
     /**
@@ -66,12 +66,12 @@ class loginController extends Controller
     {
         $request->validate([
             'email'=> ['required','email:dns'],
-            'password'=>['required']
+            'password'=>['required','min:6']
         ]);
 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required','min:6']
         ]);
 
         if (Auth::attempt($credentials)) {

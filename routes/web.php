@@ -29,6 +29,9 @@ use App\Http\Controllers\RentLogController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/loginV', function () {
+    return view('authentication.loginV');
+});
 Route::get('/home', function () {
     return view('home.home');
 });
@@ -39,6 +42,8 @@ Route::get('/api', function () {
     return view('api');
 });
 Route::post('/login',[loginController::class, 'authenticate' ]);
+Route::post('/a',[loginController::class, 'authenticate' ]);
+
 Route::get('/login',[loginController::class, 'index' ])
             ->name('login')
             ->middleware('guest');

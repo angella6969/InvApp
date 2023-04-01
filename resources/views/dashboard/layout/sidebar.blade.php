@@ -60,6 +60,12 @@
                             <p>Category</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/categories" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>logout</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

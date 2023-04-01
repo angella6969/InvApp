@@ -24,7 +24,7 @@
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @include('dashboard.layout.wrapper')
+            {{-- @include('dashboard.layout.wrapper') --}}
 
             <!-- /.content-header -->
 
