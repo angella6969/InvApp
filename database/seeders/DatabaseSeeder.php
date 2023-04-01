@@ -34,15 +34,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Elektronik',
 
         ]);
-        category::create([
-            'name' => 'Software',
-
-        ]);
-        category::create([
-            'name' => 'Hardware',
-
-        ]);
-
         role::create([
             'name' => 'Super Admin',
 
@@ -55,5 +46,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'user',
 
         ]);
+
     }
 }

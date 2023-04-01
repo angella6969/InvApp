@@ -1,19 +1,17 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Inventarisasi Sisda</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    {{-- <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search"> --}}
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            {{-- <a class="nav-link px-3" href="#">Sign out</a> --}}
-            <form action="/logout" method="post">
-                @csrf
-                <button type="submit" class="nav-link px-3 bg-dark border-0">
-                    logout <span data-feather="log-out" class="align-text-bottom"></span>
-                </button>
-            </form>
-        </div>
+{{-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"> --}}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-</header>
+{{-- </header> --}}

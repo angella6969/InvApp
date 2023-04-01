@@ -6,36 +6,41 @@
         <h1 class="h2">Inventarisasi</h1>
     </div>
     <div class="table-responsive col-lg-11">
-
+        {{-- Alert --}}
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+        {{-- End Alert --}}
 
+        {{-- Button Create --}}
         <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span> New Item </a>
+        {{-- End Button Create --}}
+
         {{-- Form Pencarian --}}
-        <form action="" method="get">
+        <form action="/dashboard/item">
             <div class="row">
-                <div class="col-12 col-sm-6">
+                {{-- <div class="col-12 col-sm-6">
                     <select name="categories" id="categories" class="form-select" placeholder="Category">
                         <option value="">Category</option>
                         @foreach ($categories as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
-                </div>
-                <div class="col-12 col-sm-6">
+                </div> --}}
+                <div class="col-12 col-sm-8">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="name" name="name"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <button class="btn btn-primary" id="basic-addon2">Search</button>
+                        <input type="text" class="form-control" placeholder="Search..." name="search" value="{{request('search')}}">
+                        <button class="btn btn-primary" type="submit" id="basic-addon2">Search</button>
                     </div>
                 </div>
             </div>
         </form>
         {{-- End form Pencarian --}}
+
+        {{-- Form Index --}}
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -60,7 +65,7 @@
                         <td>{{ $barang->owner }}</td>
                         <td>{{ $barang->location }}</td>
                         <td>{{ $barang->brand }}</td>
-                        <td>{{ $barang->Category->name }}</td>
+                        <td>{{ $barang->category->name }}</td>
 
                         <td>
                             {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#DetailModal"  --}}
@@ -77,12 +82,12 @@
                                     onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
                                         data-feather="file-minus"></span></button>
                             </form>
-
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        {{-- End Form Index --}}
     </div>
     {{ $items->links() }}
 @endsection

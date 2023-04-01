@@ -15,12 +15,14 @@ class dashboardController extends Controller
      */
     public function index()
     {
+
         $categories = category::all();
         $users = user::all();
         $items = item::all();
         $roles = role::all();
 
         return view('dashboard.index',compact('roles','categories','users','items'));
+
 
     }
 
