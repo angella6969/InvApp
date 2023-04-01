@@ -15,10 +15,11 @@
       @endif
     
       @if(session()->has('loginError'))
-    
-      <div class="alert alert-danger d-flex justify-content-center" role="alert">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{ session('loginError') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <br/>
       @endif
@@ -26,8 +27,8 @@
       
     </div>
   </div>
-
-
+  <main class="form-signin w-100 m-auto">
+    {{-- <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1> --}}
   <div class="animate form login_form">
     <section class="login_content">
       <form action="/login" method="post">
@@ -67,7 +68,7 @@
         <br /><br />
 
         <div>
-          <a class="btn btn-light" href="#">
+          <a class="btn btn-link" href="#">
             <h1><i class="fa fa-paw"></i> S . I . S . D . A</h1>
           </a>
           <p>Sistem Informasi Sumber Daya Air</p>
@@ -80,8 +81,10 @@
 
 
 
+    </section>
   </div>
-  </form>
-  </section>
+</main>
+
+
 </div>
 @endsection

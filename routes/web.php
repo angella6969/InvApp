@@ -30,7 +30,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/loginV', function () {
-    return view('authentication.loginV');
+    return view('authentication.show');
 });
 Route::get('/home', function () {
     return view('home.home');
@@ -49,6 +49,7 @@ Route::get('/login',[loginController::class, 'index' ])
             ->middleware('guest');
 
 Route::post('/logout',[LoginController::class, 'logout' ]);
+// Route::get('/dashboards/item/{id}',[ItemController::class, 'show' ]);
 
 Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest');
 Route::post('/registrasi',[RegisController::class, 'store' ]);

@@ -55,9 +55,15 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(item $item)
+    public function show($id)
     {
-        //
+        $items = item::findOrFail($id);
+        // dd($items);
+        return view('dashboard.item.show', [
+            "items" => $items,
+            'categories' => category::all()
+        ]);
+        // dd($items);
     }
 
     /**

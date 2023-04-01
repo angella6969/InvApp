@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\role;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RegisController extends Controller
@@ -38,6 +39,7 @@ class RegisController extends Controller
         ]);
         $validatedData['password'] = Hash::make( $validatedData['password']);
         User::create($validatedData);
+        auth::logout();
         return redirect('/login')->with('success', 'registration successfull! Please Contact the Admin to Activated your akun');
     }
 
