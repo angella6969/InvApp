@@ -3,8 +3,32 @@
 @section('container')
 
 <div class="login_wrapper">
-  <div class="animate form login_form">
+  <div class="container">
+    <div class="row">
 
+      {{-- Alert --}}
+      @if (session()->has('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        {{-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> --}}
+      </div>
+      @endif
+    
+      @if(session()->has('loginError'))
+    
+      <div class="alert alert-danger d-flex justify-content-center" role="alert">
+        {{ session('loginError') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <br/>
+      @endif
+      {{-- End Aler --}}
+      
+    </div>
+  </div>
+
+
+  <div class="animate form login_form">
     <section class="login_content">
       <form action="/login" method="post">
         @csrf
@@ -53,21 +77,7 @@
       {{-- End Footer --}}
 
 
-      {{-- Alert --}}
-      @if(session()->has('success'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      @endif
 
-      @if(session()->has('loginError'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('loginError') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      @endif
-      {{-- End Aler --}}
 
 
   </div>

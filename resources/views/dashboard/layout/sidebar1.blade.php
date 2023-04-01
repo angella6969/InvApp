@@ -1,8 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="/dashboard" class="brand-link">
-       <img src="image/PvQJoc4a_400x400.jpg" class="brand-image img-circle elevation-3"
+       {{-- <img src="image/PvQJoc4a_400x400.jpg" class="brand-image img-circle elevation-3"
           style="opacity: 1">
+          <img src="image\PvQJoc4a_400x400.jpg" alt="PvQJoc4a_400x400.jpg" width="200" class="img-thumbnail rounded-circle"> --}}
       <span class="brand-text font-weight-light">Sisda</span>
   </a> 
 

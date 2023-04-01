@@ -22,15 +22,15 @@
         {{-- Form Pencarian --}}
         <form action="/dashboard/item">
             <div class="row">
-                {{-- <div class="col-12 col-sm-6">
+                <div class="col-6 col-sm-6">
                     <select name="categories" id="categories" class="form-select" placeholder="Category">
                         <option value="">Category</option>
                         @foreach ($categories as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
-                </div> --}}
-                <div class="col-12 col-sm-8">
+                </div>
+                <div class="col-6 col-sm-6">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search..." name="search" value="{{request('search')}}">
                         <button class="btn btn-primary" type="submit" id="basic-addon2">Search</button>

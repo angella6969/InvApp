@@ -22,9 +22,11 @@
 </head>
 
 <body class="login">
+  
   <div>
-    <a class="hiddenanchor" id="signup"></a>
-    <a class="hiddenanchor" id="signin"></a>
+    
+    {{-- <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a> --}}
 
 @yield('container')
 
@@ -90,8 +92,6 @@
       </form>
       </section>
     </div> --}}
-
-
 
     {{-- <div id="register" class="animate form registration_form">
       <section class="login_content">

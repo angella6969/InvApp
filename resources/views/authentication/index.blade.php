@@ -16,6 +16,7 @@
   @endif
 
   <a href="/users/create" class="btn btn-primary mb-2"><span data-feather="user-plus"></span> Add New User</a>
+  <a href="/users/create" class="btn btn-primary mb-2"><span data-feather="user-check"></span> Activated New User</a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>

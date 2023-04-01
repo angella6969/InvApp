@@ -52,7 +52,7 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('welcome');
     }
 
     /**

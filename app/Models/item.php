@@ -23,21 +23,21 @@ class item extends Model
         // }
 
         $query->when($Filters['search'] ?? false, function ($query, $search) {
-            return  $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('item_code', 'like', '%' . $search . '%')
-                ->orWhere('status', 'like', '%' . $search . '%')
-                ->orWhere('brand', 'like', '%' . $search . '%')
-                ->orWhere('owner', 'like', '%' . $search . '%');
+            return  $query->where('name', 'like', '%' . $search . '%');
+                // ->orWhere('item_code', 'like', '%' . $search . '%');
+                // ->orWhere('status', 'like', '%' . $search . '%');
+                // ->orWhere('brand', 'like', '%' . $search . '%')
+                // ->orWhere('owner', 'like', '%' . $search . '%');
         });
         // $query->when($Filters['categories'] ?? false, function ($query, $categories) {
         //     return  $query->where('category_id', 'like', '%' . $categories . '%');
         //         // ->orWhere('item_code', 'like', '%' . $search . '%');
         // });
 
-        // $query->when($Filters['categories'] ?? false, function ($query, $categories) {
-        //     return $query->WhereHas('category', function ($query) use ($categories) {
-        //         $query->when('id', $categories);
-        //     });
-        // });
+        $query->when($Filters['categories'] ?? false, function ($query, $categories) {
+            return $query->WhereHas('category', function ( $query ) use ($categories) {
+                $query->where('categories.id', $categories);
+            });
+        });
     }
 }
