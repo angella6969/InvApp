@@ -16,11 +16,11 @@ class ItemController extends Controller
     {
         // dd(request('all'));
         return view('dashboard.item.index', [
-            'categories' => category::all(),
-            "items" => item::latest()
+            "items" => item::with(['category'])->latest()
                 ->Filter(request(['search','categories']))
                 ->paginate(20)
-                ->withQueryString()
+                ->withQueryString(),
+
         ]);
     }
 
@@ -57,11 +57,14 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $items = item::findOrFail($id);
+        // $items= item::all();
+        // $item = item::findOrFail($id);
         // dd($items);
         return view('dashboard.item.show', [
-            "items" => $items,
-            'categories' => category::all()
+            "item" => item::with(['category'])->findOrFail($id),
+            "items" => item::with(['category'])
+            ->paginate(20)
+            // 'categories' => category::all()
         ]);
         // dd($items);
     }

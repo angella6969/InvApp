@@ -3,9 +3,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('gentelella-master') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
+<script>    $.widget.bridge('uibutton', $.ui.button)</script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('gentelella-master') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -48,3 +46,8 @@
 <script>
     feather.replace()
 </script>
+<script src="{{ asset('gentelella-master') }}/vendors/jquery/dist/jquery.min.js"></script>
+<script src="{{ asset('gentelella-master') }}/vendors/fastclick/lib/fastclick.js"></script>
+<script src="{{ asset('gentelella-master') }}/vendors/nprogress/nprogress.js"></script>
+<script src="{{ asset('gentelella-master') }}/vendors/iCheck/icheck.min.js"></script>
+<script src="{{ asset('gentelella-master') }}/build/js/custom.min.js"></script>

@@ -26,3 +26,4 @@
 <!-- summernote -->
 <link rel="stylesheet" href="{{ asset('gentelella-master') }}/plugins/summernote/summernote-bs4.min.css">
 <!-- Styles -->
+<link href="{{ asset('gentelella-master') }}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">

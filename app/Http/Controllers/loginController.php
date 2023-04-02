@@ -79,11 +79,18 @@ class loginController extends Controller
                 auth::logout();
                 return redirect('/login')->with('loginError','Akun Sudah terdaftar!!! Silahkan Hubungi Admin untuk mengaktifkan Akun');
             }else{
-                
-                $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
+                // if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2){
+                    $request->session()->regenerate();
+                    return redirect()->intended('/dashboard');
+                // }
+                // else if(Auth::user()->role_id == 3)
+                // {
+                    // $request->session()->regenerate();
+                    // return redirect()->intended('/');
+                // }
+                // auth::logout();
+                // return redirect('/login')->with('loginError','Silahkan Hubungi Admin untuk mengaktifkan Akun');
             }
- 
         }
         return back()->with('loginError','Login Failed!');
     }

@@ -13,9 +13,9 @@ class UsersController extends Controller
     {
         // return view('welcome');
         return view('authentication.index',[
-            "users" => User::latest()
+            "users" => User::with(['role'])
                ->paginate(20)
-               ->withQueryString()
+            //    ->withQueryString()
                
        ]);
     }

@@ -13,7 +13,9 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\FormPelaporanController;
 use App\Http\Controllers\RentLogController;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,21 +46,32 @@ Route::get('/api', function () {
 Route::post('/login',[loginController::class, 'authenticate' ]);
 Route::post('/a',[loginController::class, 'authenticate' ]);
 
+Route::get('/dashboard/formlaporan',[FormPelaporanController::class, 'index' ])->middleware('auth');
+
 Route::get('/login',[loginController::class, 'index' ])
             ->name('login')
             ->middleware('guest');
 
-Route::post('/logout',[LoginController::class, 'logout' ]);
+
 // Route::get('/dashboards/item/{id}',[ItemController::class, 'show' ]);
 
 Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest');
 Route::post('/registrasi',[RegisController::class, 'store' ]);
 
-Route::resource('/dashboard/item', ItemController::class)->middleware('auth');
-Route::resource('/dashboard/role', RoleController::class)->middleware('auth');
-Route::resource('/dashboard', dashboardController::class)->middleware('auth');
-Route::resource('/categories', CategoriesController::class)->middleware('auth');
-Route::resource('/users', UsersController::class)->middleware('auth');
+
 Route::resource('/rent-item', RentLogController::class)->middleware('auth');
 
 
+
+
+Route::middleware(['Admin'])->group(function () {
+    Route::resource('/dashboard/item', ItemController::class);
+    Route::resource('/dashboard/role', RoleController::class);
+    Route::resource('/dashboard', dashboardController::class);
+    Route::resource('/categories', CategoriesController::class);
+    Route::resource('/users', UsersController::class);
+});
+
+
+
+Route::post('/logout',[LoginController::class, 'logout' ]);

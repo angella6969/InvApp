@@ -22,17 +22,17 @@
     {{-- Form Pencarian --}}
     <form action="/dashboard/item">
         <div class="row">
-            <div class="col-6 col-sm-6">
+            {{-- <div class="col-6 col-sm-6">
                 <select name="categories" id="categories" class="form-select" placeholder="Category">
                     <option value="">Category</option>
                     @foreach ($categories as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
-            </div>
-            <div class="col-6 col-sm-6">
+            </div> --}}
+            <div class="col-6 col-sm-12">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search..." name="search"
+                    <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
                         value="{{request('search')}}">
                     <button class="btn btn-primary" type="submit" id="basic-addon2">Search</button>
                 </div>
@@ -47,12 +47,8 @@
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama</th>
-                <th scope="col">Item Code</th>
                 <th scope="col">Status </th>
-                {{-- <th scope="col">owner </th>
-                <th scope="col">location </th>
-                <th scope="col">brand </th>
-                <th scope="col">category </th> --}}
+                <th scope="col">category </th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -61,17 +57,14 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $barang->name }}</td>
-                <td>{{ $barang->item_code }}</td>
                 <td>{{ $barang->status }}</td>
-                {{-- <td>{{ $barang->owner }}</td>
-                <td>{{ $barang->location }}</td>
-                <td>{{ $barang->brand }}</td>
-                <td>{{ $barang->category->name }}</td> --}}
+                <td>{{ $barang->category->name }}</td>
 
                 <td>
                     {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal"
                         data-bs-target="#DetailModal" --}} {{--><span data-feather="eye"></span></button> --}}
 
+                    @can('SuperAdmin')
                     <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
                             data-feather="eye"></span></a>
 
@@ -84,6 +77,7 @@
                             onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
                                 data-feather="file-minus"></span></button>
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach
@@ -91,5 +85,6 @@
     </table>
     {{-- End Form Index --}}
 </div>
+
 {{ $items->links() }}
 @endsection
