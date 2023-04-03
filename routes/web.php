@@ -45,8 +45,8 @@ Route::get('/api', function () {
 });
 Route::post('/login',[loginController::class, 'authenticate' ]);
 Route::post('/a',[loginController::class, 'authenticate' ]);
-
-Route::get('/dashboard/formlaporan',[FormPelaporanController::class, 'index' ])->middleware('auth');
+Route::post('/logout',[LoginController::class, 'logout' ]);
+Route::get('/dashboard/formlaporan',[FormPelaporanController::class, 'index' ])->middleware(['auth','Admin']);
 
 Route::get('/login',[loginController::class, 'index' ])
             ->name('login')
@@ -64,14 +64,14 @@ Route::resource('/rent-item', RentLogController::class)->middleware('auth');
 
 
 
-Route::middleware(['Admin'])->group(function () {
+Route::middleware(['Admin','auth'])->group(function () {
     Route::resource('/dashboard/item', ItemController::class);
     Route::resource('/dashboard/role', RoleController::class);
     Route::resource('/dashboard', dashboardController::class);
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/users', UsersController::class);
+    
 });
 
 
 
-Route::post('/logout',[LoginController::class, 'logout' ]);

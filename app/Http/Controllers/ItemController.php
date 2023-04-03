@@ -62,7 +62,7 @@ class ItemController extends Controller
         // dd($items);
         return view('dashboard.item.show', [
             "item" => item::with(['category'])->findOrFail($id),
-            "items" => item::with(['category'])
+            "items" => item::with(['category'])->latest()
             ->paginate(20)
             // 'categories' => category::all()
         ]);
