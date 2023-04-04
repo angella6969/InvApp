@@ -7,7 +7,7 @@
     <main class="form-registration">
     
       <section class="login_content">
-        <form action="/registrasi" method="post">
+        <form action="/users" method="post">
           @csrf
           <h1>Create Account</h1>
           <div class="form-floating mb-1">
@@ -59,8 +59,8 @@
 
           {{-- Footer --}}
           <div class="separator">
-            <small class="d-block text-center">Not Registered? <a href="/login"> Login Now</a>
-            </small>
+            {{-- <small class="d-block text-center">Not Registered? <a href="/login"> Login Now</a>
+            </small> --}}
 
             <div class="clearfix"></div>
             <br /><br />
@@ -76,8 +76,8 @@
           {{-- End Footer --}}
         </form>
       </section>
-      <small class="d-block text-center mb-5">Alredy Registered? <a href="/login"> Login</a>
-      </small>
+      {{-- <small class="d-block text-center mb-5">Alredy Registered? <a href="/login"> Login</a>
+      </small> --}}
     </main>
   </div>
 

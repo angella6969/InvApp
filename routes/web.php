@@ -43,35 +43,24 @@ Route::get('/home1', function () {
 Route::get('/api', function () {
     return view('api');
 });
-Route::post('/login',[loginController::class, 'authenticate' ]);
-Route::post('/a',[loginController::class, 'authenticate' ]);
-Route::post('/logout',[LoginController::class, 'logout' ]);
-Route::get('/dashboard/formlaporan',[FormPelaporanController::class, 'index' ])->middleware(['auth','Admin']);
+Route::post('/login', [loginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/dashboard/formlaporan', [FormPelaporanController::class, 'index'])->middleware(['auth', 'Admin']);
 
-Route::get('/login',[loginController::class, 'index' ])
-            ->name('login')
-            ->middleware('guest');
+Route::get('/login', [loginController::class, 'index'])
+    ->name('login')
+    ->middleware('guest');
 
-
-// Route::get('/dashboards/item/{id}',[ItemController::class, 'show' ]);
-
-Route::get('/registrasi',[RegisController::class, 'index' ])->middleware('guest');
-Route::post('/registrasi',[RegisController::class, 'store' ]);
+Route::get('/registrasi', [RegisController::class, 'index'])->middleware('guest');
+Route::post('/registrasi', [RegisController::class, 'store']);
 
 
 Route::resource('/rent-item', RentLogController::class)->middleware('auth');
 
-
-
-
-Route::middleware(['Admin','auth'])->group(function () {
+Route::middleware(['Admin', 'auth'])->group(function () {
     Route::resource('/dashboard/item', ItemController::class);
     Route::resource('/dashboard/role', RoleController::class);
     Route::resource('/dashboard', dashboardController::class);
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/users', UsersController::class);
-    
 });
-
-
-

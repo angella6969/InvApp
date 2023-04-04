@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -13,6 +14,7 @@ class UsersController extends Controller
     {
         // return view('welcome');
         return view('authentication.index',[
+            "user" => User::all()->where('role_id','1' || 'role_id','2'),
             "users" => User::with(['role'])
                ->paginate(20)
             //    ->withQueryString()
@@ -26,7 +28,7 @@ class UsersController extends Controller
     public function create()
     {
         // return view('welcome');
-        return view('authentication.register',[
+        return view('authentication.create',[
             'users' => User::all()
         ]);
     }
@@ -36,7 +38,16 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required|max:255',
+            'username'=>['required','min:3','max:200','unique:users'],
+            'email'=>['required','email:dns','unique:users'],
+            'password'=>['required','min:5','max:255']
+        ]);
+        
+        $validatedData['password'] = Hash::make( $validatedData['password']);
+        User::create($validatedData);
+        return redirect('/users')->with('success', 'Berhasil Menambahkan Data : Akun Status Inactive');
     }
 
     /**
@@ -52,7 +63,9 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        return view('welcome');
+        return view('authentication.edit',[
+            "users" => User::findOrFail($id)
+        ]);
     }
 
     /**
@@ -60,7 +73,37 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $users = User::findOrFail($id);
+        $data = [
+            'name'=> 'required|max:255',
+            // 'username'=>['required','min:3','max:200','unique:users'],
+            // 'email'=>['required','email:dns','unique:users'],
+            // 'password'=>['required','min:5','max:255']
+        ];
+        if ($request->email != $request->email || $request->username != $request->username ) {
+            $data['email'] = ['required','email:dns','unique:users'];
+            $data['username'] = ['required','min:3','max:200','unique:users'];
+        }
+        $validatedData = $request->validate($data);
+        // $validatedData['password'] = Hash::make( $validatedData['password']);
+        // User::create($validatedData);
+        User::where('id', $id)->update($validatedData);
+        return redirect('/users')->with('success', 'Berhasil Menambahkan Data : Akun Status Inactive');
+    }
+
+    public function activated(Request $request, string $id)
+    {
+        $users = User::findOrFail($id);
+        $data = [
+            'name'=> 'required|max:255',
+        ];
+        if ($request->email != $request->email || $request->username != $request->username ) {
+            $data['email'] = ['required','email:dns','unique:users'];
+            $data['username'] = ['required','min:3','max:200','unique:users'];
+        }
+        $validatedData = $request->validate($data);
+        User::where('id', $id)->update($validatedData);
+        return redirect('/users')->with('success', 'Berhasil Menambahkan Data : Akun Status Inactive');
     }
 
     /**
