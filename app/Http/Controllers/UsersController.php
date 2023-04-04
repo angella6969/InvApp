@@ -85,10 +85,8 @@ class UsersController extends Controller
             $data['username'] = ['required','min:3','max:200','unique:users'];
         }
         $validatedData = $request->validate($data);
-        // $validatedData['password'] = Hash::make( $validatedData['password']);
-        // User::create($validatedData);
         User::where('id', $id)->update($validatedData);
-        return redirect('/users')->with('success', 'Berhasil Menambahkan Data : Akun Status Inactive');
+        return redirect('/users')->with('success', 'Update Berhasil');
     }
 
     public function activated(Request $request, string $id)
