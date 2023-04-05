@@ -69,7 +69,8 @@
 
         <div>
           <a class="btn btn-link" href="#">
-            <h1><i class="fa fa-paw"></i> S . I . S . D . A</h1>
+            {{-- <h1><i class="fa fa-paw"></i> S . I . S . D . A</h1> --}}
+            <img class="img-thumbnail" src={{ asset('storage/images/LOGO%20SISDA.png') }} alt="LOGO SISDA.png">
           </a>
           <p>Sistem Informasi Sumber Daya Air</p>
           <p>BBWS Serayu Opak</p>

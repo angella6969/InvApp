@@ -76,9 +76,6 @@ class UsersController extends Controller
         $users = User::findOrFail($id);
         $data = [
             'name'=> 'required|max:255',
-            // 'username'=>['required','min:3','max:200','unique:users'],
-            // 'email'=>['required','email:dns','unique:users'],
-            // 'password'=>['required','min:5','max:255']
         ];
         if ($request->email != $request->email || $request->username != $request->username ) {
             $data['email'] = ['required','email:dns','unique:users'];

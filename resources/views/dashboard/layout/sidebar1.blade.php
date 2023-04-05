@@ -2,9 +2,9 @@
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
         {{-- <img src="image/PvQJoc4a_400x400.jpg" class="brand-image img-circle elevation-3" style="opacity: 1"> --}}
-        {{-- <img src="image\PvQJoc4a_400x400.jpg" alt="PvQJoc4a_400x400.jpg" width="200"
-            class="img-thumbnail rounded-circle"> --}}
-        <h1 class="justfy-conten-center"> S . I . S . D . A</h1>
+        <img src="{{ asset('storage/images/LOGO%20SISDA.png') }}" alt="LOGO%20SISDA.png" width="200"
+            class="img-thumbnail ">
+        {{-- <h1 class="justfy-conten-center"> S . I . S . D . A</h1> --}}
         {{-- <span class="brand-text font-weight-light">Sisda</span> --}}
     </a>
 
