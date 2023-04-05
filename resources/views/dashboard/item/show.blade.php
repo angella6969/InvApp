@@ -33,7 +33,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th>No ID</th>
                   <th>Name</th>
                   <th>Item Code</th>
                   <th>Brand</th>

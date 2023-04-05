@@ -1,17 +1,17 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-3">
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
         {{-- <img src="image/PvQJoc4a_400x400.jpg" class="brand-image img-circle elevation-3" style="opacity: 1"> --}}
-        {{-- <img src="image\PvQJoc4a_400x400.jpg" alt="PvQJoc4a_400x400.jpg" width="200"
-            class="img-thumbnail rounded-circle"> --}}
-        <h1> S . I . S . D . A</h1>
+        <img src="{{ asset('storage/images/LOGO%20SISDA.png') }}" alt="LOGO%20SISDA.png" width="200"
+            class="img-thumbnail ">
+        {{-- <h1 class="justfy-conten-center"> S . I . S . D . A</h1> --}}
         {{-- <span class="brand-text font-weight-light">Sisda</span> --}}
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-3">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">

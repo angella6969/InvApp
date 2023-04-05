@@ -65,34 +65,33 @@ class loginController extends Controller
     public function authenticate(Request $request)
     {
         $request->validate([
-            'email'=> ['required','email:dns'],
-            'password'=>['required','min:6']
+            'email' => ['required', 'email:dns'],
+            'password' => ['required', 'min:6']
         ]);
 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required','min:6']
+            'password' => ['required', 'min:6']
         ]);
 
         if (Auth::attempt($credentials)) {
-            if(Auth::user()->status != 'active'){
+            if (Auth::user()->status != 'active') {
                 auth::logout();
-                return redirect('/login')->with('loginError','Akun Sudah terdaftar!!! Silahkan Hubungi Admin untuk mengaktifkan Akun');
-            }else{
-                // if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2){
+                return redirect('/login')->with('loginError', 'Akun Sudah terdaftar!!! Silahkan Hubungi Admin untuk mengaktifkan Akun');
+            } else {
+                if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
                     $request->session()->regenerate();
                     return redirect()->intended('/dashboard');
-                // }
-                // else if(Auth::user()->role_id == 3)
-                // {
-                    // $request->session()->regenerate();
-                    // return redirect()->intended('/');
-                // }
-                // auth::logout();
-                // return redirect('/login')->with('loginError','Silahkan Hubungi Admin untuk mengaktifkan Akun');
+                }
+                if (Auth::user()->role_id == 3) {
+                    $request->session()->regenerate();
+                    return redirect()->intended('/');
+                }
+                auth::logout();
+                return redirect('/login')->with('loginError', 'Silahkan Hubungi Admin untuk mengaktifkan Akun');
             }
         }
-        return back()->with('loginError','Login Failed!');
+        return back()->with('loginError', 'Login Failed!');
     }
     public function logout(Request $request)
     {

@@ -16,7 +16,7 @@ class Client
     public function handle(Request $request, Closure $next): Response
     {
        
-        if ($request->user()->role_id == 3) {
+        if (!auth()->check() || $request->user()->role_id == 3) {
             return $next($request);
         }
         abort(403,'Akses Khusus Client');

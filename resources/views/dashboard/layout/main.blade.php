@@ -23,24 +23,13 @@
 
 
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            {{-- @include('dashboard.layout.wrapper') --}}
-
-            <!-- /.content-header -->
-
-
-
             <div class="container">
-                <div class="row">
+                <div class="row ">
                     @yield('container')
-
-
                 </div>
             </div>
-            <!-- /.content -->
         </div>
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
         </aside>
     </div>
     @include('dashboard.layout.script')
