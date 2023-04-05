@@ -64,7 +64,7 @@
                     {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal"
                         data-bs-target="#DetailModal" --}} {{--><span data-feather="eye"></span></button> --}}
 
-                    @can('SuperAdmin')
+                    {{-- @can('SuperAdmin') --}}
                     <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
                             data-feather="eye"></span></a>
 
@@ -77,7 +77,7 @@
                             onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
                                 data-feather="file-minus"></span></button>
                     </form>
-                    @endcan
+                    {{-- @endcan --}}
                 </td>
             </tr>
             @endforeach
