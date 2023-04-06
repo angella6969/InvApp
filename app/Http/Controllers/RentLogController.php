@@ -21,7 +21,7 @@ class RentLogController extends Controller
 
         return view('dashboard.rentItem.index', [
             // "items" =>item::where('status', 'in stock')->with(['category','users']),
-            "users" =>User::where('role_id', 3)->get(),
+            "users" =>User::where('role_id', '!=', 1 )->get(),
             "logs" => rent_log::with(['items','users','category'])->latest()
                ->paginate(20)
                

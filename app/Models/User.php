@@ -48,6 +48,6 @@ class User extends Authenticatable
     }
     public function rent_log()
     {
-        return $this->hasMany(rent_log::class);
+        return $this->belongsToMany(rent_log::class);
     }
 }
