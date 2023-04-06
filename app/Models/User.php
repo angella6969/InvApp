@@ -46,4 +46,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(role::class);
     }
+    public function rent_log()
+    {
+        return $this->hasMany(rent_log::class);
+    }
 }

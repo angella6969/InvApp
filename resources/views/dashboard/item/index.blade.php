@@ -20,7 +20,7 @@
     {{-- End Button Create --}}
 
      {{-- Button Rent Item --}}
-     <a href="/dashboard/item/create" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Rent Item </a>
+     <a href="/rent-item" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Rent Item </a>
      {{-- End Button  Rent Item --}}
 
     {{-- Form Pencarian --}}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\rent_log;
 use App\Http\Requests\Storerent_logRequest;
 use App\Http\Requests\Updaterent_logRequest;
+use App\Models\item;
+use App\Models\User;
 
 class RentLogController extends Controller
 {
@@ -13,10 +15,15 @@ class RentLogController extends Controller
      */
     public function index()
     {
+        $logs = rent_log::with(['items','users','category'])->latest()
+        ->paginate(20);
+        // dd($logs);
+
         return view('dashboard.rentItem.index', [
-            "logs" => rent_log::latest()
+            // "items" =>item::where('status', 'in stock')->with(['category','users']),
+            "users" =>User::where('role_id', 3)->get(),
+            "logs" => rent_log::with(['items','users','category'])->latest()
                ->paginate(20)
-               ->withQueryString()
                
        ]);
     }

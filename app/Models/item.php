@@ -14,6 +14,10 @@ class item extends Model
     {
         return $this->belongsTo(category::class);
     }
+    public function rent_logs()
+    {
+        return $this->belongsToMany(rent_log::class);
+    }
 
     public function scopeFilter($query, array $Filters)
     {

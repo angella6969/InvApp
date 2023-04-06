@@ -46,8 +46,10 @@ class UsersController extends Controller
         ]);
         
         $validatedData['password'] = Hash::make( $validatedData['password']);
+        $validatedData['status'] = "active";
+        $validatedData['role_id'] = 3;
         User::create($validatedData);
-        return redirect('/users')->with('success', 'Berhasil Menambahkan Data : Akun Status Inactive');
+        return redirect('/users')->with('success', 'Berhasil Menambahkan User');
     }
 
     /**
