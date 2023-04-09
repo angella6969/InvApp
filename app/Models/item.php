@@ -14,7 +14,7 @@ class item extends Model
     {
         return $this->belongsTo(category::class);
     }
-    public function rent_logs()
+    public function rent_log()
     {
         return $this->belongsToMany(rent_log::class);
     }
@@ -28,13 +28,13 @@ class item extends Model
 
         $query->when($Filters['search'] ?? false, function ($query, $search) {
             return  $query->where('name', 'like', '%' . $search . '%');
-                // ->orWhere('item_code', 'like', '%' . $search . '%');
-                // ->orWhere('status', 'like', '%' . $search . '%');
-                // ->orWhere('brand', 'like', '%' . $search . '%')
-                // ->orWhere('owner', 'like', '%' . $search . '%');
+            // ->orWhere('item_code', 'like', '%' . $search . '%');
+            // ->orWhere('status', 'like', '%' . $search . '%');
+            // ->orWhere('brand', 'like', '%' . $search . '%')
+            // ->orWhere('owner', 'like', '%' . $search . '%');
         });
         $query->when($Filters['categories'] ?? false, function ($query, $categories) {
-            return $query->WhereHas('category', function ( $query ) use ($categories) {
+            return $query->WhereHas('category', function ($query) use ($categories) {
                 $query->where('categories.id', $categories);
             });
         });

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\rent_log>
  */
-class RentLogFactory extends Factory
+class rent_logFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,10 @@ class RentLogFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id'=>mt_rand(1,4),
+            'item_id'=>mt_rand(1,400),
+            'rent_date' =>$this->faker->date(),
+            'return_date'=>$this->faker->date(),
         ];
     }
 }

@@ -14,6 +14,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+        
         <!-- Navbar -->
         @include('dashboard.layout.navbar1')
 
@@ -32,9 +33,10 @@
         <aside class="control-sidebar control-sidebar-dark">
         </aside>
     </div>
+
+    {{-- Script --}}
     @include('dashboard.layout.script')
-
-
+    {{-- End Script --}}
 </body>
 
 </html>

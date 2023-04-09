@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\rent_log;
 use Illuminate\Http\Request;
+use App\View\Components\rent;
 use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
 class UsersController extends Controller
 {
@@ -57,7 +60,11 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+       $users = User::findOrFail($id);
+        return view('authentication.show',[
+            'users' => $users ,
+            "logs" => rent_log::with(['item', 'user'])->where('user_id',$users->id)->paginate(10)
+        ]);
     }
 
     /**
@@ -108,6 +115,7 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        return redirect('/users')->with('success', 'Berhasil Menghapus Data');
     }
 }
