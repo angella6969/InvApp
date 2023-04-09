@@ -5,7 +5,7 @@
 <div class="row justify-content-center align-items-center">
   <div class="col-lg-5">
     <main class="form-registration">
-    
+
       <section class="login_content">
         <form action="/users" method="post">
           @csrf
@@ -51,6 +51,31 @@
             </div>
             @enderror
           </div>
+          {{-- --}}
+          @can('SuperAdmin')
+
+          <div class="mb-2">
+            <select class="form-select" name=role_id>
+
+              @foreach ($roles as $item)
+
+              @if (old('role_id') == $item->id)
+              <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+              @else
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+              @endif
+
+              @endforeach
+
+            </select>
+            @error('role_id')
+            <div class="invalit-feedback">
+              {{ $message }}
+            </div>
+            @enderror
+          </div>
+          @endcan
+          {{-- --}}
           <div>
             <button class="w-100 btn btn-lg btn-light" type="submit">Submit</button>
           </div>
@@ -81,4 +106,4 @@
     </main>
   </div>
 
-@endsection
+  @endsection

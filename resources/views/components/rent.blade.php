@@ -26,12 +26,12 @@
                 <td>{{ $barang->actual_return_date}}</td>
                 <td>
                     @can('SuperAdmin')
-                    <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
+                    <a href="/rent-item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
                             data-feather="eye"></span></a>
 
-                    <a href="/dashboard/item/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span
+                    <a href="/rent-item/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span
                             data-feather="edit"></span></a>
-                    <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
+                    <form action="/rent-item/{{ $barang->id }}" class="d-inline" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="badge bg-danger border-0"
