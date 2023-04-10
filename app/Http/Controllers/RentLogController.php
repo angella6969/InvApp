@@ -19,13 +19,13 @@ class RentLogController extends Controller
     public function index()
     {
 
-         $userss = User::all();
-        //  dd($userss);
+         
         return view('dashboard.rentItem.index', [
-            // "items" => item::where('status','!=', 'in stock')->get(),
             "items" => item::all(),
-            "users" => User::where('role_id', '!=', 1)->where('status', '!=', 'inactiv')->get(),
-            "userss" => $userss,
+            "users" => User::where('role_id', '!=', 1)
+                            ->where('role_id', '!=', 2)
+                            ->where('status', '!=', 'inactiv')->get(),
+            
             "logs" => rent_log::with(['item', 'user'])->orderBy('id', 'DESC')
                 ->Filter(request(['search']))
                 ->paginate(20)

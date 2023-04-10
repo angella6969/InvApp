@@ -41,7 +41,7 @@
                   <th>owner</th>
                   <th>status</th>
                   <th>category</th>
-                  <th>Tanngal Masuk</th>
+                  <th> Masuk</th>
                 </tr>
               </thead>
               <tbody>

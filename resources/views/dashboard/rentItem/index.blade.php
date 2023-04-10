@@ -54,104 +54,107 @@
                     {{-- End Pencarian Item --}}
 
                     {{-- Button Rent --}}
-                    <div class="mt-3">
+                    <div class="mt-2">
                         <button class="btn btn-primary" type="submit" id="basic-addon2">Rent</button>
                     </div>
                     {{-- End Button Rend --}}
 
                 </div>
             </form>
-        </div>
-        {{-- End form Pencarian --}}
 
-        {{-- Form Pencarian --}}
-        <form action="/rent-item">
-            <div class="row">
-                <div class="col-6 col-sm-12">
+            {{-- End form Pencarian --}}
 
-                    <div>
-                        <select name="search" class=" userBox form-control ">
-                            <option selected>Item</option>
-                            @foreach ($userss as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
+            {{-- Form Pencarian --}}
+            <form action="/rent-item">
+                <div class="row">
+                    <div class="col-6 col-sm-12">
+                        <div>
+                            <select name="search" class=" userBox form-control ">
+                                <option selected>Item</option>
+                                @foreach ($users as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button class="btn btn-primary mt-2" type="submit" id="basic-addon2">Search</button>
                     </div>
-                    {{-- <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
-                    value="{{request('search')}}"> --}}
-                    <button class="btn btn-primary" type="submit" id="basic-addon2">Search</button>
                 </div>
-            </div>
-        </form>
-        {{-- End form Pencarian --}}
+            </form>
+            {{-- End form Pencarian --}}
 
+        </div>
         {{-- Form Index --}}
+
         <label for="">Item Rent log</label>
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Peminjam</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Rent Date </th>
-                    <th scope="col">Return Date </th>
-                    <th scope="col">Actual Return Date </th>
-                    @can('SuperAdmin')
-                        <th scope="col">Action</th>
-                    @endcan
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($logs as $barang)
-                    <tr
-                        class="{{ $barang->actual_return_date == null ? '' : ($barang->return_date >= $barang->actual_return_date ? 'bg-success' : 'bg-danger') }}">
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $barang->user->name }}</td>
-                        <td>{{ $barang->item->name }}</td>
-                        <td>{{ $barang->rent_date }}</td>
-                        <td>{{ $barang->return_date }}</td>
-                        <td>{{ $barang->actual_return_date }}</td>
-
-                        <td>
-
-
-                            @can('SuperAdmin')
-                                {{-- Button eye --}}
-                                <a href="/users/{{ $barang->user_id }}" class="badge bg-warning border-0 d-inline"><span
-                                        data-feather="eye"></span></a>
-                                {{-- End Button Detail --}}
-
-                                {{-- Button Edit --}}
-                                <a href="/rent-item/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span
-                                        data-feather="edit"></span></a>
-                                {{-- End Button Edit --}}
-
-                                {{-- Button Hapus --}}
-                                <form action="/rent-item/{{ $barang->id }}" class="d-inline" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="badge bg-danger border-0" 
-                                        onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
-                                            data-feather="file-minus"></span></button>
-                                </form>
-                                {{-- End Button Hapus --}}
-                            @endcan
-
-                            {{-- Return Item --}}
-                            <form action="/rent-item/return/{{ $barang->id }}" class="d-inline" method="POST">
-                                @csrf
-
-                                <button class="badge bg-success border-0" {{$barang->actual_return_date != null ? 'hidden' : '' }}
-                                    onclick="return confirm('Yakin Ingin Mengembalikan Item? {{ $barang->item->name }}')"><span
-                                        data-feather="git-pull-request"></span></button>
-                            </form>
-                            {{-- End Return Item --}}
-
-                        </td>
+        <div class="table-responsive-sm">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Rent Date </th>
+                        <th scope="col">Return Date </th>
+                        <th scope="col">Actual Return Date </th>
+                        @can('SuperAdmin')
+                            <th scope="col">Action</th>
+                        @endcan
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($logs as $barang)
+                        <tr
+                            class="{{ $barang->actual_return_date == null
+                                ? ''
+                                : ($barang->return_date >= $barang->actual_return_date
+                                    ? 'bg-success'
+                                    : 'bg-danger') }}">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $barang->user->name }}</td>
+                            <td>{{ $barang->item->name }}</td>
+                            <td>{{ $barang->rent_date }}</td>
+                            <td>{{ $barang->return_date }}</td>
+                            <td>{{ $barang->actual_return_date }}</td>
+
+                            <td>
+                                @can('SuperAdmin')
+                                    {{-- Button eye --}}
+                                    <a href="/users/{{ $barang->user_id }}" class="badge bg-warning border-0 d-inline"><span
+                                            data-feather="eye"></span></a>
+                                    {{-- End Button Detail --}}
+
+                                    {{-- Button Edit --}}
+                                    <a href="/rent-item/{{ $barang->id }}/edit"
+                                        class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+                                    {{-- End Button Edit --}}
+
+                                    {{-- Button Hapus --}}
+                                    <form action="/rent-item/{{ $barang->id }}" class="d-inline" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="badge bg-danger border-0"
+                                            onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
+                                                data-feather="file-minus"></span></button>
+                                    </form>
+                                    {{-- End Button Hapus --}}
+                                @endcan
+
+                                {{-- Return Item --}}
+                                <form action="/rent-item/return/{{ $barang->id }}" class="d-inline" method="POST">
+                                    @csrf
+
+                                    <button class="badge bg-success border-0"
+                                        {{ $barang->actual_return_date != null ? 'hidden' : '' }}
+                                        onclick="return confirm('Yakin Ingin Mengembalikan Item? {{ $barang->item->name }}')"><span
+                                            data-feather="git-pull-request"></span></button>
+                                </form>
+                                {{-- End Return Item --}}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         {{-- End Form Index --}}
     </div>
 

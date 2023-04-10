@@ -32,7 +32,7 @@
                                                 <input class="form-control" class='date' type="date" name="to_date"
                                                     required='required' value="{{ request('to_date') }}">
                                             </div>
-                                            
+
                                             <div class="col-6 col-sm-12">
                                                 <div class="input-group mb-3">
                                                     <input type="text" class="form-control"
