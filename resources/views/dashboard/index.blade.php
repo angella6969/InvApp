@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h2>Total Users</h2>
                         <h3>{{ $users->count() }}</h3>
-                        <table class="table text-white">
+                        <table class="table text-white table-sm">
                             <thead>
                                 <tr>
                                     <th scope="col">Super Admin</th>
@@ -43,10 +43,10 @@
                     <div class="card-body">
                         <h2>Total Category</h2>
                         <h3>{{ $categories->count() }}</h3>
-                        <table class="table text-white">
+                        <table class="table text-white  table-sm fs-6" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Non Elektronik</th>
+                                    <th scope="col" >Non Elektronik</th>
                                     <th scope="col">Elektronik</th>
                                     <th scope="col">Software</th>
                                     <th scope="col">Hardware</th>
@@ -73,7 +73,7 @@
                     <div class="card-body">
                         <h2>Total Item</h2>
                         <h3>{{ $items->count() }}</h3>
-                        <table class="table text-white">
+                        <table class="table text-white table-sm fs-6">
                             <thead>
                                 <tr>
                                     <th scope="col">Lost</th>

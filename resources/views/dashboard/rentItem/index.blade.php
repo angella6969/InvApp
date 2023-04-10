@@ -2,53 +2,87 @@
 @Section('tittle')
     <title> Sisda | Rent Item </title>
 @Section('container')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Rent Item</h1>
     </div>
     <div class="table-responsive col-lg-11">
-        {{-- Alert --}}
+        {{-- Alert Success --}}
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        {{-- End Alert --}}
+        {{-- End Alert Success --}}
 
-        {{-- Button Create --}}
-        {{-- <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span> New Item </a> --}}
-        {{-- End Button Create --}}
-
-        {{-- Button Rent Item --}}
-        {{-- <a href="/dashboard/item/create" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Rent Item </a> --}}
-        {{-- End Button  Rent Item --}}
+        {{-- Alert Fail --}}
+        @if (session()->has('Fail'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('Fail') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        {{-- End Alert Fail --}}
 
         {{-- Form Pencarian --}}
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-md-3">
-
-
-            <form action="/dashboard/item">
+            <form action="/rent-item" method="post">
+                @csrf
                 <div class="row">
-                    <div>
-                        <select name="categories" id="categories" class=" userBox form-control "  name="state" placeholder="Category">
+                    {{-- Pencarian User --}}
+                    <div class="mb-3">
+                        <select name="user_id" id="user_id" class=" userBox form-control ">
                             <option selected>User</option>
                             @foreach ($users as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
+                    {{-- End Pencarian User --}}
+
+                    {{-- Pencarian Item --}}
                     <div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
-                                value="{{ request('search') }}">
-                            <button class="btn btn-primary" type="submit" id="basic-addon2">Search</button>
-                        </div>
+                        <select name="item_id" id="item_id" class=" userBox form-control ">
+                            <option selected>Item</option>
+                            @foreach ($items as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }} <===> {{ $item->status }}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    {{-- End Pencarian Item --}}
+
+                    {{-- Button Rent --}}
+                    <div class="mt-3">
+                        <button class="btn btn-primary" type="submit" id="basic-addon2">Rent</button>
+                    </div>
+                    {{-- End Button Rend --}}
+
                 </div>
             </form>
         </div>
+        {{-- End form Pencarian --}}
+
+        {{-- Form Pencarian --}}
+        <form action="/rent-item">
+            <div class="row">
+                <div class="col-6 col-sm-12">
+
+                    <div>
+                        <select name="search" class=" userBox form-control ">
+                            <option selected>Item</option>
+                            @foreach ($userss as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{-- <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
+                    value="{{request('search')}}"> --}}
+                    <button class="btn btn-primary" type="submit" id="basic-addon2">Search</button>
+                </div>
+            </div>
+        </form>
         {{-- End form Pencarian --}}
 
         {{-- Form Index --}}
@@ -57,38 +91,62 @@
             <thead>
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Status </th>
-                    <th scope="col">category </th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Peminjam</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Rent Date </th>
+                    <th scope="col">Return Date </th>
+                    <th scope="col">Actual Return Date </th>
+                    @can('SuperAdmin')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
                 @foreach ($logs as $barang)
-                    {{-- {{ $barang->item }} --}}
-                    <tr>
+                    <tr
+                        class="{{ $barang->actual_return_date == null ? '' : ($barang->return_date >= $barang->actual_return_date ? 'bg-success' : 'bg-danger') }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $barang->user->name }}</td>
                         <td>{{ $barang->item->name }}</td>
-                        {{-- <td>{{ $barang->users->name }}</td> --}}
+                        <td>{{ $barang->rent_date }}</td>
+                        <td>{{ $barang->return_date }}</td>
+                        <td>{{ $barang->actual_return_date }}</td>
 
                         <td>
 
 
                             @can('SuperAdmin')
-                                <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
+                                {{-- Button eye --}}
+                                <a href="/users/{{ $barang->user_id }}" class="badge bg-warning border-0 d-inline"><span
                                         data-feather="eye"></span></a>
+                                {{-- End Button Detail --}}
 
-                                <a href="/dashboard/item/{{ $barang->id }}/edit"
-                                    class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
-                                <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
+                                {{-- Button Edit --}}
+                                <a href="/rent-item/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span
+                                        data-feather="edit"></span></a>
+                                {{-- End Button Edit --}}
+
+                                {{-- Button Hapus --}}
+                                <form action="/rent-item/{{ $barang->id }}" class="d-inline" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="badge bg-danger border-0"
+                                    <button class="badge bg-danger border-0" 
                                         onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
                                             data-feather="file-minus"></span></button>
                                 </form>
+                                {{-- End Button Hapus --}}
                             @endcan
+
+                            {{-- Return Item --}}
+                            <form action="/rent-item/return/{{ $barang->id }}" class="d-inline" method="POST">
+                                @csrf
+
+                                <button class="badge bg-success border-0" {{$barang->actual_return_date != null ? 'hidden' : '' }}
+                                    onclick="return confirm('Yakin Ingin Mengembalikan Item? {{ $barang->item->name }}')"><span
+                                        data-feather="git-pull-request"></span></button>
+                            </form>
+                            {{-- End Return Item --}}
+
                         </td>
                     </tr>
                 @endforeach
@@ -97,12 +155,6 @@
         {{-- End Form Index --}}
     </div>
 
-    {{-- {{ $items->links() }} --}}
-    <script scr="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.userBox').select2(); 
-        });
-    </script>
+    {{ $logs->links() }}
+
 @endsection

@@ -23,6 +23,10 @@
      <a href="/rent-item" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Rent Item </a>
      {{-- End Button  Rent Item --}}
 
+     {{-- Button Return Item --}}
+     <a href="/rent-item/return" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Return Item </a>
+     {{-- End Button  Return Item --}}
+
     {{-- Form Pencarian --}}
     <form action="/dashboard/item">
         <div class="row">

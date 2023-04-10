@@ -9,6 +9,7 @@ use App\Models\rent_log;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Storerent_logRequest;
 use App\Http\Requests\Updaterent_logRequest;
+use Clockwork\Request\Request;
 
 class RentLogController extends Controller
 {
@@ -17,11 +18,16 @@ class RentLogController extends Controller
      */
     public function index()
     {
+
+         $userss = User::all();
+        //  dd($userss);
         return view('dashboard.rentItem.index', [
             // "items" => item::where('status','!=', 'in stock')->get(),
             "items" => item::all(),
-            "users" => User::where('role_id', '!=', 1)->where('status','!=','inactiv')->get(),
-            "logs" => rent_log::with(['item', 'user'])->latest()
+            "users" => User::where('role_id', '!=', 1)->where('status', '!=', 'inactiv')->get(),
+            "userss" => $userss,
+            "logs" => rent_log::with(['item', 'user'])->orderBy('id', 'DESC')
+                ->Filter(request(['search']))
                 ->paginate(20)
         ]);
     }
@@ -42,13 +48,12 @@ class RentLogController extends Controller
         $request['return_date'] = Carbon::now()->addDay(3)->toDateString();
 
         $items = item::findOrFail($request->item_id)->only('status');
-
         if ($items['status'] != 'in stock') {
             return redirect('/rent-item')->with('Fail', ' gagal Merubah Data');
         } else {
 
             $count = rent_log::where('user_id', $request->user_id)->where('actual_return_date', null)->count();
-            // dd($count);
+
             if ($count >= 7) {
                 return redirect('/rent-item')->with('Fail', 'Melebihi Kuota Pinjam Barang');
             } else {
@@ -100,5 +105,26 @@ class RentLogController extends Controller
     public function destroy(rent_log $rent_log)
     {
         //
+    }
+
+    public function returnItem(string $id)
+    {
+        $request['return_date'] = Carbon::now()->toDateString();
+
+        try {
+            DB::beginTransaction();
+            $logs = rent_log::findOrFail($id);
+            $logs->actual_return_date =  Carbon::now()->toDateString();
+            $logs->save();
+
+            $items = item::findOrFail($logs['item_id']);
+            $items->status = 'in Stock';
+            $items->save();
+            db::commit();
+            
+            return redirect('/rent-item')->with('success', 'Berhasil Mengembalikan Item');
+        } catch (\Throwable $th) {
+            db::rollBack();
+        }
     }
 }

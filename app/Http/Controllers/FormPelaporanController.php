@@ -12,6 +12,7 @@ class FormPelaporanController extends Controller
     // public $timestamps = false;
     public function index()
     {
+        dd('Under Construksion');
         $a = request('from_date');
         $b = request('to_date');
        

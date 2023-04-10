@@ -54,8 +54,8 @@ Route::get('/login', [loginController::class, 'index'])
 Route::get('/registrasi', [RegisController::class, 'index'])->middleware('guest');
 Route::post('/registrasi', [RegisController::class, 'store']);
 
+Route::post('/rent-item/return/{id}', [RentLogController::class,'returnItem'])->middleware(['Admin','auth']);
 
-Route::resource('/rent-item', RentLogController::class)->middleware('auth');
 
 Route::middleware(['Admin', 'auth'])->group(function () {
     Route::resource('/dashboard/item', ItemController::class);
@@ -63,4 +63,6 @@ Route::middleware(['Admin', 'auth'])->group(function () {
     Route::resource('/dashboard', dashboardController::class);
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/users', UsersController::class);
+    Route::resource('/rent-item', RentLogController::class);
+    
 });

@@ -1,6 +1,7 @@
 @extends('dashboard.layout.main')
+
 @Section('tittle')
-    <title> Sisda | Rent Item </title>
+<title> | Return Item</title>
 @Section('container')
 
 
