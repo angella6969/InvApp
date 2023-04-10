@@ -1,7 +1,7 @@
 @extends('dashboard.layout.main')
 
 @Section('tittle')
-    <title> SISDA | dashboard Users </title>
+    <title> SISDA | Dashboard Users </title>
 
 @Section('container')
 

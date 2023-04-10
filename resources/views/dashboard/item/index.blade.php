@@ -16,28 +16,26 @@
         {{-- End Alert --}}
 
         {{-- Button Create --}}
-        <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span> New Item </a>
+        <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span> New Item
+        </a>
         {{-- End Button Create --}}
 
         {{-- Button Rent Item --}}
         <a href="/rent-item" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Rent Item </a>
         {{-- End Button  Rent Item --}}
 
-        {{-- Button Return Item --}}
-        {{-- <a href="/rent-item/return" class="btn btn-primary mb-2"><i class="fa fa-tasks"></i> Return Item </a> --}}
-        {{-- End Button  Return Item --}}
-
         {{-- Form Pencarian --}}
         <form action="/dashboard/item">
             <div class="row">
                 {{-- <div class="col-6 col-sm-6">
-                <select name="categories" id="categories" class="form-select" placeholder="Category">
-                    <option value="">Category</option>
-                    @foreach ($categories as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
+                        <select name="categories" id="categories" class="form-select" placeholder="Category">
+                            <option value="">Category</option>
+                            @foreach ($categories as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+
                 <div class="col-6 col-sm-12">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
@@ -95,6 +93,6 @@
         </div>
         {{-- End Form Index --}}
     </div>
-
     {{ $items->links() }}
+
 @endsection
