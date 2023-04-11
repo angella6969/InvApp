@@ -28,23 +28,23 @@ class DatabaseSeeder extends Seeder
         category::factory(4)->create();
         // role::factory(3)->create();
         item::factory(400)->create();
-        rent_log::factory(40)->create();
+        // rent_log::factory(40)->create();
 
         
 
       
-        role::create([
-            'name' => 'Super Admin',
+        // role::create([
+        //     'name' => 'Super Admin',
 
-        ]);
-        role::create([
-            'name' => 'Admin',
+        // ]);
+        // role::create([
+        //     'name' => 'Admin',
 
-        ]);
-        role::create([
-            'name' => 'Client',
+        // ]);
+        // role::create([
+        //     'name' => 'Client',
 
-        ]);
+        // ]);
 
     }
 }

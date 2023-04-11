@@ -17,21 +17,17 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // return view('welcome');
         if (auth()->user()->role_id == 1) {
             $users = User::with(['role']);
-        } else if (auth()->user()->role_id == 2) {
-            $users = User::with(['role'])->where('role_id', '!=', 1);
+        } elseif (auth()->user()->role_id == 2) {
+            $users = User::with(['role'])
+                ->where('role_id', '!=', 1);
         }
 
         return view('authentication.index', [
-            // "user" => User::all()->where('role_id', '1' || 'role_id', '2'),
-            'users' => $users->latest()->paginate(20)
-
-
-
-            //    ->withQueryString()
-
+            'users' => $users
+                ->orderBy('id', 'DESC')
+                ->paginate(10)
         ]);
     }
 
@@ -40,7 +36,6 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // return view('welcome');
         return view('authentication.create', [
             'users' => User::all(),
             'roles' =>role::all()
@@ -67,7 +62,7 @@ class UsersController extends Controller
                 'password' => ['required', 'min:5', 'max:255'],
                 'role_id' => ['required'],
             ]);
-        } else{
+        } else {
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
                 'username' => ['required', 'min:3', 'max:200', 'unique:users'],
@@ -82,7 +77,8 @@ class UsersController extends Controller
         
         
         User::create($validatedData);
-        return redirect('/users')->with('success', 'Berhasil Menambahkan User');
+        return redirect('/users')
+            ->with('success', 'Berhasil Menambahkan User');
     }
 
     /**
@@ -93,7 +89,8 @@ class UsersController extends Controller
         $users = User::findOrFail($id);
         return view('authentication.show', [
             'users' => $users,
-            "logs" => rent_log::with(['item', 'user'])->where('user_id', $users->id)->paginate(10)
+            "logs" => rent_log::with(['item', 'user'])
+                    ->where('user_id', $users->id)->paginate(10)
         ]);
     }
 

@@ -12,7 +12,8 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-3">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -35,15 +36,17 @@
                                 <p>Users</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
-                                <span data-feather="folder-plus"></span>
-                                <p>Category</p>
-                            </a>
-                        </li>
+                        @can('SuperAdmin')
+                            <li class="nav-item">
+                                <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
+                                    <span data-feather="folder-plus"></span>
+                                    <p>Category</p>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
+                {{-- <li class="nav-item menu-open">
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a  href="/dashboard/formlaporan"
@@ -53,7 +56,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li>
                     <form action="/logout" method="post">
                         @csrf

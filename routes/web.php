@@ -28,9 +28,10 @@ use Illuminate\Routing\RouteGroup;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [loginController::class, 'index'])
+    ->name('login')
+    ->middleware('guest');
+
 Route::get('/loginV', function () {
     return view('authentication.show');
 });
@@ -54,7 +55,7 @@ Route::get('/login', [loginController::class, 'index'])
 Route::get('/registrasi', [RegisController::class, 'index'])->middleware('guest');
 Route::post('/registrasi', [RegisController::class, 'store']);
 
-Route::post('/rent-item/return/{id}', [RentLogController::class,'returnItem'])->middleware(['Admin','auth']);
+Route::post('/rent-item/return/{id}', [RentLogController::class, 'returnItem'])->middleware(['Admin', 'auth']);
 
 
 Route::middleware(['Admin', 'auth'])->group(function () {
@@ -64,5 +65,4 @@ Route::middleware(['Admin', 'auth'])->group(function () {
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/users', UsersController::class);
     Route::resource('/rent-item', RentLogController::class);
-    
 });

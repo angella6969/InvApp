@@ -64,28 +64,32 @@
 
             {{-- End form Pencarian --}}
 
-            {{-- Form Pencarian --}}
-            <form action="/rent-item">
-                <div class="row">
-                    <div class="col-6 col-sm-12">
-                        <div>
-                            <select name="search" class=" userBox form-control ">
-                                <option selected>Item</option>
-                                @foreach ($users as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button class="btn btn-primary mt-2" type="submit" id="basic-addon2">Search</button>
-                    </div>
-                </div>
-            </form>
-            {{-- End form Pencarian --}}
+           
 
         </div>
         {{-- Form Index --}}
 
         <label for="">Item Rent log</label>
+
+        <div>
+             {{-- Form Pencarian --}}
+             <form action="/rent-item">
+                <div class="row">
+                    <div class="col-6 col-sm-8">
+                        <div>
+                            <select name="search" class=" userBox form-control ">
+                                <option selected>Search User Rent</option>
+                                @foreach ($users as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            <button class="btn btn-primary mt-2" type="submit" id="basic-addon2">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{-- End form Pencarian --}}
+        </div>
         <div class="table-responsive-sm">
             <table class="table table-striped table-sm">
                 <thead>
@@ -108,7 +112,7 @@
                                 ? ''
                                 : ($barang->return_date >= $barang->actual_return_date
                                     ? 'bg-success'
-                                    : 'bg-danger') }}">
+                                    : 'bg-secondary') }}">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $barang->user->name }}</td>
                             <td>{{ $barang->item->name }}</td>
@@ -124,18 +128,18 @@
                                     {{-- End Button Detail --}}
 
                                     {{-- Button Edit --}}
-                                    <a href="/rent-item/{{ $barang->id }}/edit"
-                                        class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+                                    {{-- <a href="/rent-item/{{ $barang->id }}/edit"
+                                        class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a> --}}
                                     {{-- End Button Edit --}}
 
                                     {{-- Button Hapus --}}
-                                    <form action="/rent-item/{{ $barang->id }}" class="d-inline" method="POST">
+                                    {{-- <form action="/rent-item/{{ $barang->id }}" class="d-inline" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="badge bg-danger border-0"
                                             onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
                                                 data-feather="file-minus"></span></button>
-                                    </form>
+                                    </form> --}}
                                     {{-- End Button Hapus --}}
                                 @endcan
 

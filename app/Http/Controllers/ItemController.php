@@ -16,7 +16,8 @@ class ItemController extends Controller
     {
         // dd(request('all'));
         return view('dashboard.item.index', [
-            "items" => item::with(['category'])->latest()
+            "items" => item::with(['category'])
+                ->orderBy('id', 'DESC')
                 ->Filter(request(['search','categories']))
                 ->paginate(20)
                 ->withQueryString(),

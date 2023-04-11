@@ -32,7 +32,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('gentelella-master') }}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('gentelella-master') }}/ dist/js/pages/dashboard.js"></script>
+<script src="{{ asset('gentelella-master') }}/dist/js/pages/dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
 <script src="https://unpkg.com/feather-icons"></script>
@@ -45,7 +45,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
 </script>
-<script src="/js/dashboard.js"></script>
 <script>
     feather.replace()
 </script>
