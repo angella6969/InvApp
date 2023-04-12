@@ -22,7 +22,7 @@
 
 
         {{-- Table Users --}}
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm ms-4">
             <thead>
                 <tr>
                     <th scope="col">No</th>

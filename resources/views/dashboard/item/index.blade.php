@@ -5,11 +5,20 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Inventarisasi</h1>
     </div>
-    <div class="table-responsive col-lg-11">
-        {{-- Alert --}}
+    <div class="table-responsive col-lg-11 ms-4">
+        {{-- Alert Success--}}
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        {{-- End Alert --}}
+
+        {{-- Alert Fail --}}
+        @if (session()->has('fail'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('fail') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -21,22 +30,37 @@
         {{-- End Button Create --}}
 
         {{-- Button Rent Item --}}
-        <a href="/rent-item" class="btn btn-warning mb-2"><i class="fa fa-tasks"></i> Rent Item </a>
+        <a href="/rent-item" class="btn btn-warning mb-2 ms-4"><i class="fa fa-tasks"></i> Rent Item </a>
         {{-- End Button  Rent Item --}}
 
         {{-- Form Pencarian --}}
         <form action="/dashboard/item">
             <div class="row">
-                {{-- <div class="col-6 col-sm-6">
-                        <select name="categories" id="categories" class="form-select" placeholder="Category">
-                            <option value="">Category</option>
-                            @foreach ($categories as $item)
+                <div class="col-6 col-sm-4">
+                    <select name="categories" id="categories" class="form-select" placeholder="Category">
+                        <option value="">Category</option>
+                        @foreach ($categories as $item)
+                            @if (old('categories') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+                
 
-                <div class="col-6 col-sm-12">
+                <div class="col-6 col-sm-4">
+                    <select name="status" id="status" class="form-select" placeholder="Category">
+                        <option value="">Status</option>
+                        <option value="rusak">Rusak</option>
+                        <option value="hilang">Hilang</option>
+                        <option value="terpinjam">Terpinjam</option>
+                        <option value="in stock">In Stock</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-sm-4">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
                             value="{{ request('search') }}">

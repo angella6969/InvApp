@@ -33,6 +33,7 @@
                 <div class="row">
                     {{-- Pencarian User --}}
                     <div class="mb-3">
+                        <label for="">Peminjam</label>
                         <select name="user_id" id="user_id" class=" userBox form-control ">
                             <option selected>User</option>
                             @foreach ($users as $item)
@@ -44,6 +45,7 @@
 
                     {{-- Pencarian Item --}}
                     <div>
+                        <label for="">Barang</label>
                         <select name="item_id" id="item_id" class=" userBox form-control ">
                             <option selected>Item</option>
                             @foreach ($items as $item)
@@ -54,7 +56,7 @@
                     {{-- End Pencarian Item --}}
 
                     {{-- Button Rent --}}
-                    <div class="mt-2">
+                    <div class="mt-2 d-flex justify-content-center">
                         <button class="btn btn-primary" type="submit" id="basic-addon2">Rent</button>
                     </div>
                     {{-- End Button Rend --}}
@@ -69,9 +71,9 @@
         </div>
         {{-- Form Index --}}
 
-        <label for="">Item Rent log</label>
-
-        <div>
+        
+        <div class="ms-4">
+            <label for="" class="mt-4">Item Rent log</label>
              {{-- Form Pencarian --}}
              <form action="/rent-item">
                 <div class="row">
@@ -90,7 +92,7 @@
             </form>
             {{-- End form Pencarian --}}
         </div>
-        <div class="table-responsive-sm">
+        <div class="table-responsive-sm ms-4">
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>

@@ -60,6 +60,7 @@ class UsersController extends Controller
                 'username' => ['required', 'min:3', 'max:200', 'unique:users'],
                 'email' => ['required', 'email:dns', 'unique:users'],
                 'password' => ['required', 'min:5', 'max:255'],
+                'phone' => ['required', 'min:10', 'numeric'],
                 'role_id' => ['required'],
             ]);
         } else {
@@ -67,7 +68,8 @@ class UsersController extends Controller
                 'name' => 'required|max:255',
                 'username' => ['required', 'min:3', 'max:200', 'unique:users'],
                 'email' => ['required', 'email:dns', 'unique:users'],
-                'password' => ['required', 'min:5', 'max:255']
+                'password' => ['required', 'min:5', 'max:255'],
+                'phone' => ['required', 'min:10', 'numeric'],
             ]);
             $validatedData['role_id'] = 3;
         }
@@ -112,6 +114,7 @@ class UsersController extends Controller
         $users = User::findOrFail($id);
         $data = [
             'name' => 'required|max:255',
+            'phone' => ['required', 'min:10', 'numeric'],
         ];
         if ($request->email != $request->email || $request->username != $request->username) {
             $data['email'] = ['required', 'email:dns', 'unique:users'];
@@ -125,6 +128,7 @@ class UsersController extends Controller
     public function activated(Request $request, string $id)
     {
         $users = User::findOrFail($id);
+        
         $data = [
             'name' => 'required|max:255',
         ];

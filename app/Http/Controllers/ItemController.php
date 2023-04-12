@@ -14,11 +14,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        // dd(request('all'));
         return view('dashboard.item.index', [
+            "categories" => category::all(),
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
-                ->Filter(request(['search','categories']))
+                ->Filter(request(['search', 'categories', 'status']))
                 ->paginate(20)
                 ->withQueryString(),
 
@@ -40,17 +40,35 @@ class ItemController extends Controller
      */
     public function store(StoreitemRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'item_code' => 'required|max:255|unique:items',
-            'category_id' => ['required'],
-            'brand' => ['required'],
-            'location' => ['required'],
-            'owner' => ['required'],
-        ]);
-        // dd($request);
-        item::create($validatedData);
-        return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|max:255',
+                'item_code' => 'required|max:255|unique:items',
+                'category_id' => ['required'],
+                'brand' => ['required'],
+                'location' => ['required'],
+                'owner' => ['required'],
+            ]);
+            $code = $validatedData['category_id'];
+            if ($code == 1) {
+                $localcode = 'IN/E 123';
+            } elseif ($code == 2) {
+                $localcode = 'IN/S 123';
+            } elseif ($code == 3) {
+                $localcode = 'IN/H 123';
+            } elseif ($code == 4) {
+                $localcode = 'IN/N 123';
+            } else {
+                $localcode = 'INW/N 123';
+            }
+            $validatedData['item_code'] = $localcode . ' ' . $validatedData['item_code'];
+            dd($validatedData);
+
+            item::create($validatedData);
+            return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
+        } catch (\Throwable $th) {
+            return redirect('/dashboard/item')->with('fail', 'Gagal Menambahkan Data');
+        }
     }
 
     /**
@@ -58,16 +76,11 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        // $items= item::all();
-        // $item = item::findOrFail($id);
-        // dd($items);
         return view('dashboard.item.show', [
             "item" => item::with(['category'])->findOrFail($id),
             "items" => item::with(['category'])->latest()
-            ->paginate(20)
-            // 'categories' => category::all()
+                ->paginate(20)
         ]);
-        // dd($items);
     }
 
     /**
@@ -104,7 +117,6 @@ class ItemController extends Controller
         $validatedData = $request->validate($data);
 
         item::where('id', $item)->update($validatedData);
-
 
         return redirect('/dashboard/item')->with('success', 'Berhasil Merubah Data');
     }
