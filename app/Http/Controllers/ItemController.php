@@ -62,8 +62,7 @@ class ItemController extends Controller
                 $localcode = 'INW/N 123';
             }
             $validatedData['item_code'] = $localcode . ' ' . $validatedData['item_code'];
-            dd($validatedData);
-
+            
             item::create($validatedData);
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
         } catch (\Throwable $th) {

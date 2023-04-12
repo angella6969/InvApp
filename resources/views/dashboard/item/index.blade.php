@@ -34,8 +34,10 @@
         {{-- End Button  Rent Item --}}
 
         {{-- Form Pencarian --}}
+        
         <form action="/dashboard/item">
             <div class="row">
+                <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
                     <select name="categories" id="categories" class="form-select" placeholder="Category">
                         <option value="">Category</option>

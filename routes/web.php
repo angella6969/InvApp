@@ -31,6 +31,9 @@ use Illuminate\Routing\RouteGroup;
 Route::get('/', [loginController::class, 'index'])
     ->name('login')
     ->middleware('guest');
+Route::get('/access_denied', function () {
+    return view('access_denied');
+});
 
 Route::get('/loginV', function () {
     return view('authentication.show');

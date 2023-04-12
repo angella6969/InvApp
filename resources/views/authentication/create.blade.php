@@ -1,9 +1,10 @@
-@extends('template.layout.loginLayout')
-
+@extends('dashboard.layout.main')
+@Section('tittle')
+    <title> SISDA | Create Users </title>
 @section('container')
 
     <div class="row justify-content-center align-items-center">
-        <div class="col-lg-5">
+        <div class="col-lg-11">
             <main class="form-registration">
 
                 <section class="login_content">
@@ -110,21 +111,7 @@
                         <div class="clearfix"></div>
 
                         {{-- Footer --}}
-                        <div class="separator">
-                            {{-- <small class="d-block text-center">Not Registered? <a href="/login"> Login Now</a>
-            </small> --}}
-
-                            <div class="clearfix"></div>
-                            <br /><br />
-
-                            <div>
-                                <a class="btn btn-light" href="#">
-                                    <h1><i class="fa fa-paw"></i> S . I . S . D . A</h1>
-                                </a>
-                                <p>Sistem Informasi Sumber Daya Air</p>
-                                <p>BBWS Serayu Opak</p>
-                            </div>
-                        </div>
+                        
                         {{-- End Footer --}}
                     </form>
                 </section>
