@@ -34,7 +34,6 @@
         {{-- End Button  Rent Item --}}
 
         {{-- Form Pencarian --}}
-        
         <form action="/dashboard/item">
             <div class="row">
                 <label for="">Form Pencarian</label>
