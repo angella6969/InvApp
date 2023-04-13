@@ -8,9 +8,11 @@ use App\Models\category;
 use App\Models\ItemImport;
 use Illuminate\Http\Request;
 use App\Imports\ItemImpoert1;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
+use League\Csv\Reader;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 
 class ItemController extends Controller
@@ -179,14 +181,25 @@ class ItemController extends Controller
 
     public function import(Request $request)
     {
+
+        // $csv = Reader::createFromPath($request->file('file')->getPathname());
         if ($request->hasFile('file')) {
-            $file = $request->file('file');
+            $request->validate([
+                'file' => 'required|file|mimes:csv,txt',
+            ]);
+            dd($$request->validate);
+            DB::beginTransaction();
+            try {
+                $file = $request->file('file');
 
-            Excel::import(new ItemImpoert1, $file);
+                Excel::import(new ItemImpoert1, $file);
 
-            return redirect()->back()->with('success', 'Data imported successfully.');
+                return redirect()->back()->with('success', 'Data imported successfully.');
+            } catch (\Throwable $th) {
+                DB::rollBack();
+            }
         } else {
-            return redirect()->back()->with('fail', 'Silahkan pilih file yang ingin diupload');
+            return redirect()->back()->with('fail', 'Silahkan pilih file yang ingin diupload terlebih dahulu');
         }
     }
 }
