@@ -64,6 +64,29 @@
                         </div>
                         {{-- End Field Email --}}
 
+                        {{-- Field Role --}}
+                        @can('SuperAdmin')
+                            <div class="mb-2">
+                                <select class="form-select" name=role_id>
+
+                                    @foreach ($roles as $item)
+                                        @if (old('role_id', $users->role_id) == $item->id)
+                                            <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                        @else
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+                                @error('role_id')
+                                    <div class="invalit-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        @endcan
+                        {{-- End Field Role --}}
+
                         {{-- <div class="form-floating mb-1">
                             <input type="password" name='password'
                                 class="form-control rounded-bottom @error('password') is-invalid @enderror"

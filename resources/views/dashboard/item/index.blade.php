@@ -6,7 +6,7 @@
         <h1 class="h2">Inventarisasi</h1>
     </div>
     <div class="table-responsive col-lg-11 ms-4">
-        {{-- Alert Success--}}
+        {{-- Alert Success --}}
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -29,9 +29,23 @@
         </a>
         {{-- End Button Create --}}
 
+
+
         {{-- Button Rent Item --}}
         <a href="/rent-item" class="btn btn-warning mb-2 ms-4"><i class="fa fa-tasks"></i> Rent Item </a>
         {{-- End Button  Rent Item --}}
+
+        {{-- Button Import --}}
+
+        <form action="/item/import" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="file">File Excel</label>
+                <input type="file" name="file" class="form-control" accept=".xlsx,.xls">
+            </div>
+            <button type="submit" class="btn btn-primary">Import Data</button>
+        </form>
+        {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}
         <form action="/dashboard/item">
@@ -49,7 +63,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
 
                 <div class="col-6 col-sm-4">
                     <select name="status" id="status" class="form-select" placeholder="Category">

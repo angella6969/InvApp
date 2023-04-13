@@ -33,14 +33,14 @@
                         <li class="nav-item">
                             <a href="/users" class="nav-link {{ Request::is('users') ? 'active' : '' }}">
                                 <span data-feather="users"></span>
-                                <p>Users</p>
+                                <p>Pengguna</p>
                             </a>
                         </li>
                         @can('SuperAdmin')
                             <li class="nav-item">
                                 <a href="/categories" class="nav-link {{ Request::is('categories') ? 'active' : '' }}">
                                     <span data-feather="folder-plus"></span>
-                                    <p>Category</p>
+                                    <p>Kategori</p>
                                 </a>
                             </li>
                         @endcan

@@ -13,7 +13,7 @@
             <div class="col-xl-4 col-md-6 mb-2">
                 <div class="card bg-info text-white  h-100">
                     <div class="card-body">
-                        <h2>Total Users</h2>
+                        <h2>Total Pengguna</h2>
                         <h3>{{ $users->count() }}</h3>
                         <div class="table-responsive">
                             <table class="table text-white">
@@ -81,16 +81,16 @@
             <div class="col-xl-4 col-md-6 mb-2">
                 <div class="card bg-danger text-white  h-100">
                     <div class="card-body">
-                        <h2>Total Item</h2>
+                        <h2>Total Barang</h2>
                         <h3>{{ $items->count() }}</h3>
                         <div class="table-responsive">
                             <table class="table text-white table-sm fs-6">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Lost</th>
-                                        <th scope="col">Broken</th>
-                                        <th scope="col">Rent</th>
-                                        <th scope="col">stored</th>
+                                        <th scope="col">Hilang</th>
+                                        <th scope="col">Rusak</th>
+                                        <th scope="col">Terpinjam</th>
+                                        <th scope="col">Tersedia</th>
                                     </tr>
                                 </thead>
                                 <tbody>

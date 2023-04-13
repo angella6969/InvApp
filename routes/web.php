@@ -69,3 +69,7 @@ Route::middleware(['Admin', 'auth'])->group(function () {
     Route::resource('/users', UsersController::class);
     Route::resource('/rent-item', RentLogController::class);
 });
+
+
+// Route::POST('/item/import', [ItemController::class, 'import']);
+Route::post('/item/import', [ItemController::class, 'import']);

@@ -38,7 +38,7 @@ class UsersController extends Controller
     {
         return view('authentication.create', [
             'users' => User::all(),
-            'roles' =>role::all()
+            'roles' => role::all()
         ]);
     }
 
@@ -47,30 +47,26 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->role_id == 1 ){
-            $validatedData = $request->validate([
-                'name' => 'required|max:255',
-                'username' => ['required', 'min:3', 'max:200', 'unique:users'],
-                'email' => ['required', 'email:dns', 'unique:users'],
-                'password' => ['required', 'min:5', 'max:255'],
-                'phone' => ['required', 'min:10', 'numeric'],
-                'role_id' => ['required'],
-            ]);
+        $data = [
+            'name' => 'required|max:255',
+            'username' => ['required', 'min:3', 'max:200', 'unique:users'],
+            'email' => ['required', 'email:dns', 'unique:users'],
+            'password' => ['required', 'min:5', 'max:255'],
+            'phone' => ['required', 'digits_between:10,16', 'numeric','unique:users'],
+        ];
+        if (auth()->user()->role_id == 1) {
+            $data['role_id'] = ['required'];
         } else {
-            $validatedData = $request->validate([
-                'name' => 'required|max:255',
-                'username' => ['required', 'min:3', 'max:200', 'unique:users'],
-                'email' => ['required', 'email:dns', 'unique:users'],
-                'password' => ['required', 'min:5', 'max:255'],
-                'phone' => ['required', 'min:10', 'numeric'],
-            ]);
-            $validatedData['role_id'] = 3;
+            $data['role_id'] = 3;
         }
+        // dd($data);
+        $validatedData = $request->validate($data);
+
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['status'] = "active";
-        
-        
+
+
         User::create($validatedData);
         return redirect('/users')
             ->with('success', 'Berhasil Menambahkan User');
@@ -85,7 +81,7 @@ class UsersController extends Controller
         return view('authentication.show', [
             'users' => $users,
             "logs" => rent_log::with(['item', 'user'])
-                    ->where('user_id', $users->id)->paginate(10)
+                ->where('user_id', $users->id)->paginate(10)
         ]);
     }
 
@@ -95,7 +91,8 @@ class UsersController extends Controller
     public function edit(string $id)
     {
         return view('authentication.edit', [
-            "users" => User::findOrFail($id)
+            "users" => User::findOrFail($id),
+            "roles" => role::all()
         ]);
     }
 
@@ -105,13 +102,20 @@ class UsersController extends Controller
     public function update(Request $request, string $id)
     {
         $users = User::findOrFail($id);
+        
         $data = [
             'name' => 'required|max:255',
-            'phone' => ['required', 'min:10', 'numeric'],
+            'phone' => ['required', 'digits_between:10,16', 'numeric','unique:users'],
         ];
-        if ($request->email != $request->email || $request->username != $request->username) {
-            $data['email'] = ['required', 'email:dns', 'unique:users'];
+        if (auth()->user()->role_id == 1) {
+            $data['role_id'] = ['required'];
+        }
+        if ($request->email != $users->email) {
+            $data['email'] = ['required', 'email:dns','min:3', 'unique:users'];
+        } elseif ($request->username != $users->username) {
             $data['username'] = ['required', 'min:3', 'max:200', 'unique:users'];
+        } elseif ($request->phone != $users->phone) {
+            $data['phone'] = ['required', 'digits_between:10,16', 'numeric','unique:users'];
         }
         $validatedData = $request->validate($data);
         User::where('id', $id)->update($validatedData);

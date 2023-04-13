@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\item;
 use App\Models\category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
+use App\Models\ItemImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ItemController extends Controller
 {
@@ -127,5 +131,15 @@ class ItemController extends Controller
     {
         item::destroy($item);
         return redirect('/dashboard/item')->with('success', 'Berhasil Menghapus Data');
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        // dd($file);
+
+        Excel::import(new ItemImport, $file);
+
+        return redirect()->back()->with('success', 'Data imported successfully.');
     }
 }
