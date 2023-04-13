@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 
 use App\Models\item;
 use App\Models\category;
+use App\Models\ItemImport;
 use Illuminate\Http\Request;
+use App\Imports\ItemImpoert1;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
-use App\Models\ItemImport;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Excel as ExcelExcel;
 
 class ItemController extends Controller
 {
@@ -53,11 +55,11 @@ class ItemController extends Controller
                 'location' => ['required'],
                 'owner' => ['required'],
             ]);
-            
+
 
             $code = $validatedData['category_id'];
-            $items= category::findorfail($code)->only('name');
-            if ($items['name'] =='Hardware') {
+            $items = category::findorfail($code)->only('name');
+            if ($items['name'] == 'Hardware') {
                 $localcode = 'IN/E 123';
             } elseif ($items['name'] == 'Elektronik') {
                 $localcode = 'IN/S 123';
@@ -177,11 +179,14 @@ class ItemController extends Controller
 
     public function import(Request $request)
     {
-        $file = $request->file('file');
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
 
-        Excel::import(new ItemImport, $file);
-        dd($file);
+            Excel::import(new ItemImpoert1, $file);
 
-        return redirect()->back()->with('success', 'Data imported successfully.');
+            return redirect()->back()->with('success', 'Data imported successfully.');
+        } else {
+            return redirect()->back()->with('fail', 'Silahkan pilih file yang ingin diupload');
+        }
     }
 }

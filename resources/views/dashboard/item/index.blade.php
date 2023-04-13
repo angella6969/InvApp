@@ -17,7 +17,7 @@
 
         {{-- Alert Fail --}}
         @if (session()->has('fail'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('fail') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -36,15 +36,14 @@
         {{-- End Button  Rent Item --}}
 
         {{-- Button Import --}}
-
-        {{-- <form action="/item/import" method="POST" enctype="multipart/form-data">
+        <form action="/item/import" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="file">File Excel</label>
                 <input type="file" name="file" class="form-control" accept=".xlsx,.xls">
             </div>
-            <button type="submit" class="btn btn-primary">Import Data</button>
-        </form> --}}
+            <button type="submit" class="btn btn-primary">Upload Data</button>
+        </form>
         {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}
