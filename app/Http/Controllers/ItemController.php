@@ -53,22 +53,64 @@ class ItemController extends Controller
                 'location' => ['required'],
                 'owner' => ['required'],
             ]);
+            
+
             $code = $validatedData['category_id'];
-            if ($code == 1) {
+            $items= category::findorfail($code)->only('name');
+            if ($items['name'] =='Hardware') {
                 $localcode = 'IN/E 123';
-            } elseif ($code == 2) {
+            } elseif ($items['name'] == 'Elektronik') {
                 $localcode = 'IN/S 123';
-            } elseif ($code == 3) {
+            } elseif ($items['name'] == 'Software') {
                 $localcode = 'IN/H 123';
-            } elseif ($code == 4) {
+            } elseif ($items['name'] == 'Hardware') {
                 $localcode = 'IN/N 123';
             } else {
                 $localcode = 'INW/N 123';
             }
             $validatedData['item_code'] = $localcode . ' ' . $validatedData['item_code'];
-            
+
             item::create($validatedData);
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
+
+            //     $items= item::all();
+
+            // $validatedData = $request->validate([
+            //     'name' => 'required|max:255',
+            //     'item_code' => 'required|max:255|unique:items',
+            //     'category_id' => ['required'],
+            //     'brand' => ['required'],
+            //     'location' => ['required'],
+            //     'owner' => ['required'],
+            // ]);
+
+            // $code = $validatedData['category_id'];
+            // $items= category::findorfail($code)->only('name');
+            // dd($items['name']);
+
+            // $localcode = '';
+            // $codes = [
+            //     1 => 'IN/E',
+            //     2 => 'IN/S',
+            //     3 => 'IN/H',
+            //     4 => 'IN/N',
+            // ];
+
+            // if (isset($codes[$code])) {
+            //     $localcode = $codes[$code];
+            // } else {
+            //     $localcode = 'INW/N';
+            // }
+
+            // $itemCode = $localcode . ' ' . $validatedData['item_code'];
+            // $itemData = array_merge($validatedData, ['item_code' => $itemCode]);
+
+            // $item = Item::create($itemData);
+            // if ($item) {
+            //     return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
+            // } else {
+            //     return redirect('/dashboard/item')->with('fail', 'Gagal Menambahkan Data');
+            // }
         } catch (\Throwable $th) {
             return redirect('/dashboard/item')->with('fail', 'Gagal Menambahkan Data');
         }
@@ -136,9 +178,9 @@ class ItemController extends Controller
     public function import(Request $request)
     {
         $file = $request->file('file');
-        // dd($file);
 
         Excel::import(new ItemImport, $file);
+        dd($file);
 
         return redirect()->back()->with('success', 'Data imported successfully.');
     }

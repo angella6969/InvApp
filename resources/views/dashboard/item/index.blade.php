@@ -37,14 +37,14 @@
 
         {{-- Button Import --}}
 
-        <form action="/item/import" method="POST" enctype="multipart/form-data">
+        {{-- <form action="/item/import" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="file">File Excel</label>
                 <input type="file" name="file" class="form-control" accept=".xlsx,.xls">
             </div>
             <button type="submit" class="btn btn-primary">Import Data</button>
-        </form>
+        </form> --}}
         {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}

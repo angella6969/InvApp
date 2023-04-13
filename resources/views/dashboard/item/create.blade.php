@@ -17,6 +17,20 @@
         <form method="post" action="/dashboard/item">
             @csrf
 
+            {{-- Field Item Code --}}
+            <div class="mb-2">
+                <label for="Item Code" class="form-label ">kode Item</label>
+                <input placeholder="Item Code" type="text" name='item_code'
+                    class="form-control @error('item_code') is-invalid @enderror" id="item_code " required
+                    value="{{ old('item_code') }}">
+                @error('item_code')
+                    <div class="invalit-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            {{-- End Field Item Code --}}
+
             {{-- Field Item Name --}}
             <div class="mb-2">
                 <label for="name" class="form-label ">name Item</label>
@@ -73,19 +87,7 @@
             </div>
             {{-- End Field Item Owner --}}
 
-            {{-- Field Item Code --}}
-            <div class="mb-2">
-                <label for="Item Code" class="form-label ">kode Item</label>
-                <input placeholder="Item Code" type="text" name='item_code'
-                    class="form-control @error('item_code') is-invalid @enderror" id="item_code " required
-                    value="{{ old('item_code') }}">
-                @error('item_code')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            {{-- End Field Item Code --}}
+
 
             {{-- Field Item Category --}}
             <div class="mb-2">
@@ -108,7 +110,7 @@
                 @enderror
             </div>
             {{-- End Field Item Category --}}
-            
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
