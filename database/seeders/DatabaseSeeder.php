@@ -10,6 +10,7 @@ use App\Models\category;
 use App\Models\rent_log;
 use Nette\Schema\Schema;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,18 +26,23 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         User::factory(10)->create();
-        category::factory(4)->create();
-        // role::factory(3)->create();
+        category::factory(48)->create();
+        role::factory(3)->create();
         item::factory(400)->create();
         // rent_log::factory(40)->create();
 
         
 
       
-        // role::create([
-        //     'name' => 'Super Admin',
+        user::create([
+            'name' => 'Super Admin',
+            'username' => 'Super Admin',
+            'email' => 'superadmin@yahoo.com',
+            'password' => Hash::make('123456'),
+            'role_id' => '1',
+            'status' => 'active',
 
-        // ]);
+        ]);
         // role::create([
         //     'name' => 'Admin',
 

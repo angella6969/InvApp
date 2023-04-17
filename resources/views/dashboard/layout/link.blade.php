@@ -54,6 +54,4 @@
 
 <!-- Styles -->
 <link href="{{ asset('gentelella-master') }}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" /> --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

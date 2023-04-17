@@ -1,7 +1,9 @@
 @extends('dashboard.layout.main')
 
+ 
+
 @Section('tittle')
-    <title> | dashboard 12 </title>
+    <title> SISDA | dashboard 12 </title>
 @Section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h3">Wellcame Back,{{ auth()->user()->role->name }} : {{ auth()->user()->name }} </h1>
@@ -49,7 +51,7 @@
                         <h2>Total Category</h2>
                         <h3>{{ $categories->count() }}</h3>
                         <div class="table-responsive">
-                            <table class="table text-white  table-sm">
+                            {{-- <table class="table text-white  table-sm">
                                 <thead>
                                     <tr>
                                         <th scope="col">Non Elektronik</th>
@@ -66,7 +68,7 @@
                                         <th scope="col">{{ $items->where('category_id', '4')->count() }}</th>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> --}}
                         </div>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">

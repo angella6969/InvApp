@@ -31,6 +31,29 @@
             </div>
             {{-- End Field Item Code --}}
 
+            {{-- Field Item Category --}}
+            <div class="mb-2">
+                <label for="Item Code" class="form-label ">Kategori Barang</label>
+                <select class="form-select userbox" name=category_id placeholder="Choose one thing">
+                    {{-- <optgroup label="Group 1"> --}}
+                    <option value="">Category</option>
+                    @foreach ($categories as $item)
+                        @if (old('category_id') == $item->id)
+                            <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                        @else
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endif
+                        </optgroup>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <div class="invalit-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            {{-- End Field Item Category --}}
+
             {{-- Field Item Name --}}
             <div class="mb-2">
                 <label for="name" class="form-label ">Nama Barang</label>
@@ -87,27 +110,7 @@
             </div>
             {{-- End Field Item Owner --}}
 
-            {{-- Field Item Category --}}
-            <div class="mb-2">
-                <label for="Item Code" class="form-label ">Kategori Barang</label>
-                <select class="form-select" name=category_id placeholder="Choose one thing">
 
-                    @foreach ($categories as $item)
-                        @if (old('category_id') == $item->id)
-                            <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                        @else
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endif
-                    @endforeach
-
-                </select>
-                @error('category_id')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            {{-- End Field Item Category --}}
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

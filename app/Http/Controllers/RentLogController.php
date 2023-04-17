@@ -19,14 +19,15 @@ class RentLogController extends Controller
     public function index()
     {
 
-         
+
         return view('dashboard.rentItem.index', [
-            "items" => item::all(),
-            "users" => User::where('role_id', '!=', 1)
-                            ->where('role_id', '!=', 2)
-                            ->where('status', '!=', 'inactiv')
-                            ->get(),
-            
+            "items" => item::orderByRaw("SUBSTRING(name, 1, 3) ASC")->get(),
+            "users" => User::orderByRaw("SUBSTRING(name, 1, 3) ASC")
+                ->where('role_id', '!=', 1)
+                ->where('role_id', '!=', 2)
+                ->where('status', '!=', 'inactiv')
+                ->get(),
+
             "logs" => rent_log::with(['item', 'user'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search']))
@@ -123,7 +124,7 @@ class RentLogController extends Controller
             $items->status = 'in Stock';
             $items->save();
             db::commit();
-            
+
             return redirect('/rent-item')->with('success', 'Berhasil Mengembalikan Item');
         } catch (\Throwable $th) {
             db::rollBack();

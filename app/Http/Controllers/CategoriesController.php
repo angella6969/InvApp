@@ -79,7 +79,14 @@ class CategoriesController extends Controller
      */
     public function destroy(string $id)
     {
-        category::destroy($id);
-        return redirect('/categories')->with('success', 'Berhasil Menghapus Data');
+
+        $category = category::findOrFail($id);
+
+        try {
+            $category->delete();
+            return redirect('/categories')->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 }

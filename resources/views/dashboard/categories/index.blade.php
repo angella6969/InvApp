@@ -1,7 +1,7 @@
 @extends('dashboard.layout.main')
 
 @Section('tittle')
-<title> Sisda | Category </title>
+    <title> Sisda | Category </title>
 
 @Section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -15,6 +15,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <a href="/categories/create" class="btn btn-primary mb-2"> Add New Category</a>
         <table class="table table-striped table-sm">
@@ -22,7 +27,9 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">Action</th>
+                    @can('SuperAdmin')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -31,16 +38,18 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $barang->name }}</td>
                         <td>
-                            {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" ><span data-feather="eye"></span></button>     --}}
+
                             <a href="/categories/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span
                                     data-feather="edit"></span></a>
-                            <form action="/categories/{{ $barang->id }}" class="d-inline" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="badge bg-danger border-0"
-                                    onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><i
-                                        data-feather="trash-2"></i></button>
-                            </form>
+                            @can('SuperAdmin')
+                                <form action="/categories/{{ $barang->id }}" class="d-inline" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="badge bg-danger border-0"
+                                        onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><i
+                                            data-feather="trash-2"></i></button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

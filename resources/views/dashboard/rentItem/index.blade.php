@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-6 col-sm-8">
                         <div>
-                            <select name="search" class="select2 userBox form-control ">
+                            <select name="search" class=" userBox form-control ">
                                 <option selected>Search User Rent</option>
                                 @foreach ($users as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>

@@ -23,7 +23,7 @@ class ItemController extends Controller
     public function index()
     {
         return view('dashboard.item.index', [
-            "categories" => category::all(),
+            "categories" => category::orderByRaw('SUBSTRING(name,1,5) ASC')->get(),
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))
@@ -39,7 +39,7 @@ class ItemController extends Controller
     public function create()
     {
         return view('dashboard.item.create', [
-            'categories' => category::all()
+            'categories' => category::orderByRaw('SUBSTRING(UPPER(name),1,5) ASC')->get()
         ]);
     }
 
@@ -52,11 +52,89 @@ class ItemController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
                 'item_code' => 'required|max:255|unique:items',
-                'category_id' => ['required'],
+                'category_id' => ['required', 'numeric'],
                 'brand' => ['required'],
                 'location' => ['required'],
                 'owner' => ['required'],
             ]);
+
+
+            // $kom = '02.06.03';
+
+
+            // $codes = [
+
+            //     'Mainframe' => '01',
+            //     'Mini Komputer' => '02',
+            //     'Local Area Network (LAN)' => '03',
+            //     'Internet' => '04',
+
+            //     'P.C. Unit' => '02.01',
+            //     'Laptop' => '02.02',
+            //     'Notebook' => '02.03',
+            //     'Palm Top' => '02.04',
+
+
+            //     'Card Reader Komputer Mainframe' => '03.01',
+            //     'Magnetic Tape Unit Komputer Mainframe' => '03.02',
+            //     'Floppy Disk Unit Komputer Mainframe' => '03.03',
+            //     'Storage Modul Disk Komputer Mainframe' => '03.04',
+            //     'Consol Unit Komputer Mainframe' => '03.05',
+            //     'CPU Komputer Mainframe' => '03.06',
+            //     'Diskpark Komputer Mainframe' => '03.07',
+            //     'Hard Copy Consol Komputer Mainframe' => '03.08',
+            //     'Sesial Pointer Komputer Mainframe' => '03.09',
+            //     'Line Printer Komputer Mainframe' => '03.10',
+            //     'Ploter Komputer Mainframe' => '03.11',
+            //     'Hard Disk Komputer Mainframe' => '03.12',
+            //     'Keyboard Komputer Mainframe' => '03.13',
+
+
+            //     'Card Reader MiniKom' => '04.01',
+            //     'Magnetic Tape Unit MiniKom' => '04.02',
+            //     'Floppy Disk Unit MiniKom' => '04.03',
+            //     'Storage Modul Disk MiniKom' => '04.04',
+            //     'Consol Unit MiniKom' => '04.05',
+            //     'CPU MiniKom' => '04.06',
+            //     'Diskpark MiniKom' => '04.07',
+            //     'Hard Printer MiniKom' => '04.08',
+            //     'Plotter MiniKom' => '04.09',
+            //     'Scanner MiniKom' => '04.10',
+            //     'Computer Compatible' => '04.11',
+            //     'Viewewr' => '04.12',
+            //     'Digitzer MiniKom' => '04.13',
+            //     'Keyboard MiniKom' => '04.14',
+
+            //     'CPU Personal Computer' => '05.01',
+            //     'Monitor Personal Computer' => '05.02',
+            //     'Printer Personal Computer' => '05.03',
+            //     'Scanner Personal Computer' => '05.04',
+            //     'Ploter Personal Computer' => '05.05',
+            //     'Viewer Personal Computer' => '05.06',
+            //     'Extermal Personal Computer' => '05.07',
+            //     'Digizer Personal Computer' => '05.08',
+            //     'Keyboard Personal Computer' => '05.09',
+
+            //     'Server' => '06.01',
+            //     'Router' => '06.02',
+            //     'Hub' => '06.03',
+            //     'Modem' => '06.04',
+            //     'Netware Interface External' => '06.05',
+            // ];
+
+            // $code = $validatedData['category_id'];
+            // $categoryItems = Category::findOrFail($code)->only('name');
+
+            // $localcode = $kom . '.' . $codes[$categoryItems['name']];
+
+
+            // dd($localcode);
+
+
+
+
+
+
 
             $kom = '02.06.03';
 
@@ -95,12 +173,12 @@ class ItemController extends Controller
             $consolUnitMiniKom = $peralatanMiniKom . '.' . '05';
             $cpuMiniKom = $peralatanMiniKom . '.' . '06';
             $diskparkMiniKom = $peralatanMiniKom . '.' . '07';
-            $hardDiskConsolMiniKom = $peralatanMiniKom . '.' . '08';
-            $sesialPointerMiniKom = $peralatanMiniKom . '.' . '09';
-            $linePrinterMiniKom = $peralatanMiniKom . '.' . '10';
+            $hardPrinterMiniKom = $peralatanMiniKom . '.' . '08';
+            $plotterMiniKom = $peralatanMiniKom . '.' . '09';
+            $scannerMiniKom = $peralatanMiniKom . '.' . '10';
             $computerCompatible = $peralatanMiniKom . '.' . '11';
-            $ploterMiniKom = $peralatanMiniKom . '.' . '12';
-            $hardDiskMiniKom = $peralatanMiniKom . '.' . '13';
+            $viewewr = $peralatanMiniKom . '.' . '12';
+            $digitzerMiniKom = $peralatanMiniKom . '.' . '13';
             $keyboardMiniKom = $peralatanMiniKom . '.' . '14';
 
             $peralatanPC = $kom . '.' . '05';
@@ -119,10 +197,7 @@ class ItemController extends Controller
             $router =  $peralatanJar . '.' . '02';
             $hub =  $peralatanJar . '.' . '03';
             $modem =  $peralatanJar . '.' . '04';
-            $networkInterfaceExternal =  $peralatanJar . '.' . '05';
-
-            
-
+            $netwareInterfaceExternal =  $peralatanJar . '.' . '05';
 
 
 
@@ -131,6 +206,7 @@ class ItemController extends Controller
             $code = $validatedData['category_id'];
             $categoryItems = category::findorfail($code)->only('name');
 
+            //
             if ($categoryItems['name'] == 'Mainframe') {
                 $localcode = $mainframe;
             } elseif ($categoryItems['name'] == 'Mini Komputer') {
@@ -139,7 +215,10 @@ class ItemController extends Controller
                 $localcode = $lan;
             } elseif ($categoryItems['name'] == 'Internet') {
                 $localcode = $internet;
-            } elseif ($categoryItems['name'] == 'P.C. Unit') {
+            }
+
+            //
+            elseif ($categoryItems['name'] == 'P.C. Unit') {
                 $localcode = $pcUnit;
             } elseif ($categoryItems['name'] == 'Laptop') {
                 $localcode = $laptop;
@@ -147,109 +226,111 @@ class ItemController extends Controller
                 $localcode = $notebook;
             } elseif ($categoryItems['name'] == 'Palm Top') {
                 $localcode = $plamTop;
-            } 
-            
-            
-            elseif ($categoryItems['name'] == 'Card Reader') {
+            }
+
+
+            //
+            elseif ($categoryItems['name'] == 'Card Reader Komputer Mainframe') {
                 $localcode = $cardReader;
-            } elseif ($categoryItems['name'] == 'Magnetic Tape Unit') {
+            } elseif ($categoryItems['name'] == 'Magnetic Tape Unit Komputer Mainframe') {
                 $localcode = $magneticTapeUnit;
-            } elseif ($categoryItems['name'] == 'Floppy Disk Unit') {
+            } elseif ($categoryItems['name'] == 'Floppy Disk Unit Komputer Mainframe') {
                 $localcode = $floppyDiskUnit;
-            } elseif ($categoryItems['name'] == 'Storage Modul Disk') {
+            } elseif ($categoryItems['name'] == 'Storage Modul Disk Komputer Mainframe') {
                 $localcode = $storageModulDisk;
-            } elseif ($categoryItems['name'] == 'Console Unit') {
+            } elseif ($categoryItems['name'] == 'Console Unit Komputer Mainframe') {
                 $localcode = $consolUnit;
-            } elseif ($categoryItems['name'] == 'CPU') {
+            } elseif ($categoryItems['name'] == 'CPU Komputer Mainframe') {
                 $localcode = $cpu;
-            } elseif ($categoryItems['name'] == 'Disk Park') {
+            } elseif ($categoryItems['name'] == 'Disk Park Komputer Mainframe') {
                 $localcode = $diskpark;
-            } elseif ($categoryItems['name'] == 'Hard Copy Console') {
+            } elseif ($categoryItems['name'] == 'Hard Copy Console Komputer Mainframe') {
                 $localcode = $hardCopyConsol;
-            } elseif ($categoryItems['name'] == 'Serial Pointer') {
+            } elseif ($categoryItems['name'] == 'Serial Pointer Komputer Mainframe') {
                 $localcode = $sesialPointer;
-            } elseif ($categoryItems['name'] == 'Line Printer') {
+            } elseif ($categoryItems['name'] == 'Line Printer Komputer Mainframe') {
                 $localcode = $linePrinter;
-            } elseif ($categoryItems['name'] == 'Ploter') {
+            } elseif ($categoryItems['name'] == 'Ploter Komputer Mainframe') {
                 $localcode = $ploter;
-            } elseif ($categoryItems['name'] == 'Hard Disk') {
+            } elseif ($categoryItems['name'] == 'Hard Disk Komputer Mainframe') {
                 $localcode = $hardDisk;
-            } elseif ($categoryItems['name'] == 'Keyboard') {
+            } elseif ($categoryItems['name'] == 'Keyboard Komputer Mainframe') {
                 $localcode = $keyboard;
             }
 
-           
 
-            //  elseif ($categoryItems['name'] == 'Card Reader Main') {
-            //     $localcode = $cardReaderMiniKom;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } elseif ($categoryItems['name'] == '') {
-            //     $localcode = $hardDisk;
-            // } else {
-            //     $localcode = 'INW/N 123';
-            // }
+            //
+            elseif ($categoryItems['name'] == 'Card Reader Mini Komputer') {
+                $localcode = $cardReaderMiniKom;
+            } elseif ($categoryItems['name'] == 'Magnetic Tape Unit Mini Komputer') {
+                $localcode = $magneticTapeUnitMiniKom;
+            } elseif ($categoryItems['name'] == 'Floppy Disk Unit Mini Komputer') {
+                $localcode = $floppyDiskUnitMiniKom;
+            } elseif ($categoryItems['name'] == 'Storage Modul Disk Mini Komputer') {
+                $localcode = $storageModulDiskMiniKom;
+            } elseif ($categoryItems['name'] == 'Console Unit Mini Komputer') {
+                $localcode = $consolUnitMiniKom;
+            } elseif ($categoryItems['name'] == 'CPU Mini Komputer') {
+                $localcode = $cpuMiniKom;
+            } elseif ($categoryItems['name'] == 'Disk Pack Mini Komputer') {
+                $localcode = $diskparkMiniKom;
+            } elseif ($categoryItems['name'] == 'Printer Mini Komputer') {
+                $localcode = $hardPrinterMiniKom;
+            } elseif ($categoryItems['name'] == 'Plotter Mini Komputer') {
+                $localcode = $plotterMiniKom;
+            } elseif ($categoryItems['name'] == 'Scanner Mini Komputer') {
+                $localcode = $scannerMiniKom;
+            } elseif ($categoryItems['name'] == 'Computer Compatible Mini Komputer') {
+                $localcode = $computerCompatible;
+            } elseif ($categoryItems['name'] == 'Viewer Mini Komputer') {
+                $localcode = $viewewr;
+            } elseif ($categoryItems['name'] == 'Digitzer Mini Komputer') {
+                $localcode = $digitzerMiniKom;
+            } elseif ($categoryItems['name'] == 'Keyboard Mini Komputer') {
+                $localcode = $keyboardMiniKom;
+
+
+                //
+
+            } elseif ($categoryItems['name'] == 'CPU Personal Computer') {
+                $localcode = $cpuPc;
+            } elseif ($categoryItems['name'] == 'Monitor Personal Computer') {
+                $localcode = $monitor;
+            } elseif ($categoryItems['name'] == 'Printer Personal Computer') {
+                $localcode = $printer;
+            } elseif ($categoryItems['name'] == 'Scanner Personal Computer') {
+                $localcode = $scanner;
+            } elseif ($categoryItems['name'] == 'Plotter Personal Computer') {
+                $localcode = $plotterPc;
+            } elseif ($categoryItems['name'] == 'Viewer Personal Computer') {
+                $localcode = $viewer;
+            } elseif ($categoryItems['name'] == 'Extermal Personal Computer') {
+                $localcode = $extermal;
+            } elseif ($categoryItems['name'] == 'Digitzer Personal Computer') {
+                $localcode = $digizer;
+            } elseif ($categoryItems['name'] == 'Keyboard Personal Computer') {
+                $localcode = $keyboardPc;
+            }
+
+
+            //
+            elseif ($categoryItems['name'] == 'Server') {
+                $localcode = $server;
+            } elseif ($categoryItems['name'] == 'Router') {
+                $localcode = $router;
+            } elseif ($categoryItems['name'] == 'Hub') {
+                $localcode = $hub;
+            } elseif ($categoryItems['name'] == 'Modem') {
+                $localcode = $modem;
+            } elseif ($categoryItems['name'] == 'Netware Interface External') {
+                $localcode = $netwareInterfaceExternal;
+            } else {
+                $localcode = 'INW/N 123';
+            }
+
             $validatedData['item_code'] = $localcode . '.' . $validatedData['item_code'];
-            dd( $validatedData['item_code']);
-            // item::create($validatedData);
+            item::create($validatedData);
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
-
-            //     $items= item::all();
-
-            // $validatedData = $request->validate([
-            //     'name' => 'required|max:255',
-            //     'item_code' => 'required|max:255|unique:items',
-            //     'category_id' => ['required'],
-            //     'brand' => ['required'],
-            //     'location' => ['required'],
-            //     'owner' => ['required'],
-            // ]);
-
-            // $code = $validatedData['category_id'];
-            // $items= category::findorfail($code)->only('name');
-            // dd($items['name']);
-
-            // $localcode = '';
-            // $codes = [
-            //     1 => 'IN/E',
-            //     2 => 'IN/S',
-            //     3 => 'IN/H',
-            //     4 => 'IN/N',
-            // ];
-
-            // if (isset($codes[$code])) {
-            //     $localcode = $codes[$code];
-            // } else {
-            //     $localcode = 'INW/N';
-            // }
-
-            // $itemCode = $localcode . ' ' . $validatedData['item_code'];
-            // $itemData = array_merge($validatedData, ['item_code' => $itemCode]);
-
-            // $item = Item::create($itemData);
-            // if ($item) {
-            //     return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
-            // } else {
-            //     return redirect('/dashboard/item')->with('fail', 'Gagal Menambahkan Data');
-            // }
         } catch (\Throwable $th) {
             return redirect('/dashboard/item')->with('fail', 'Gagal Menambahkan Data');
         }

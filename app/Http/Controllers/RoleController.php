@@ -88,7 +88,14 @@ class RoleController extends Controller
      */
     public function destroy(string $role)
     {
-        role::destroy($role);
-        return redirect('/dashboard/role')->with('success', 'Berhasil Menghapus Data');
+        $role = role::findOrFail($role);
+
+        try {
+            $role->delete();
+            return redirect('/dashboard/role')->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+       
     }
 }

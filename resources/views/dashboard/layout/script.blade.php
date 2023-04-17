@@ -52,21 +52,12 @@
 <script src="{{ asset('gentelella-master') }}/vendors/fastclick/lib/fastclick.js"></script>
 <script src="{{ asset('gentelella-master') }}/vendors/nprogress/nprogress.js"></script>
 <script src="{{ asset('gentelella-master') }}/vendors/iCheck/icheck.min.js"></script>
-{{-- <script src="{{ asset('gentelella-master') }}/build/js/custom.min.js"></script> --}}
+<script src="{{ asset('gentelella-master') }}/build/js/custom.min.js"></script>
 
 <script scr="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script> --}}
 <script>
     $(document).ready(function() {
-        $('.userBox').select2();
-    });
+            $('.userBox').select2(); 
+        });
 </script>
-{{-- <script>
-    $(document).ready(function() {
-      $('.select2').select2({
-        theme: 'bootstrap'
-      });
-    });
-  </script> --}}
-  

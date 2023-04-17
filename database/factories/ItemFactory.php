@@ -17,8 +17,8 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=> $this->faker->cityPrefix()   ,
-            'category_id'=>mt_rand(1,4),
+            'name'=> $this->faker->streetSuffix()   ,
+            'category_id'=>mt_rand(1,45),
             'item_code'=>$this->faker->ean8(),
             'brand'=>$this->faker->randomElement(['Asus', 'Lenovo', 'MSI', 'Samsung', 'Acer']),
             'status'=>$this->faker->randomElement(['rusak', 'hilang', 'terpinjam', 'in stock']) ,
