@@ -7,7 +7,7 @@
 @Section('container')
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Create</h1>
+        <h1 class="h2">Penambahan Barang</h1>
     </div>
     {{-- Body --}}
     <div class="col-lg-8 ms-4">
@@ -33,7 +33,7 @@
 
             {{-- Field Item Name --}}
             <div class="mb-2">
-                <label for="name" class="form-label ">name Item</label>
+                <label for="name" class="form-label ">Nama Barang</label>
                 <input placeholder="Item Name" type="text" name='name'
                     class="form-control @error('name') is-invalid @enderror" id="name" required
                     value="{{ old('name') }}">
@@ -47,7 +47,7 @@
 
             {{-- Field Item Brand --}}
             <div class="mb-2">
-                <label for="brand" class="form-label ">brand Item</label>
+                <label for="brand" class="form-label ">Merek Barang</label>
                 <input placeholder="Item brand" type="text" name='brand'
                     class="form-control @error('brand') is-invalid @enderror" id="brand" required
                     value="{{ old('brand') }}">
@@ -61,7 +61,7 @@
 
             {{-- Field Item Location --}}
             <div class="mb-2">
-                <label for="location" class="form-label ">location Item</label>
+                <label for="location" class="form-label ">Lokasi Barang</label>
                 <input placeholder="Item location" type="text" name='location'
                     class="form-control @error('location') is-invalid @enderror" id="location" required
                     value="{{ old('location') }}">
@@ -75,7 +75,7 @@
 
             {{-- Field Item Owner --}}
             <div class="mb-2">
-                <label for="owner" class="form-label ">owner Item</label>
+                <label for="owner" class="form-label ">Pemilik Barang</label>
                 <input placeholder="Item owner" type="text" name='owner'
                     class="form-control @error('owner') is-invalid @enderror" id="owner" required
                     value="{{ old('owner') }}">
@@ -87,12 +87,10 @@
             </div>
             {{-- End Field Item Owner --}}
 
-
-
             {{-- Field Item Category --}}
             <div class="mb-2">
-                <label for="Item Code" class="form-label ">Category Item</label>
-                <select class="form-select" name=category_id>
+                <label for="Item Code" class="form-label ">Kategori Barang</label>
+                <select class="form-select" name=category_id placeholder="Choose one thing">
 
                     @foreach ($categories as $item)
                         @if (old('category_id') == $item->id)

@@ -31,22 +31,22 @@
             <form action="/rent-item" method="post">
                 @csrf
                 <div class="row">
-                    {{-- Pencarian User --}}
+                    {{-- Pencarian User Peminjam --}}
                     <div class="mb-3">
                         <label for="">Peminjam</label>
-                        <select name="user_id" id="user_id" class=" userBox form-control ">
+                        <select name="user_id" id="user_id" class="select2 userBox form-control ">
                             <option selected>User</option>
                             @foreach ($users as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    {{-- End Pencarian User --}}
+                    {{-- End Pencarian User Peminjam --}}
 
                     {{-- Pencarian Item --}}
                     <div>
                         <label for="">Barang</label>
-                        <select name="item_id" id="item_id" class=" userBox form-control ">
+                        <select name="item_id" id="item_id" class="select2 userBox form-control ">
                             <option selected>Item</option>
                             @foreach ($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }} <===> {{ $item->status }}</option>
@@ -66,8 +66,6 @@
 
             {{-- End form Pencarian --}}
 
-           
-
         </div>
         {{-- Form Index --}}
 
@@ -79,7 +77,7 @@
                 <div class="row">
                     <div class="col-6 col-sm-8">
                         <div>
-                            <select name="search" class=" userBox form-control ">
+                            <select name="search" class="select2 userBox form-control ">
                                 <option selected>Search User Rent</option>
                                 @foreach ($users as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>

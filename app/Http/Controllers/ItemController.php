@@ -58,23 +58,158 @@ class ItemController extends Controller
                 'owner' => ['required'],
             ]);
 
+            $kom = '02.06.03';
+
+            $komJar = $kom . '.' . '01';
+            $mainframe = $komJar . '.' . '01';
+            $miniKom = $komJar . '.' . '02';
+            $lan = $komJar . '.' . '03';
+            $internet = $komJar . '.' . '04';
+
+            $perKom = $kom . '.' . '02';
+            $pcUnit = $perKom . '.' . '01';
+            $laptop = $perKom . '.' . '02';
+            $notebook = $perKom . '.' . '03';
+            $plamTop = $perKom . '.' . '04';
+
+            $peralatanKomMain = $kom . '.' . '03';
+            $cardReader = $peralatanKomMain . '.' . '01';
+            $magneticTapeUnit = $peralatanKomMain . '.' . '02';
+            $floppyDiskUnit = $peralatanKomMain . '.' . '03';
+            $storageModulDisk = $peralatanKomMain . '.' . '04';
+            $consolUnit = $peralatanKomMain . '.' . '05';
+            $cpu = $peralatanKomMain . '.' . '06';
+            $diskpark = $peralatanKomMain . '.' . '07';
+            $hardCopyConsol = $peralatanKomMain . '.' . '08';
+            $sesialPointer = $peralatanKomMain . '.' . '09';
+            $linePrinter = $peralatanKomMain . '.' . '10';
+            $ploter = $peralatanKomMain . '.' . '11';
+            $hardDisk = $peralatanKomMain . '.' . '12';
+            $keyboard = $peralatanKomMain . '.' . '13';
+
+            $peralatanMiniKom = $kom . '.' . '04';
+            $cardReaderMiniKom = $peralatanMiniKom . '.' . '01';
+            $magneticTapeUnitMiniKom = $peralatanMiniKom . '.' . '02';
+            $floppyDiskUnitMiniKom = $peralatanMiniKom . '.' . '03';
+            $storageModulDiskMiniKom = $peralatanMiniKom . '.' . '04';
+            $consolUnitMiniKom = $peralatanMiniKom . '.' . '05';
+            $cpuMiniKom = $peralatanMiniKom . '.' . '06';
+            $diskparkMiniKom = $peralatanMiniKom . '.' . '07';
+            $hardDiskConsolMiniKom = $peralatanMiniKom . '.' . '08';
+            $sesialPointerMiniKom = $peralatanMiniKom . '.' . '09';
+            $linePrinterMiniKom = $peralatanMiniKom . '.' . '10';
+            $computerCompatible = $peralatanMiniKom . '.' . '11';
+            $ploterMiniKom = $peralatanMiniKom . '.' . '12';
+            $hardDiskMiniKom = $peralatanMiniKom . '.' . '13';
+            $keyboardMiniKom = $peralatanMiniKom . '.' . '14';
+
+            $peralatanPC = $kom . '.' . '05';
+            $cpuPc = $peralatanPC . '.' . '01';
+            $monitor = $peralatanPC . '.' . '02';
+            $printer = $peralatanPC . '.' . '03';
+            $scanner = $peralatanPC . '.' . '04';
+            $plotterPc = $peralatanPC . '.' . '05';
+            $viewer = $peralatanPC . '.' . '06';
+            $extermal = $peralatanPC . '.' . '07';
+            $digizer = $peralatanPC . '.' . '08';
+            $keyboardPc = $peralatanPC . '.' . '09';
+
+            $peralatanJar = $kom . '.' . '06';
+            $server = $peralatanJar . '.' . '01';
+            $router =  $peralatanJar . '.' . '02';
+            $hub =  $peralatanJar . '.' . '03';
+            $modem =  $peralatanJar . '.' . '04';
+            $networkInterfaceExternal =  $peralatanJar . '.' . '05';
+
+            
+
+
+
+
+
 
             $code = $validatedData['category_id'];
-            $items = category::findorfail($code)->only('name');
-            if ($items['name'] == 'Hardware') {
-                $localcode = 'IN/E 123';
-            } elseif ($items['name'] == 'Elektronik') {
-                $localcode = 'IN/S 123';
-            } elseif ($items['name'] == 'Software') {
-                $localcode = 'IN/H 123';
-            } elseif ($items['name'] == 'Hardware') {
-                $localcode = 'IN/N 123';
-            } else {
-                $localcode = 'INW/N 123';
-            }
-            $validatedData['item_code'] = $localcode . ' ' . $validatedData['item_code'];
+            $categoryItems = category::findorfail($code)->only('name');
 
-            item::create($validatedData);
+            if ($categoryItems['name'] == 'Mainframe') {
+                $localcode = $mainframe;
+            } elseif ($categoryItems['name'] == 'Mini Komputer') {
+                $localcode = $miniKom;
+            } elseif ($categoryItems['name'] == 'Local Area Network (LAN)') {
+                $localcode = $lan;
+            } elseif ($categoryItems['name'] == 'Internet') {
+                $localcode = $internet;
+            } elseif ($categoryItems['name'] == 'P.C. Unit') {
+                $localcode = $pcUnit;
+            } elseif ($categoryItems['name'] == 'Laptop') {
+                $localcode = $laptop;
+            } elseif ($categoryItems['name'] == 'Note Book') {
+                $localcode = $notebook;
+            } elseif ($categoryItems['name'] == 'Palm Top') {
+                $localcode = $plamTop;
+            } 
+            
+            
+            elseif ($categoryItems['name'] == 'Card Reader') {
+                $localcode = $cardReader;
+            } elseif ($categoryItems['name'] == 'Magnetic Tape Unit') {
+                $localcode = $magneticTapeUnit;
+            } elseif ($categoryItems['name'] == 'Floppy Disk Unit') {
+                $localcode = $floppyDiskUnit;
+            } elseif ($categoryItems['name'] == 'Storage Modul Disk') {
+                $localcode = $storageModulDisk;
+            } elseif ($categoryItems['name'] == 'Console Unit') {
+                $localcode = $consolUnit;
+            } elseif ($categoryItems['name'] == 'CPU') {
+                $localcode = $cpu;
+            } elseif ($categoryItems['name'] == 'Disk Park') {
+                $localcode = $diskpark;
+            } elseif ($categoryItems['name'] == 'Hard Copy Console') {
+                $localcode = $hardCopyConsol;
+            } elseif ($categoryItems['name'] == 'Serial Pointer') {
+                $localcode = $sesialPointer;
+            } elseif ($categoryItems['name'] == 'Line Printer') {
+                $localcode = $linePrinter;
+            } elseif ($categoryItems['name'] == 'Ploter') {
+                $localcode = $ploter;
+            } elseif ($categoryItems['name'] == 'Hard Disk') {
+                $localcode = $hardDisk;
+            } elseif ($categoryItems['name'] == 'Keyboard') {
+                $localcode = $keyboard;
+            }
+
+           
+
+            //  elseif ($categoryItems['name'] == 'Card Reader Main') {
+            //     $localcode = $cardReaderMiniKom;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } elseif ($categoryItems['name'] == '') {
+            //     $localcode = $hardDisk;
+            // } else {
+            //     $localcode = 'INW/N 123';
+            // }
+            $validatedData['item_code'] = $localcode . '.' . $validatedData['item_code'];
+            dd( $validatedData['item_code']);
+            // item::create($validatedData);
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
 
             //     $items= item::all();
