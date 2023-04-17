@@ -25,28 +25,28 @@ class ItemController extends Controller
     public function index()
     {
 
-        $cacheKey = 'model_cache_key';
-        $minutes = 60;
+        // $cacheKey = 'model_cache_key';
+        // $minutes = 60;
 
-        $models = Cache::remember($cacheKey, $minutes, function () {
-            $categories = category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
-            $items = item::with(['category'])
-                ->orderBy('id', 'DESC')
-                ->Filter(request(['search', 'categories', 'status']))
-                ->paginate(20)
-                ->withQueryString();
-            return Model::all();
-        });
+        // $models = Cache::remember($cacheKey, $minutes, function () {
+        //     $categories = category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
+        //     $items = item::with(['category'])
+        //         ->orderBy('id', 'DESC')
+        //         ->Filter(request(['search', 'categories', 'status']))
+        //         ->paginate(20)
+        //         ->withQueryString();
+        //     return Model::all();
+        // });
 
         // return view('view_name', ['models' => $models]);
         return view('dashboard.item.index', [
-            // "categories" => category::orderByRaw('SUBSTRING(name,1,5) ASC')->get(),
-            // "items" => item::with(['category'])
-            //     ->orderBy('id', 'DESC')
-            //     ->Filter(request(['search', 'categories', 'status']))
-            //     ->paginate(20)
-            //     ->withQueryString(),
-            'models' => $models
+            "categories" => category::orderByRaw('SUBSTRING(name,1,5) ASC')->get(),
+            "items" => item::with(['category'])
+                ->orderBy('id', 'DESC')
+                ->Filter(request(['search', 'categories', 'status']))
+                ->paginate(20)
+                ->withQueryString(),
+            // 'models' => $models
 
         ]);
     }
