@@ -52,7 +52,7 @@ class RentLogController extends Controller
 
         $items = item::findOrFail($request->item_id)->only('status');
         if ($items['status'] != 'in stock') {
-            return redirect('/rent-item')->with('Fail', 'Item Has Been Rent');
+            return redirect('/rent-item')->with('Fail', 'Barang Tidak Tersedia, Silahkan Pilih yang lain');
         } else {
 
             $count = rent_log::where('user_id', $request->user_id)->where('actual_return_date', null)->count();
@@ -70,7 +70,7 @@ class RentLogController extends Controller
                     $items->save();
                     db::commit();
 
-                    return redirect('/rent-item')->with('success', 'Success Rent Item');
+                    return redirect('/rent-item')->with('success', 'Berhasil Meminjam Barang');
                 } catch (\Throwable $th) {
                     db::rollBack();
                 }

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use League\Csv\Reader;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 
@@ -22,13 +24,29 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('dashboard.item.index', [
-            "categories" => category::orderByRaw('SUBSTRING(name,1,5) ASC')->get(),
-            "items" => item::with(['category'])
+
+        $cacheKey = 'model_cache_key';
+        $minutes = 60;
+
+        $models = Cache::remember($cacheKey, $minutes, function () {
+            $categories = category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
+            $items = item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))
                 ->paginate(20)
-                ->withQueryString(),
+                ->withQueryString();
+            return Model::all();
+        });
+
+        // return view('view_name', ['models' => $models]);
+        return view('dashboard.item.index', [
+            // "categories" => category::orderByRaw('SUBSTRING(name,1,5) ASC')->get(),
+            // "items" => item::with(['category'])
+            //     ->orderBy('id', 'DESC')
+            //     ->Filter(request(['search', 'categories', 'status']))
+            //     ->paginate(20)
+            //     ->withQueryString(),
+            'models' => $models
 
         ]);
     }

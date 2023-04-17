@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class item extends Model
@@ -35,5 +36,13 @@ class item extends Model
             });
         });
     }
-   
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Ketika ada data baru yang dimasukkan, cache akan dihapus agar data yang baru dimasukkan bisa langsung terlihat
+            Cache::forget('model_cache_key');
+        });
+    }
 }
