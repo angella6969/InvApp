@@ -66,6 +66,7 @@
 
                         {{-- Field Role --}}
                         @can('SuperAdmin')
+                        
                             <div class="mb-2">
                                 <select class="form-select" name=role_id>
 
@@ -84,6 +85,7 @@
                                     </div>
                                 @enderror
                             </div>
+                        
                         @endcan
                         {{-- End Field Role --}}
 

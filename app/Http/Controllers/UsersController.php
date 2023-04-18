@@ -53,7 +53,7 @@ class UsersController extends Controller
             'username' => ['required', 'min:3', 'max:200', 'unique:users'],
             'email' => ['required', 'email:dns', 'unique:users'],
             'password' => ['required', 'min:5', 'max:255'],
-            'phone' => ['required', 'digits_between:10,16', 'numeric','unique:users'],
+            'phone' => ['required', 'digits_between:10,16', 'numeric', 'unique:users'],
         ];
         if (auth()->user()->role_id == 1) {
             $data['role_id'] = ['required'];
@@ -90,10 +90,21 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
+        // $data['name'] = User::findOrFail($id)->only('name');
+
+        // dd($data);
+        // if (auth()->user()->name !=  $data['name']) {
         return view('authentication.edit', [
             "users" => User::findOrFail($id),
             "roles" => role::all()
         ]);
+        // }
+        // else
+        // {
+
+        // }
+        // dd(auth()->user()->name);
+
     }
 
     /**
@@ -102,20 +113,20 @@ class UsersController extends Controller
     public function update(Request $request, string $id)
     {
         $users = User::findOrFail($id);
-        
+
         $data = [
             'name' => 'required|max:255',
-            'phone' => ['required', 'digits_between:10,16', 'numeric','unique:users'],
+            'phone' => ['required', 'digits_between:10,16', 'numeric', 'unique:users'],
         ];
         if (auth()->user()->role_id == 1) {
             $data['role_id'] = ['required'];
         }
         if ($request->email != $users->email) {
-            $data['email'] = ['required', 'email:dns','min:3', 'unique:users'];
+            $data['email'] = ['required', 'email:dns', 'min:3', 'unique:users'];
         } elseif ($request->username != $users->username) {
             $data['username'] = ['required', 'min:3', 'max:200', 'unique:users'];
         } elseif ($request->phone != $users->phone) {
-            $data['phone'] = ['required', 'digits_between:10,16', 'numeric','unique:users'];
+            $data['phone'] = ['required', 'digits_between:10,16', 'numeric', 'unique:users'];
         }
         $validatedData = $request->validate($data);
         User::where('id', $id)->update($validatedData);
