@@ -25,22 +25,26 @@ class ItemController extends Controller
     public function index()
     {
 
-        // $cacheKey = 'model_cache_key';
-        // $minutes = 60;
-
-        // $models = Cache::remember($cacheKey, $minutes, function () {
-        //     $categories = category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
-        //     $items = item::with(['category'])
+        $expiration = 10;
+        // // Ambil data user dari cache atau database
+        // $data = Cache::remember('my_data', $expiration, function () {
+        //     return item::with(['category'])
         //         ->orderBy('id', 'DESC')
         //         ->Filter(request(['search', 'categories', 'status']))
         //         ->paginate(20)
         //         ->withQueryString();
-        //     return Model::all();
         // });
 
-        // return view('view_name', ['models' => $models]);
+        // // Ambil data rent log dari cache atau database
+        $data1 = Cache::remember('my_data1', $expiration, function () {
+            return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
+        });
+        // return view('dashboard.item.index', [
+        //     "categories" =>  $data1,
+        //     "items" => $data
+        // ]);
         return view('dashboard.item.index', [
-            "categories" => category::orderByRaw('SUBSTRING(name,1,5) ASC')->get(),
+            "categories" =>  $data1,
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))

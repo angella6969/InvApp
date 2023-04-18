@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Storerent_logRequest;
 use App\Http\Requests\Updaterent_logRequest;
 use Clockwork\Request\Request;
+use Illuminate\Support\Facades\Cache;
 
 class RentLogController extends Controller
 {
@@ -18,15 +19,37 @@ class RentLogController extends Controller
      */
     public function index()
     {
-
-
-        return view('dashboard.rentItem.index', [
-            "items" => item::orderByRaw("SUBSTRING(name, 1, 3) ASC")->get(),
-            "users" => User::orderByRaw("SUBSTRING(name, 1, 3) ASC")
+        $expiration = 30;
+        // // Ambil data user dari cache atau database
+        $data = Cache::remember('my_data', $expiration, function () {
+            return User::orderByRaw("SUBSTRING(name, 1, 3) ASC")
                 ->where('role_id', '!=', 1)
                 ->where('role_id', '!=', 2)
                 ->where('status', '!=', 'inactiv')
-                ->get(),
+                ->get();
+        });
+
+        // // Ambil data rent log dari cache atau database
+        // $data1 = Cache::remember('my_data1', $expiration, function () {
+        //     return rent_log::with(['item', 'user'])
+        //         ->orderBy('id', 'DESC')
+        //         ->filter(request(['search']))
+        //         ->paginate(20);
+        // });
+        // $data2 = Cache::remember('my_data2', $expiration, function () {
+        //     return Item::orderByRaw("SUBSTRING(name, 1, 3) ASC")->get();
+        // });
+
+        // // Kembalikan tampilan view dengan data yang telah diambil
+        // return view('dashboard.rentItem.index', [
+        //     'items' => $data2,
+        //     'users' => $data,
+        //     'logs' => $data1,
+        // ]);
+
+        return view('dashboard.rentItem.index', [
+            "items" => item::orderByRaw("SUBSTRING(name, 1, 3) ASC")->get(),
+            "users" => $data,
 
             "logs" => rent_log::with(['item', 'user'])
                 ->orderBy('id', 'DESC')
@@ -47,10 +70,21 @@ class RentLogController extends Controller
      */
     public function store(Storerent_logRequest $request)
     {
-        $request['rent_date'] = Carbon::now()->toDateString();
-        $request['return_date'] = Carbon::now()->addDay(3)->toDateString();
+
+        $data  = [
+            'user_id' => 'required',
+            'item_id' => 'required',
+        ];
+        $validatedData = $request->validate($data);
+        // $request['rent_date'] = Carbon::now()->toDateString();
+        // $request['return_date'] = Carbon::now()->addDay(3)->toDateString();
+
+        $validatedData['rent_date'] = Carbon::now()->toDateString();
+        $validatedData['return_date'] = Carbon::now()->addDay(3)->toDateString();
+
 
         $items = item::findOrFail($request->item_id)->only('status');
+
         if ($items['status'] != 'in stock') {
             return redirect('/rent-item')->with('Fail', 'Barang Tidak Tersedia, Silahkan Pilih yang lain');
         } else {
@@ -62,8 +96,8 @@ class RentLogController extends Controller
             } else {
                 try {
                     DB::beginTransaction();
-
-                    rent_log::create($request->all());
+                    rent_log::create($validatedData);
+                    // rent_log::create($request->all());
 
                     $items = item::findOrFail($request->item_id);
                     $items->status = 'Terpinjam';

@@ -34,8 +34,8 @@
                     {{-- Pencarian User Peminjam --}}
                     <div class="mb-3">
                         <label for="">Peminjam</label>
-                        <select name="user_id" id="user_id" class="select2 userBox form-control ">
-                            <option selected>User</option>
+                        <select name="user_id" id="user_id" class="select2 userBox form-control " required>
+                            <option value="">User</option>
                             @foreach ($users as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
@@ -46,8 +46,8 @@
                     {{-- Pencarian Item --}}
                     <div>
                         <label for="">Barang</label>
-                        <select name="item_id" id="item_id" class="select2 userBox form-control ">
-                            <option selected>Item</option>
+                        <select name="item_id" id="item_id" class="select2 userBox form-control " required>
+                            <option value="">Item</option>
                             @foreach ($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }} <===> {{ $item->status }}</option>
                             @endforeach

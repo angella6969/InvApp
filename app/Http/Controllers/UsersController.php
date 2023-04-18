@@ -7,6 +7,7 @@ use App\Models\rent_log;
 use App\Models\role;
 use Illuminate\Http\Request;
 use App\View\Components\rent;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use PHPUnit\Framework\MockObject\ReturnValueNotConfiguredException;
 
@@ -59,7 +60,6 @@ class UsersController extends Controller
         } else {
             $data['role_id'] = 3;
         }
-        // dd($data);
         $validatedData = $request->validate($data);
 
 

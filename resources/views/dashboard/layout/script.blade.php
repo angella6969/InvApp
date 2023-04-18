@@ -7,24 +7,24 @@
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="{{ asset('gentelella-master') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
 <!-- ChartJS -->
-<script src="{{ asset('gentelella-master') }}/plugins/chart.js/Chart.min.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/chart.js/Chart.min.js"></script> --}}
 <!-- Sparkline -->
-<script src="{{ asset('gentelella-master') }}/plugins/sparklines/sparkline.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/sparklines/sparkline.js"></script> --}}
 <!-- JQVMap -->
-<script src="{{ asset('gentelella-master') }}/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="{{ asset('gentelella-master') }}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/jqvmap/jquery.vmap.min.js"></script> --}}
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> --}}
 <!-- jQuery Knob Chart -->
-<script src="{{ asset('gentelella-master') }}/plugins/jquery-knob/jquery.knob.min.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/jquery-knob/jquery.knob.min.js"></script> --}}
 <!-- daterangepicker -->
-<script src="{{ asset('gentelella-master') }}/plugins/moment/moment.min.js"></script>
-<script src="{{ asset('gentelella-master') }}/plugins/daterangepicker/daterangepicker.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/moment/moment.min.js"></script> --}}
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/daterangepicker/daterangepicker.js"></script> --}}
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset('gentelella-master') }}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js">
-</script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"> --}}
+{{-- </script> --}}
 <!-- Summernote -->
-<script src="{{ asset('gentelella-master') }}/plugins/summernote/summernote-bs4.min.js"></script>
+{{-- <script src="{{ asset('gentelella-master') }}/plugins/summernote/summernote-bs4.min.js"></script> --}}
 <!-- overlayScrollbars -->
 <script src="{{ asset('gentelella-master') }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
@@ -58,6 +58,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-            $('.userBox').select2(); 
-        });
+        $('.userBox').select2();
+    });
 </script>
