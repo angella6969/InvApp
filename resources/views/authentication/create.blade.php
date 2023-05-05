@@ -10,13 +10,13 @@
                 <section class="login_content">
                     <form action="/users" method="post">
                         @csrf
-                        <h1>Create Account</h1>
+                        <h1>Tambah Pengguna</h1>
                         {{-- Field Name --}}
                         <div class="form-floating mb-1">
                             <input type="text" name='name'
                                 class="form-control rounded-top @error('name') is-invalid @enderror " id="name"
                                 placeholder="name" required value="{{ old('name') }}">
-                            <label for="name">name</label>
+                            <label for="name">Nama</label>
                             @error('name')
                                 <div class="invalit-feedback">
                                     {{ $message }}
@@ -56,7 +56,7 @@
                         <div class="form-floating mb-1">
                             <input type="email" name='email' class="form-control @error('email') is-invalid @enderror"
                                 id="floatingInput" placeholder="email" required value="{{ old('email') }}">
-                            <label for="floatingInput">Email address</label>
+                            <label for="floatingInput">Email</label>
                             @error('email')
                                 <div class="invalit-feedback">
                                     {{ $message }}
