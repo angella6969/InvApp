@@ -27,7 +27,7 @@
                             <a href="/dashboard/item"
                                 class="nav-link {{ Request::is('dashboard/item') ? 'active' : '' }}">
                                 <span data-feather="layers"></span>
-                                <p>Items</p>
+                                <p>Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">

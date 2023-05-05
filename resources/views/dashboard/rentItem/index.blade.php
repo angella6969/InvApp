@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Rent Item</h1>
+        <h1 class="h2">Peminjaman Barang</h1>
     </div>
     <div class="table-responsive col-lg-11">
         {{-- Alert Success --}}
@@ -35,7 +35,7 @@
                     <div class="mb-3">
                         <label for="">Peminjam</label>
                         <select name="user_id" id="user_id" class="select2 userBox form-control " required>
-                            <option value="">User</option>
+                            <option value="">Pengguna</option>
                             @foreach ($users as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
@@ -47,7 +47,7 @@
                     <div>
                         <label for="">Barang</label>
                         <select name="item_id" id="item_id" class="select2 userBox form-control " required>
-                            <option value="">Item</option>
+                            <option value="">Barang</option>
                             @foreach ($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }} <===> {{ $item->status }}</option>
                             @endforeach
@@ -71,19 +71,19 @@
 
         
         <div class="ms-4">
-            <label for="" class="mt-4">Item Rent log</label>
+            <label for="" class="mt-4">Log Peminjaman</label>
              {{-- Form Pencarian --}}
              <form action="/rent-item">
                 <div class="row">
                     <div class="col-6 col-sm-8">
                         <div>
                             <select name="search" class=" userBox form-control ">
-                                <option selected>Search User Rent</option>
+                                <option selected>Pencarian</option>
                                 @foreach ($users as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            <button class="btn btn-primary mt-2" type="submit" id="basic-addon2">Search</button>
+                            <button class="btn btn-primary mt-2" type="submit" id="basic-addon2">Pencarian</button>
                         </div>
                     </div>
                 </div>
@@ -95,13 +95,13 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Item</th>
-                        <th scope="col">Rent Date </th>
-                        <th scope="col">Return Date </th>
-                        <th scope="col">Actual Return Date </th>
+                        <th scope="col">Pengguna</th>
+                        <th scope="col">Barang</th>
+                        <th scope="col">Tgl Pinjam</th>
+                        <th scope="col">Tgl Kembali </th>
+                        <th scope="col">Tgl Dikembalikan</th>
                         @can('SuperAdmin')
-                            <th scope="col">Action</th>
+                            <th scope="col">Aksi</th>
                         @endcan
                     </tr>
                 </thead>

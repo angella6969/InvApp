@@ -30,7 +30,7 @@
                     <th scope="col">Status</th>
                     <th scope="col">Role</th>
                     @can('Admin')
-                        <th scope="col">Action</th>
+                        <th scope="col">Aksi</th>
                     @endcan
                 </tr>
             </thead>

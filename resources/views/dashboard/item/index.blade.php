@@ -25,16 +25,15 @@
         {{-- End Alert --}}
 
         {{-- Button Create --}}
-        <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span> New Item
-        </a>
+        <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span>Tambah Barang</a>
         {{-- End Button Create --}}
 
         {{-- Button Rent Item --}}
-        <a href="/rent-item" class="btn btn-warning mb-2 ms-4"><i class="fa fa-tasks"></i> Rent Item </a>
+        <a href="/rent-item" class="btn btn-warning mb-2 ms-4"><i class="fa fa-tasks"></i> Peminjaman Barang </a>
         {{-- End Button Rent Item --}}
 
         {{-- Button Import --}}
-        @can('Admin')
+        @can('SuperAdmin')
             <form action="/item/import" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -52,7 +51,7 @@
                 <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
                     <select name="categories" id="categories" class="form-select " placeholder="Category">
-                        <option value="">Category</option>
+                        <option value="">Kategori</option>
                         @foreach ($categories as $item)
                             @if (old('categories') == $item->id)
                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
@@ -91,11 +90,11 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Nama</th>
                         <th scope="col">Status </th>
-                        <th scope="col">category </th>
+                        <th scope="col">Kategori </th>
                         @can('SuperAdmin')
-                            <th scope="col">Action</th>
+                            <th scope="col">Aksi</th>
                         @endcan
                     </tr>
                 </thead>
