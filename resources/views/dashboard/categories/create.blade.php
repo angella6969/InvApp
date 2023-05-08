@@ -35,7 +35,7 @@
                     <select name="golongan" id="golongan" class="form-select ">
                         <option value="">Golongan</option>
                         <option value="02.06.03">Elektronik</option>
-                        <option value="">Non-Elektronik</option>
+                        <option value="01.06.02">Non-Elektronik</option>
                     </select>
                     @error('golongan')
                     <div class="invalit-feedback">

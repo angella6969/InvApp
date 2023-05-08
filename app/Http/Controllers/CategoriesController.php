@@ -26,7 +26,6 @@ class CategoriesController extends Controller
     {
         return view('dashboard.categories.create', [
             'categories' => category::all()
-            // 'statuses' => status::all()
         ]);
     }
 
