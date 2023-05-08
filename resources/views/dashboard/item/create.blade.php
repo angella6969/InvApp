@@ -43,7 +43,7 @@
                         @else
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endif
-                        </optgroup>
+                        {{-- </optgroup> --}}
                     @endforeach
                 </select>
                 @error('category_id')

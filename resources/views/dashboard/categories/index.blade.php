@@ -27,6 +27,7 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
+                    <th scope="col">Kode Inventaris</th>
                     @can('SuperAdmin')
                         <th scope="col">Action</th>
                     @endcan
@@ -37,6 +38,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $barang->name }}</td>
+                        <td> {{ $barang->categoryCode }}</td>
                         <td>
 
                             <a href="/categories/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline"><span

@@ -12,11 +12,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('dashboard.categories.index',[
+        return view('dashboard.categories.index', [
             "categories" => category::latest()
-               ->paginate(20)
-               ->withQueryString()
-       ]);
+                ->paginate(20)
+                ->withQueryString()
+        ]);
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create',[
+        return view('dashboard.categories.create', [
             'categories' => category::all()
             // 'statuses' => status::all()
         ]);
@@ -36,9 +36,16 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name'=> 'required|max:255'
+            'name' => 'required|max:255',
+            'golongan' => 'required|max:255',
+            'unit' => 'required|max:255',
+            'kode' => 'required|numeric',
+
         ]);
-        // dd($request);
+
+        $validatedData['categoryCode'] = $validatedData ['golongan']. '.' . $validatedData ['unit'] . '.' . $validatedData ['kode'];
+        dd( $validatedData ['categoryCode']);
+
         category::create($validatedData);
         return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
     }
@@ -56,7 +63,7 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        return view('dashboard.categories.edit',[
+        return view('dashboard.categories.edit', [
             "categories" => category::findOrFail($id)
         ]);
     }
@@ -66,11 +73,17 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            'name'=> 'required|max:255'
-        ]);
-        // dd($request);
-        category::where('id',$id)->update($validatedData);
+        $category = category::findOrFail($id);
+        $data = [
+            'name' => 'required|max:255'
+        ];
+
+        if ($request->categoryCode != $category->categoryCode) {
+            $data['email'] = ['required', 'email:dns', 'min:3', 'unique:categories'];
+        }
+        $validatedData = $request->validate($data);
+
+        category::where('id', $id)->update($validatedData);
         return redirect('/categories')->with('success', 'Berhasil Merubah Data');
     }
 

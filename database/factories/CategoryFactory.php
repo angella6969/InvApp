@@ -38,7 +38,9 @@ class CategoryFactory extends Factory
                 'Printer Personal Computer', 'Scanner Personal Computer', 'Plotter Personal Computer', 'Viewer Personal Computer',
                 'Extermal Personal Computer', 'Digitzer Personal Computer', 'Keyboard Personal Computer', 'Server', 'Router', 'Hub',
                 'Modem', 'Netware Interface External'
+                
             ]),
+            'categoryCode' => $this->faker->unique()->numerify('INF-####'),
             // 'name'=>$this->faker->randomElements(['Elektronik', 'Non Elektronik', 'Software', 'Hardware']),
         ];
     }
