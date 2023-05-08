@@ -38,9 +38,9 @@
             </div>
 
             <div class="row">
-                <label for="">Set Kode Kategori</label>
+                <label for="">Set Kode Inventaris</label>
                 <div class="col-6 col-sm-4">
-                    <select name="golongan" id="golongan" class="form-select ">
+                    <select name="golongan" id="golongan" class="form-select" onchange="showDropdowns()">
                         <option value="">Golongan</option>
                         <option value="02.06.03">Elektronik</option>
                         <option value="01.06.02">Non-Elektronik</option>
@@ -52,7 +52,7 @@
                     @enderror
                 </div>
 
-                <div class="col-6 col-sm-4">
+                <div class="col-6 col-sm-4" id="unit1" style="display:none;">
                     <select name="unit" id="unit" class="form-select">
                         <option value="">unit</option>
                         <option value="01">Komputer Unit/Jaringan</option>
@@ -61,6 +61,21 @@
                         <option value="04">Peralatan Mini Komputer</option>
                         <option value="05">Peralatan Personal Komputer</option>
                         <option value="06">Peralatan Jaringan</option>
+                    </select>
+                    @error('unit')
+                        <div class="invalit-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+
+                <div class="col-6 col-sm-4" id="unit2" style="display:none;">
+                    <select name="unit" id="unit" class="form-select">
+                        <option value="">unit</option>
+                        <option value="01">Piring</option>
+                        <option value="02">Gelas</option>
+                        <option value="03">topi</option>
                     </select>
                     @error('unit')
                         <div class="invalit-feedback">
@@ -82,5 +97,27 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
     </div>
+    <script>
+        function showDropdowns() {
+            var select1 = document.getElementById("golongan");
+            var select2 = document.getElementById("unit1");
+            var select3 = document.getElementById("unit2");
+            // var select6 = document.getElementById("select6").value = "";
+
+            // Tampilkan dropdown kedua jika opsi pertama dipilih
+            if (select1.value == "02.06.03") {
+                select2.style.display = "block";
+                select3.style.display = "none";
+            }
+
+            // Tampilkan dropdown ketiga jika opsi kedua dipilih
+            else if (select1.value == "01.06.02") {
+                select2.style.display = "none";
+                select3.style.display = "block";
+
+            }
+        }
+    </script>
 @endsection
