@@ -34,19 +34,33 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'golongan' => 'required|max:255',
-            'unit' => 'required|max:255',
-            'kode' => 'required|numeric',
+        $validatedData = $request->validate(
+            [
+                'name' => 'required|max:255',
+                'golongan' => 'required|max:255',
+                'unit' => 'required|max:255',
+                'kode' => 'required|numeric',
+            ]
+        );
 
-        ]);
+        $validatedData['categoryCode'] = $validatedData['golongan'] . '.' . $validatedData['unit'] . '.' . $validatedData['kode'];
 
-        $validatedData['categoryCode'] = $validatedData ['golongan']. '.' . $validatedData ['unit'] . '.' . $validatedData ['kode'];
-        dd( $validatedData ['categoryCode']);
-
-        category::create($validatedData);
-        return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
+        $a = $validatedData['categoryCode'];
+        $c = str_replace('.', '', $a);
+        $categoryItems = category::where('categoryCode', '=', $a)->value('categoryCode');
+        $newCode = str_replace('.', '', $categoryItems);
+        // dd($categoryItems);
+        if ($categoryItems != null) {
+            if ($c == $newCode) {
+                return redirect('/categories/create')->with('fail', 'Kode Inventaris Sudah Terdaftar');
+            } else {
+                category::create($validatedData);
+                return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
+            }
+        } else {
+            category::create($validatedData);
+            return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
+        }
     }
 
     /**

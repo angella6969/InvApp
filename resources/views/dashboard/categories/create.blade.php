@@ -17,6 +17,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+
+            @if (session()->has('fail'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('fail') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="mb-2">
                 <label for="nama" class="form-label ">Nama Kategori</label>
                 <input placeholder="Category Name" type="text" name='name'
@@ -38,10 +46,10 @@
                         <option value="01.06.02">Non-Elektronik</option>
                     </select>
                     @error('golongan')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                        <div class="invalit-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="col-6 col-sm-4">
@@ -55,15 +63,15 @@
                         <option value="06">Peralatan Jaringan</option>
                     </select>
                     @error('unit')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                        <div class="invalit-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="col-6 col-sm-4">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="kode">
+                        <input type="text" class="form-control" name="kode" placeholder="Sub-Kelompok">
                     </div>
                     @error('kode')
                         <div class="invalit-feedback">
@@ -72,12 +80,6 @@
                     @enderror
                 </div>
             </div>
-
-            {{-- End form Pencarian --}}
-
-
-
-
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
