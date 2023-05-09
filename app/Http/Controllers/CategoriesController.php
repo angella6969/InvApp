@@ -34,33 +34,31 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate(
-            [
-                'name' => 'required|max:255',
-                'golongan' => 'required|max:255',
-                'unit' => 'required|max:255',
-                'kode' => 'required|numeric',
-            ]
-        );
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'golongan' => 'required|max:255',
+            'kode' => 'required|numeric',
+        ]);
 
-        $validatedData['categoryCode'] = $validatedData['golongan'] . '.' . $validatedData['unit'] . '.' . $validatedData['kode'];
+        $categoryCode = $validatedData['golongan'] . '.' . $validatedData['kode'];
 
-        $a = $validatedData['categoryCode'];
-        $c = str_replace('.', '', $a);
-        $categoryItems = category::where('categoryCode', '=', $a)->value('categoryCode');
-        $newCode = str_replace('.', '', $categoryItems);
-        // dd($categoryItems);
-        if ($categoryItems != null) {
-            if ($c == $newCode) {
-                return redirect('/categories/create')->with('fail', 'Kode Inventaris Sudah Terdaftar');
-            } else {
-                category::create($validatedData);
-                return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
-            }
+        if (str_replace('.', '', $validatedData['golongan']) == '020603') {
+            $validatedData['unit1'] = $request->input('unit1');
+            $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit1'] . '.' . $validatedData['kode'];
         } else {
-            category::create($validatedData);
-            return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
+            $validatedData['unit2'] = $request->input('unit2');
+            $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit2'] . '.' . $validatedData['kode'];
         }
+
+        $categoryItem = category::where('categoryCode', $categoryCode)->value('categoryCode');
+
+        if ($categoryItem != null) {
+            return redirect('/categories/create')->with('fail', 'Kode Inventaris Sudah Terdaftar');
+        }
+
+        category::create($validatedData + ['categoryCode' => $categoryCode]);
+
+        return redirect('/categories')->with('success', 'Berhasil Menambahkan Data');
     }
 
     /**

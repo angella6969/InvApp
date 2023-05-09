@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="col-6 col-sm-4" id="unit1" style="display:none;">
-                    <select name="unit" id="unit" class="form-select">
+                    <select name="unit1" id="unit1" class="form-select">
                         <option value="">unit</option>
                         <option value="01">Komputer Unit/Jaringan</option>
                         <option value="02">Personal Komputer</option>
@@ -69,9 +69,8 @@
                     @enderror
                 </div>
 
-
                 <div class="col-6 col-sm-4" id="unit2" style="display:none;">
-                    <select name="unit" id="unit" class="form-select">
+                    <select name="unit2" id="unit2" class="form-select">
                         <option value="">unit</option>
                         <option value="01">Piring</option>
                         <option value="02">Gelas</option>
@@ -104,7 +103,6 @@
             var select1 = document.getElementById("golongan");
             var select2 = document.getElementById("unit1");
             var select3 = document.getElementById("unit2");
-            // var select6 = document.getElementById("select6").value = "";
 
             // Tampilkan dropdown kedua jika opsi pertama dipilih
             if (select1.value == "02.06.03") {
