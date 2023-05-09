@@ -25,7 +25,7 @@ class ItemController extends Controller
     public function index()
     {
 
-        $expiration = 10;
+        $expiration = 5;
         // // Ambil data user dari cache atau database
         // $data = Cache::remember('my_data', $expiration, function () {
         //     return item::with(['category'])
@@ -39,10 +39,7 @@ class ItemController extends Controller
         $data1 = Cache::remember('my_data1', $expiration, function () {
             return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
         });
-        // return view('dashboard.item.index', [
-        //     "categories" =>  $data1,
-        //     "items" => $data
-        // ]);
+        
         return view('dashboard.item.index', [
             "categories" =>  $data1,
             "items" => item::with(['category'])

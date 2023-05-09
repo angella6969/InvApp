@@ -33,7 +33,7 @@
         {{-- End Button Rent Item --}}
 
         {{-- Button Import --}}
-        @can('SuperAdmin')
+        {{-- @can('SuperAdmin')
             <form action="/item/import" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -42,7 +42,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Upload Data</button>
             </form>
-        @endcan
+        @endcan --}}
         {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}
