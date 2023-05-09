@@ -73,3 +73,7 @@ Route::middleware(['Admin', 'auth'])->group(function () {
 
 // Route::POST('/item/import', [ItemController::class, 'import']);
 Route::post('/item/import', [ItemController::class, 'import']);
+
+
+///////// route test ////////
+// Route::get('/getSubCategories/{id}', 'App\Http\Controllers\CategoryController@getSubCategories')->name('getSubCategories');

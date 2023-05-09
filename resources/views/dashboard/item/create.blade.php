@@ -52,6 +52,9 @@
                     </div>
                 @enderror
             </div>
+
+
+            
             {{-- End Field Item Category --}}
 
             {{-- Field Item Name --}}
@@ -145,5 +148,6 @@
 
             }
         }
+
     </script>
 @endsection
