@@ -84,14 +84,10 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = category::findOrFail($id);
         $data = [
             'name' => 'required|max:255'
         ];
 
-        if ($request->categoryCode != $category->categoryCode) {
-            $data['email'] = ['required', 'email:dns', 'min:3', 'unique:categories'];
-        }
         $validatedData = $request->validate($data);
 
         category::where('id', $id)->update($validatedData);
@@ -103,9 +99,7 @@ class CategoriesController extends Controller
      */
     public function destroy(string $id)
     {
-
         $category = category::findOrFail($id);
-
         try {
             $category->delete();
             return redirect('/categories')->with('success', 'Berhasil Menghapus Data');

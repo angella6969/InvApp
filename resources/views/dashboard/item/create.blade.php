@@ -119,4 +119,31 @@
 
     </div>
     {{-- End Body --}}
+
+
+
+
+
+
+
+    <script>
+        function showDropdowns() {
+            var select1 = document.getElementById("golongan");
+            var select2 = document.getElementById("unit1");
+            var select3 = document.getElementById("unit2");
+
+            // Tampilkan dropdown kedua jika opsi pertama dipilih
+            if (select1.value == "1") {
+                select2.style.display = "block";
+                select3.style.display = "none";
+            }
+
+            // Tampilkan dropdown ketiga jika opsi kedua dipilih
+            else if (select1.value == "2") {
+                select2.style.display = "none";
+                select3.style.display = "block";
+
+            }
+        }
+    </script>
 @endsection
