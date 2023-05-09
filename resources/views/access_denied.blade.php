@@ -31,9 +31,9 @@
                         <h1 class="error-number ">403</h1>
                         <h2>Access denied</h2>
                         <p>Full authentication is required to access this resource.
-                        <div class="ratio ratio-16x9">
+                        {{-- <div class="ratio ratio-16x9">
                             <div id="ytplayer"></div>
-                        </div>
+                        </div> --}}
                         </p>
 
                     </div>
