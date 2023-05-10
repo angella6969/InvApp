@@ -44,5 +44,16 @@ class item extends Model
             // Ketika ada data baru yang dimasukkan, cache akan dihapus agar data yang baru dimasukkan bisa langsung terlihat
             Cache::forget('model_cache_key');
         });
+
+        static::deleting(function ($item) {
+            $item->preventDelete();
+        });
+    }
+
+    public function preventDelete()
+    {
+        if (DB::table('rent_logs')->where('item_id', $this->id)->count() > 0) {
+            throw new \Exception('Data tidak dapat dihapus karena terdapat constraint yang terkait.');
+        }
     }
 }

@@ -28,25 +28,7 @@ class RentLogController extends Controller
                 ->where('status', '!=', 'inactiv')
                 ->get();
         });
-
-        // // Ambil data rent log dari cache atau database
-        // $data1 = Cache::remember('my_data1', $expiration, function () {
-        //     return rent_log::with(['item', 'user'])
-        //         ->orderBy('id', 'DESC')
-        //         ->filter(request(['search']))
-        //         ->paginate(20);
-        // });
-        // $data2 = Cache::remember('my_data2', $expiration, function () {
-        //     return Item::orderByRaw("SUBSTRING(name, 1, 3) ASC")->get();
-        // });
-
-        // // Kembalikan tampilan view dengan data yang telah diambil
-        // return view('dashboard.rentItem.index', [
-        //     'items' => $data2,
-        //     'users' => $data,
-        //     'logs' => $data1,
-        // ]);
-
+        
         return view('dashboard.rentItem.index', [
             "items" => item::orderByRaw("SUBSTRING(name, 1, 3) ASC")->get(),
             "users" => $data,
@@ -155,7 +137,7 @@ class RentLogController extends Controller
             $logs->save();
 
             $items = item::findOrFail($logs['item_id']);
-            $items->status = 'in Stock';
+            $items->status = 'in stock';
             $items->save();
             db::commit();
 

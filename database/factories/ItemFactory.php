@@ -21,7 +21,7 @@ class ItemFactory extends Factory
             'category_id'=>mt_rand(1,45),
             'item_code'=>$this->faker->ean8(),
             'brand'=>$this->faker->randomElement(['Asus', 'Lenovo', 'MSI', 'Samsung', 'Acer']),
-            'status'=>$this->faker->randomElement(['rusak', 'hilang', 'terpinjam', 'in stock']) ,
+            'status'=>$this->faker->randomElement(['rusak', 'hilang','in stock']) ,
             'location'=>$this->faker->randomElement(['Ruang Sisda', 'PPK PP', 'KPSDA', 'PPK BMN', 'PPK PSDA']) ,
             'owner'=>$this->faker->randomElement(['Sisda', 'Pp', 'Op', 'Psda', 'Kabalai']),
         ];

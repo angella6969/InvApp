@@ -139,8 +139,13 @@ class ItemController extends Controller
      */
     public function destroy(string $item)
     {
-        item::destroy($item);
-        return redirect('/dashboard/item')->with('success', 'Berhasil Menghapus Data');
+        $item = item::findOrFail($item);
+        try {
+            $item->delete();
+            return redirect('/dashboard/item')->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function import(Request $request)

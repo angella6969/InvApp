@@ -24,8 +24,17 @@
         @endif
         {{-- End Alert --}}
 
+        {{-- Alert error --}}
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        {{-- End Alert error --}}
+
         {{-- Button Create --}}
-        <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span>Tambah Barang</a>
+        <a href="/dashboard/item/create" class="btn btn-primary mb-2"><span data-feather="file-plus"> </span>Tambah
+            Barang</a>
         {{-- End Button Create --}}
 
         {{-- Button Rent Item --}}
@@ -100,19 +109,22 @@
                 </thead>
                 <tbody>
                     @foreach ($items as $barang)
-                        <tr>
+                        <tr
+                            class="{{ $barang->status == 'in stock'
+                                ? ''
+                                : ($barang->status == 'Terpinjam'
+                                    ? 'bg-success'
+                                    : ($barang->status == 'rusak'
+                                        ? 'bg-warning'
+                                        : 'bg-danger')) }}">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $barang->name }}</td>
                             <td>{{ $barang->status }}</td>
                             <td>{{ $barang->category->name }}</td>
 
                             <td>
-                                {{-- <button class="badge bg-info border-0 d-inline" data-bs-toggle="modal"
-                            data-bs-target="#DetailModal" --}} {{-- ><span data-feather="eye"></span></button> --}}
-
-
                                 <a href="/dashboard/item/{{ $barang->id }}"
-                                    class="badge bg-warning border-0 d-inline"><span data-feather="eye"></span></a>
+                                    class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
 
                                 <a href="/dashboard/item/{{ $barang->id }}/edit"
                                     class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>

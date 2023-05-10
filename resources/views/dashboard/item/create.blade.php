@@ -19,7 +19,7 @@
 
             {{-- Field Item Code --}}
             <div class="mb-2">
-                <label for="Item Code" class="form-label ">kode Item</label>
+                <label for="Item Code" class="form-label ">Kode Item</label>
                 <input placeholder="Item Code" type="text" name='item_code'
                     class="form-control @error('item_code') is-invalid @enderror" id="item_code " required
                     value="{{ old('item_code') }}">
