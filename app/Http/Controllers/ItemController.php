@@ -132,16 +132,12 @@ class ItemController extends Controller
         $items = item::findOrFail($item);
         $data = [
             'name' => 'required|max:255',
-            'category_id' => ['required'],
+            // 'category_id' => ['required'],
             'status' => ['required'],
             'brand' => ['required'],
             'location' => ['required'],
             'owner' => ['required'],
         ];
-        if ($request->item_code != $items->item_code) {
-            $data['item_code'] = ['required', 'min:3', 'unique:items'];
-        }
-
         $validatedData = $request->validate($data);
 
         item::where('id', $item)->update($validatedData);
