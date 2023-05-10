@@ -37,17 +37,30 @@ class CategoriesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'golongan' => 'required|max:255',
-            'kode' => 'required|numeric',
         ]);
-
-        $categoryCode = $validatedData['golongan'] . '.' . $validatedData['kode'];
 
         if (str_replace('.', '', $validatedData['golongan']) == '020603') {
             $validatedData['unit1'] = $request->input('unit1');
-            $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit1'] . '.' . $validatedData['kode'];
+
+            $c = category::where('categoryCode', 'like', '02.06.03' . '.' . $validatedData['unit1'] . '%')->pluck('categoryCode')->max();
+            if ($c != null) {
+                $parts = explode('.', $c);
+                $b = intval($parts[4]) + 1;
+                $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit1'] . '.' . str_pad($b, 2, "0", STR_PAD_LEFT);
+            } else {
+                $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit1'] . '.' . '01';
+            }
         } else {
             $validatedData['unit2'] = $request->input('unit2');
-            $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit2'] . '.' . $validatedData['kode'];
+
+            $c = category::where('categoryCode', 'like', '01.06.02' . '.' . $validatedData['unit2'] . '%')->pluck('categoryCode')->max();
+            if ($c != null) {
+                $parts = explode('.', $c);
+                $b = intval($parts[4]) + 1;
+                $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit2'] . '.' . str_pad($b, 2, "0", STR_PAD_LEFT);
+            } else {
+                $categoryCode = $validatedData['golongan'] . '.' . $validatedData['unit2'] . '.' . '01';
+            }
         }
 
         $categoryItem = category::where('categoryCode', $categoryCode)->value('categoryCode');

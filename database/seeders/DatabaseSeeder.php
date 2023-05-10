@@ -19,20 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+       
         User::factory(10)->create();
-        category::factory(48)->create();
+        // category::factory(48)->create();
         role::factory(3)->create();
-        item::factory(400)->create();
-        // rent_log::factory(40)->create();
-
-        
-
+        // item::factory(400)->create();
       
         user::create([
             'name' => 'Super Admin',
@@ -43,14 +34,5 @@ class DatabaseSeeder extends Seeder
             'status' => 'active',
 
         ]);
-        // role::create([
-        //     'name' => 'Admin',
-
-        // ]);
-        // role::create([
-        //     'name' => 'Client',
-
-        // ]);
-
     }
 }

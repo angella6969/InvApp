@@ -39,7 +39,7 @@ class ItemController extends Controller
         $data1 = Cache::remember('my_data1', $expiration, function () {
             return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
         });
-        
+
         return view('dashboard.item.index', [
             "categories" =>  $data1,
             "items" => item::with(['category'])
@@ -70,12 +70,27 @@ class ItemController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
-                'item_code' => 'required|max:255|unique:items',
+                // 'item_code' => 'required|max:255|unique:items',
                 'category_id' => ['required', 'numeric'],
                 'brand' => ['required'],
                 'location' => ['required'],
                 'owner' => ['required'],
             ]);
+
+            $itemCategory = category::where('id', $validatedData['category_id'])->value('categoryCode');
+            $item = item::where('item_code', 'like', $itemCategory . '%')->pluck('item_code')->max();
+
+           
+
+            if ($item != null) {
+                $parts = explode('.', $item);
+                $b = intval($parts[5]) + 1;
+                $validatedData['item_code'] = $itemCategory . '.' . str_pad($b, 3, "0", STR_PAD_LEFT);
+                // dd($validatedData['item_code']);
+            } else {
+                $validatedData['item_code'] = $itemCategory . '.' . '001';
+            }
+           
 
             item::create($validatedData);
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');

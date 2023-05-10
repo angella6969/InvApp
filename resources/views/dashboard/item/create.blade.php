@@ -18,7 +18,7 @@
             @csrf
 
             {{-- Field Item Code --}}
-            <div class="mb-2">
+            {{-- <div class="mb-2">
                 <label for="Item Code" class="form-label ">Kode Item</label>
                 <input placeholder="Item Code" type="text" name='item_code'
                     class="form-control @error('item_code') is-invalid @enderror" id="item_code " required
@@ -28,7 +28,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
             {{-- End Field Item Code --}}
 
             {{-- Field Item Category --}}

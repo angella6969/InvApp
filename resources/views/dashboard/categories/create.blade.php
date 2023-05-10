@@ -83,7 +83,7 @@
                     @enderror
                 </div>
 
-                <div class="col-6 col-sm-4">
+                {{-- <div class="col-6 col-sm-4">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="kode" placeholder="Sub-Kelompok">
                     </div>
@@ -92,7 +92,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div> --}}
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
