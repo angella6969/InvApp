@@ -35,16 +35,61 @@
             <div class="mb-2">
                 <label for="Item Code" class="form-label ">Kategori Barang</label>
                 <select class="form-select userbox" name=category_id placeholder="Choose one thing">
-                    {{-- <optgroup label="Group 1"> --}}
                     <option value="">Category</option>
-                    @foreach ($categories as $item)
-                        @if (old('category_id') == $item->id)
-                            <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                        @else
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endif
-                        {{-- </optgroup> --}}
-                    @endforeach
+                    <optgroup label="Komputer Unit/Jaringan">
+                        @foreach ($categories as $item)
+                            @if (old('category_id') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Personal Komputer">
+                        @foreach ($categories1 as $item)
+                            @if (old('category_id') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Peralatan Komputer Mainframe">
+                        @foreach ($categories2 as $item)
+                            @if (old('category_id') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Peralatan Mini Komputer">
+                        @foreach ($categories3 as $item)
+                            @if (old('category_id') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Peralatan Personal Komputer">
+                        @foreach ($categories4 as $item)
+                            @if (old('category_id') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Peralatan Jaringan">
+                        @foreach ($categories5 as $item)
+                            @if (old('category_id') == $item->id)
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
                 </select>
                 @error('category_id')
                     <div class="invalit-feedback">
@@ -54,7 +99,7 @@
             </div>
 
 
-            
+
             {{-- End Field Item Category --}}
 
             {{-- Field Item Name --}}
@@ -148,6 +193,5 @@
 
             }
         }
-
     </script>
 @endsection

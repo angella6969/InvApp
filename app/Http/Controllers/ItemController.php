@@ -26,29 +26,18 @@ class ItemController extends Controller
     {
 
         $expiration = 5;
-        // // Ambil data user dari cache atau database
-        // $data = Cache::remember('my_data', $expiration, function () {
-        //     return item::with(['category'])
-        //         ->orderBy('id', 'DESC')
-        //         ->Filter(request(['search', 'categories', 'status']))
-        //         ->paginate(20)
-        //         ->withQueryString();
-        // });
-
         // // Ambil data rent log dari cache atau database
         $data1 = Cache::remember('my_data1', $expiration, function () {
             return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
         });
 
         return view('dashboard.item.index', [
-            "categories" =>  $data1,
+            "categories" => $data1,
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))
                 ->paginate(20)
                 ->withQueryString(),
-            // 'models' => $models
-
         ]);
     }
 
@@ -57,8 +46,23 @@ class ItemController extends Controller
      */
     public function create()
     {
+        // $category = category::orderByRaw('SUBSTRING(UPPER(name),1,5) ASC')->get();
+        $category1 = category::where('categoryCode', 'like', '02.06.03.01' . '%')->get();
+        $category2 = category::where('categoryCode', 'like', '02.06.03.02' . '%')->get();
+        $category3 = category::where('categoryCode', 'like', '02.06.03.03' . '%')->get();
+        $category4 = category::where('categoryCode', 'like', '02.06.03.04' . '%')->get();
+        $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
+        $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
+        // $category = category::get();
+
+        // dd($category);
         return view('dashboard.item.create', [
-            'categories' => category::orderByRaw('SUBSTRING(UPPER(name),1,5) ASC')->get()
+            'categories' => $category1,
+            'categories1' => $category2,
+            'categories2' => $category3,
+            'categories3' => $category4,
+            'categories4' => $category5,
+            'categories5' => $category6,
         ]);
     }
 
@@ -80,7 +84,7 @@ class ItemController extends Controller
             $itemCategory = category::where('id', $validatedData['category_id'])->value('categoryCode');
             $item = item::where('item_code', 'like', $itemCategory . '%')->pluck('item_code')->max();
 
-           
+
 
             if ($item != null) {
                 $parts = explode('.', $item);
@@ -90,7 +94,7 @@ class ItemController extends Controller
             } else {
                 $validatedData['item_code'] = $itemCategory . '.' . '001';
             }
-           
+
 
             item::create($validatedData);
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
