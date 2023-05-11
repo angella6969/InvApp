@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('owner');
             $table->string('status')->default('in stock');
+            $table->string('image')->nullable();
             $table->foreignId('category_id');
             $table->timestamps();
         });

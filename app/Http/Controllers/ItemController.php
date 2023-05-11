@@ -86,29 +86,30 @@ class ItemController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
-                // 'item_code' => 'required|max:255|unique:items',
                 'category_id' => ['required', 'numeric'],
                 'brand' => ['required'],
                 'location' => ['required'],
                 'owner' => ['required'],
+                'image'=> ['image','file','max:1024']
             ]);
+
+            if ($request->file('image')) {
+                $validatedData['image'] = $request->file('image')->store('image-store');
+            }
 
             $itemCategory = category::where('id', $validatedData['category_id'])->value('categoryCode');
             $item = item::where('item_code', 'like', $itemCategory . '%')->pluck('item_code')->max();
-
-
 
             if ($item != null) {
                 $parts = explode('.', $item);
                 $b = intval($parts[5]) + 1;
                 $validatedData['item_code'] = $itemCategory . '.' . str_pad($b, 3, "0", STR_PAD_LEFT);
-                // dd($validatedData['item_code']);
             } else {
                 $validatedData['item_code'] = $itemCategory . '.' . '001';
             }
 
-
             item::create($validatedData);
+
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
         } catch (\Throwable $th) {
             return redirect('/dashboard/item')->with('fail', 'Gagal Menambahkan Data');

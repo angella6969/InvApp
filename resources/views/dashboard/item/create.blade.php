@@ -14,7 +14,7 @@
 
         {{-- Field Create --}}
 
-        <form method="post" action="/dashboard/item">
+        <form method="post" action="/dashboard/item" enctype="multipart/form-data">
             @csrf
 
             {{-- Field Item Code --}}
@@ -97,9 +97,6 @@
                     </div>
                 @enderror
             </div>
-
-
-
             {{-- End Field Item Category --}}
 
             {{-- Field Item Name --}}
@@ -116,9 +113,9 @@
             </div>
             {{-- End Field Item Name --}}
 
-            {{-- Field Item Brand --}}
+            {{-- Field Tahun Pengadaan --}}
             <div class="mb-2">
-                <label for="brand" class="form-label ">Merek Barang</label>
+                <label for="brand" class="form-label ">Tahun Pengadaan</label>
                 <input placeholder="Item brand" type="text" name='brand'
                     class="form-control @error('brand') is-invalid @enderror" id="brand" required
                     value="{{ old('brand') }}">
@@ -128,11 +125,11 @@
                     </div>
                 @enderror
             </div>
-            {{-- End Field Item Brand --}}
+            {{-- End Tahun Pengadaan --}}
 
             {{-- Field Item Location --}}
             <div class="mb-2">
-                <label for="location" class="form-label ">Lokasi Barang</label>
+                <label for="location" class="form-label ">Lokasi Barang/ Keterangan</label>
                 <input placeholder="Item location" type="text" name='location'
                     class="form-control @error('location') is-invalid @enderror" id="location" required
                     value="{{ old('location') }}">
@@ -146,7 +143,7 @@
 
             {{-- Field Item Owner --}}
             <div class="mb-2">
-                <label for="owner" class="form-label ">Pemilik Barang</label>
+                <label for="owner" class="form-label ">Sumber Dana</label>
                 <input placeholder="Item owner" type="text" name='owner'
                     class="form-control @error('owner') is-invalid @enderror" id="owner" required
                     value="{{ old('owner') }}">
@@ -158,7 +155,19 @@
             </div>
             {{-- End Field Item Owner --}}
 
+            {{-- Field Foto --}}
+            <div class="mt-3 mb-3">
+                <label for="image">Foto Barang</label>
+                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
+                    name="image">
 
+                @error('image')
+                    <div class="invalit-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            {{-- Field Foto --}}
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
