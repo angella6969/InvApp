@@ -60,14 +60,61 @@
                 <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
                     <select name="categories" id="categories" class="form-select " placeholder="Category">
-                        <option value="">Kategori</option>
-                        @foreach ($categories as $item)
-                            @if (old('categories') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
+                        <option value="">Category</option>
+                        <optgroup label="Komputer Unit/Jaringan">
+                            @foreach ($categories as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Personal Komputer">
+                            @foreach ($categories1 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Peralatan Komputer Mainframe">
+                            @foreach ($categories2 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Peralatan Mini Komputer">
+                            @foreach ($categories3 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Peralatan Personal Komputer">
+                            @foreach ($categories4 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                        <optgroup label="Peralatan Jaringan">
+                            @foreach ($categories5 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
                     </select>
                 </div>
 

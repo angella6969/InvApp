@@ -31,6 +31,13 @@ class ItemController extends Controller
             return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
         });
 
+        $category1 = category::where('categoryCode', 'like', '02.06.03.01' . '%')->get();
+        $category2 = category::where('categoryCode', 'like', '02.06.03.02' . '%')->get();
+        $category3 = category::where('categoryCode', 'like', '02.06.03.03' . '%')->get();
+        $category4 = category::where('categoryCode', 'like', '02.06.03.04' . '%')->get();
+        $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
+        $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
+
         return view('dashboard.item.index', [
             "categories" => $data1,
             "items" => item::with(['category'])
@@ -38,6 +45,13 @@ class ItemController extends Controller
                 ->Filter(request(['search', 'categories', 'status']))
                 ->paginate(20)
                 ->withQueryString(),
+
+            'categories' => $category1,
+            'categories1' => $category2,
+            'categories2' => $category3,
+            'categories3' => $category4,
+            'categories4' => $category5,
+            'categories5' => $category6,
         ]);
     }
 
@@ -53,9 +67,7 @@ class ItemController extends Controller
         $category4 = category::where('categoryCode', 'like', '02.06.03.04' . '%')->get();
         $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
         $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
-        // $category = category::get();
 
-        // dd($category);
         return view('dashboard.item.create', [
             'categories' => $category1,
             'categories1' => $category2,
