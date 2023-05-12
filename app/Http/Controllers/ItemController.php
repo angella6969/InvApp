@@ -14,9 +14,11 @@ use App\Http\Requests\StoreitemRequest;
 use App\Http\Requests\UpdateitemRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage as FacadesStorage;
 use League\Csv\Reader;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -44,6 +46,7 @@ class ItemController extends Controller
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))
+                ->groupBy('name', 'items.id')
                 ->paginate(20)
                 ->withQueryString(),
 
@@ -150,13 +153,21 @@ class ItemController extends Controller
         $items = item::findOrFail($item);
         $data = [
             'name' => 'required|max:255',
-            // 'category_id' => ['required'],
             'status' => ['required'],
             'brand' => ['required'],
             'location' => ['required'],
             'owner' => ['required'],
+            'image' => ['image', 'file', 'max:1024']
         ];
+
         $validatedData = $request->validate($data);
+
+        if ($request->file('image')) {
+            if ($items->image != null) {
+                Storage::delete($items->image);
+            }
+            $validatedData['image'] = $request->file('image')->store('image-store');
+        }
 
         item::where('id', $item)->update($validatedData);
 
@@ -170,6 +181,11 @@ class ItemController extends Controller
     {
         $item = item::findOrFail($item);
         try {
+
+            if ($item->image) {
+                Storage::delete($item->image);
+            }
+
             $item->delete();
             return redirect('/dashboard/item')->with('success', 'Berhasil Menghapus Data');
         } catch (\Exception $e) {
