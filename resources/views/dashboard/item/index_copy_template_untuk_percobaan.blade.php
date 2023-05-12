@@ -55,7 +55,7 @@
         {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}
-        {{-- <form action="/dashboard/item">
+        <form action="/dashboard/item">
             <div class="row">
                 <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
@@ -137,20 +137,19 @@
                     </div>
                 </div>
             </div>
-        </form> --}}
+        </form>
         {{-- End form Pencarian --}}
         {{-- {{ $a}} --}}
 
-        {{-- @foreach ($a as $item)
+        @foreach ($a as $item)
             <table>
                 <tr>
                     <td> nama {{ $item->name }}</td>
                     <td> total {{ $item->total }}</td>
                 </tr>
             </table>
-            <a href="/dashboard/item/detail/{{ $item->name }}" class="badge bg-danger border-0 d-inline"><span
-                    data-feather="eye"></span></a>
-        @endforeach --}}
+            <a href="/dashboard/item/detail/{{ $item->name }}" class="badge bg-danger border-0 d-inline"><span data-feather="eye"></span></a>
+        @endforeach
 
         {{-- Form Index --}}
         <div class="table-responsive-sm">
@@ -159,19 +158,45 @@
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">total </th>
-                        <th scope="col">Aksi </th>
+                        <th scope="col">Status </th>
+                        <th scope="col">Kategori </th>
+                        @can('SuperAdmin')
+                            <th scope="col">Aksi</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($a as $item)
-                        <tr>
+                    @foreach ($items as $barang)
+                        <tr
+                            class="{{ $barang->status == 'in stock'
+                                ? ''
+                                : ($barang->status == 'Terpinjam'
+                                    ? 'bg-success'
+                                    : ($barang->status == 'rusak'
+                                        ? 'bg-warning'
+                                        : 'bg-danger')) }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td> {{ $item->name }}</td>
-                            <td> {{ $item->total }}</td>
+                            <td>{{ $barang->name }}</td>
+                            <td>{{ $barang->status }}</td>
+                            <td>{{ $barang->category->name }}</td>
+
                             <td>
-                                <a href="/dashboard/item/detail/{{ $item->name }}"
-                                    class="badge bg-danger border-0 d-inline"><span data-feather="eye"></span></a>
+                                <a href="/dashboard/item/{{ $barang->id }}"
+                                    class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
+                                <a href="/dashboard/item/detail" class="badge bg-danger border-0 d-inline"><span
+                                        data-feather="eye"></span></a>
+
+                                <a href="/dashboard/item/{{ $barang->id }}/edit"
+                                    class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+                                @can('SuperAdmin')
+                                    <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="badge bg-danger border-0"
+                                            onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
+                                                data-feather="file-minus"></span></button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -180,5 +205,6 @@
         </div>
         {{-- End Form Index --}}
     </div>
+    {{ $items->links() }}
 
 @endsection
