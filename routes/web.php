@@ -62,6 +62,9 @@ Route::post('/rent-item/return/{id}', [RentLogController::class, 'returnItem'])-
 
 
 Route::middleware(['Admin', 'auth'])->group(function () {
+    Route::get('/dashboard/item/detail/{name}', [ItemController::class, 'detail']);
+
+
     Route::resource('/dashboard/item', ItemController::class);
     Route::resource('/dashboard/role', RoleController::class);
     Route::resource('/dashboard', dashboardController::class);
@@ -76,4 +79,4 @@ Route::post('/item/import', [ItemController::class, 'import']);
 
 
 ///////// route test ////////
-// Route::get('/getSubCategories/{id}', 'App\Http\Controllers\CategoryController@getSubCategories')->name('getSubCategories');
+

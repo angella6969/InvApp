@@ -55,7 +55,7 @@
         {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}
-        <form action="/dashboard/item">
+        {{-- <form action="/dashboard/item">
             <div class="row">
                 <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
@@ -137,7 +137,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </form> --}}
         {{-- End form Pencarian --}}
         {{-- {{ $a}} --}}
 
@@ -153,7 +153,7 @@
 
         {{-- Form Index --}}
         <div class="table-responsive-sm">
-            <table class="table table-striped table-sm">
+            {{-- <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -201,10 +201,10 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         </div>
         {{-- End Form Index --}}
     </div>
-    {{ $items->links() }}
+    {{-- {{ $items->links() }} --}}
 
 @endsection

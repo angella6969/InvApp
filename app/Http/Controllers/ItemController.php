@@ -41,8 +41,14 @@ class ItemController extends Controller
         $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
         $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
 
+        $a = item::select('name', DB::raw('count(*) as total'))
+            ->groupBy('name')
+            ->get();
+        // dd($a);
+
         return view('dashboard.item.index', [
             "categories" => $data1,
+            "a" => $a,
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))
@@ -215,5 +221,12 @@ class ItemController extends Controller
         } else {
             return redirect()->back()->with('fail', 'Silahkan pilih file yang ingin diupload terlebih dahulu');
         }
+    }
+    public function detail(Request $request, $name){
+        $a = item::where('name', $name)->get();
+
+        return view('dashboard.item.detail', [
+            "a" => $a,
+        ]);
     }
 }
