@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use League\Csv\Reader;
 use Maatwebsite\Excel\Excel as ExcelExcel;
+use Intervention\Image\Facades\Image;
 
 class ItemController extends Controller
 {
@@ -90,7 +91,7 @@ class ItemController extends Controller
                 'brand' => ['required'],
                 'location' => ['required'],
                 'owner' => ['required'],
-                'image'=> ['image','file','max:1024']
+                'image' => ['image', 'file', 'max:1024']
             ]);
 
             if ($request->file('image')) {

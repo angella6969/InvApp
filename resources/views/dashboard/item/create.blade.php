@@ -158,14 +158,16 @@
             {{-- Field Foto --}}
             <div class="mt-3 mb-3">
                 <label for="image">Foto Barang</label>
+                <img class="img-preview img-fluid mb-3 col-sm-5">
                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
-                    name="image">
+                    onchange="previewImage()" name="image">
+                <h6>Photo Max 1 MB</h6>
 
-                @error('image')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                @if ($errors->has('image'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('image') }}</strong>
+                    </span>
+                @endif
             </div>
             {{-- Field Foto --}}
 
@@ -176,12 +178,6 @@
 
     </div>
     {{-- End Body --}}
-
-
-
-
-
-
 
     <script>
         function showDropdowns() {
@@ -200,6 +196,22 @@
                 select2.style.display = "none";
                 select3.style.display = "block";
 
+            }
+        }
+
+        function previewImage() {
+
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
             }
         }
     </script>
