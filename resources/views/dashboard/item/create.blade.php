@@ -12,24 +12,23 @@
     {{-- Body --}}
     <div class="col-lg-8 ms-4">
 
+
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         {{-- Field Create --}}
 
         <form method="post" action="/dashboard/item" enctype="multipart/form-data">
             @csrf
 
-            {{-- Field Item Code --}}
-            {{-- <div class="mb-2">
-                <label for="Item Code" class="form-label ">Kode Item</label>
-                <input placeholder="Item Code" type="text" name='item_code'
-                    class="form-control @error('item_code') is-invalid @enderror" id="item_code " required
-                    value="{{ old('item_code') }}">
-                @error('item_code')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div> --}}
-            {{-- End Field Item Code --}}
 
             {{-- Field Item Category --}}
             <div class="mb-2">
@@ -106,7 +105,7 @@
                     class="form-control @error('name') is-invalid @enderror" id="name" required
                     value="{{ old('name') }}">
                 @error('name')
-                    <div class="invalit-feedback">
+                    <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
@@ -116,16 +115,30 @@
             {{-- Field Tahun Pengadaan --}}
             <div class="mb-2">
                 <label for="brand" class="form-label ">Tahun Pengadaan</label>
-                <input placeholder="Item brand" type="text" name='brand'
+                <input placeholder="Tahun Pengadaan" type="text" name='brand'
                     class="form-control @error('brand') is-invalid @enderror" id="brand" required
                     value="{{ old('brand') }}">
                 @error('brand')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            {{-- End Tahun Pengadaan --}}
+
+
+
+            {{-- Field Unit --}}
+            <div class="mb-2">
+                <label for="unit" class="form-label ">Unit</label>
+                <input placeholder="unit" type="text" name='unit'
+                    class="form-control @error('unit') is-invalid @enderror" id="unit" required
+                    value="{{ old('unit') }}">
+                @error('unit')
                     <div class="invalit-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            {{-- End Tahun Pengadaan --}}
+            {{-- End Unit --}}
 
             {{-- Field Item Location --}}
             <div class="mb-2">

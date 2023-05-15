@@ -31,22 +31,15 @@ use Illuminate\Routing\RouteGroup;
 Route::get('/', [loginController::class, 'index'])
     ->name('login')
     ->middleware('guest');
+
 Route::get('/access_denied', function () {
     return view('access_denied');
 });
 
-Route::get('/loginV', function () {
-    return view('authentication.show');
-});
-Route::get('/home', function () {
-    return view('home.home');
-});
-Route::get('/home1', function () {
-    return view('home.home1');
-});
-Route::get('/api', function () {
-    return view('api');
-});
+// Route::get('/loginV', function () {
+//     return view('authentication.show');
+// });
+
 Route::post('/login', [loginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard/formlaporan', [FormPelaporanController::class, 'index'])->middleware(['auth', 'Admin']);

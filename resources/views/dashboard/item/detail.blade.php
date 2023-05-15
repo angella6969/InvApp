@@ -41,21 +41,8 @@
         <a href="/rent-item" class="btn btn-warning mb-2 ms-4"><i class="fa fa-tasks"></i> Peminjaman Barang </a>
         {{-- End Button Rent Item --}}
 
-        {{-- Button Import --}}
-        {{-- @can('SuperAdmin')
-            <form action="/item/import" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="file">File Excel</label>
-                    <input type="file" name="file" class="form-control" accept=".CSV">
-                </div>
-                <button type="submit" class="btn btn-primary">Upload Data</button>
-            </form>
-        @endcan --}}
-        {{-- End Button Import --}}
-
         {{-- Form Pencarian --}}
-        {{-- <form action="/dashboard/item">
+        {{-- <form action="/dashboard/item/detail">
             <div class="row">
                 <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
@@ -139,25 +126,15 @@
             </div>
         </form> --}}
         {{-- End form Pencarian --}}
-        {{-- {{ $a}} --}}
-
-        @foreach ($a as $item)
-            <table>
-                <tr>
-                    <td> nama {{ $item->name }}</td>
-                    <td> total {{ $item->total }}</td>
-                </tr>
-            </table>
-            <a href="/dashboard/item/detail/{{ $item->name }}" class="badge bg-danger border-0 d-inline"><span data-feather="eye"></span></a>
-        @endforeach
 
         {{-- Form Index --}}
         <div class="table-responsive-sm">
-            {{-- <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Kode Kategori </th>
                         <th scope="col">Status </th>
                         <th scope="col">Kategori </th>
                         @can('SuperAdmin')
@@ -177,14 +154,15 @@
                                         : 'bg-danger')) }}">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $barang->name }}</td>
+                            <td>{{ $barang->item_code }}</td>
                             <td>{{ $barang->status }}</td>
                             <td>{{ $barang->category->name }}</td>
 
                             <td>
                                 <a href="/dashboard/item/{{ $barang->id }}"
                                     class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
-                                <a href="/dashboard/item/detail" class="badge bg-danger border-0 d-inline"><span
-                                        data-feather="eye"></span></a>
+                                {{-- <a href="/dashboard/item/detail" class="badge bg-danger border-0 d-inline"><span
+                                        data-feather="eye"></span></a> --}}
 
                                 <a href="/dashboard/item/{{ $barang->id }}/edit"
                                     class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
@@ -201,7 +179,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table> --}}
+            </table>
         </div>
         {{-- End Form Index --}}
     </div>

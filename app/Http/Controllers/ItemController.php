@@ -27,41 +27,13 @@ class ItemController extends Controller
      */
     public function index()
     {
-
-        $expiration = 5;
-        // // Ambil data rent log dari cache atau database
-        $data1 = Cache::remember('my_data1', $expiration, function () {
-            return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
-        });
-
-        $category1 = category::where('categoryCode', 'like', '02.06.03.01' . '%')->get();
-        $category2 = category::where('categoryCode', 'like', '02.06.03.02' . '%')->get();
-        $category3 = category::where('categoryCode', 'like', '02.06.03.03' . '%')->get();
-        $category4 = category::where('categoryCode', 'like', '02.06.03.04' . '%')->get();
-        $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
-        $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
-
-        $a = item::select('name', DB::raw('count(*) as total'))
-            ->groupBy('name')
+        $a = item::select('name', 'image', DB::raw('count(*) as total'))
+            ->groupBy('name', 'image')
+            ->Filter(request(['search']))
             ->get();
         // dd($a);
-
         return view('dashboard.item.index', [
-            "categories" => $data1,
             "a" => $a,
-            "items" => item::with(['category'])
-                ->orderBy('id', 'DESC')
-                ->Filter(request(['search', 'categories', 'status']))
-                ->groupBy('name', 'items.id')
-                ->paginate(20)
-                ->withQueryString(),
-
-            'categories' => $category1,
-            'categories1' => $category2,
-            'categories2' => $category3,
-            'categories3' => $category4,
-            'categories4' => $category5,
-            'categories5' => $category6,
         ]);
     }
 
@@ -70,7 +42,6 @@ class ItemController extends Controller
      */
     public function create()
     {
-        // $category = category::orderByRaw('SUBSTRING(UPPER(name),1,5) ASC')->get();
         $category1 = category::where('categoryCode', 'like', '02.06.03.01' . '%')->get();
         $category2 = category::where('categoryCode', 'like', '02.06.03.02' . '%')->get();
         $category3 = category::where('categoryCode', 'like', '02.06.03.03' . '%')->get();
@@ -100,6 +71,7 @@ class ItemController extends Controller
                 'brand' => ['required'],
                 'location' => ['required'],
                 'owner' => ['required'],
+                'unit' => ['required', 'numeric', 'min:1'],
                 'image' => ['image', 'file', 'max:1024']
             ]);
 
@@ -109,16 +81,23 @@ class ItemController extends Controller
 
             $itemCategory = category::where('id', $validatedData['category_id'])->value('categoryCode');
             $item = item::where('item_code', 'like', $itemCategory . '%')->pluck('item_code')->max();
-
+            // dd($itemCategory);
             if ($item != null) {
                 $parts = explode('.', $item);
                 $b = intval($parts[5]) + 1;
-                $validatedData['item_code'] = $itemCategory . '.' . str_pad($b, 3, "0", STR_PAD_LEFT);
+                $itemCodePrefix = $itemCategory . '.';
             } else {
-                $validatedData['item_code'] = $itemCategory . '.' . '001';
+                $b = 1;
+                
+                $itemCodePrefix = $itemCategory . '.';
+                
             }
 
-            item::create($validatedData);
+            for ($i = 1; $i <= $validatedData['unit']; $i++) {
+                $validatedData['item_code'] = $itemCodePrefix . str_pad($b++, 3, "0", STR_PAD_LEFT);
+                // dd($validatedData['item_code']);
+                item::create($validatedData);
+            }
 
             return redirect('/dashboard/item')->with('success', 'Berhasil Menambahkan Data');
         } catch (\Throwable $th) {
@@ -131,10 +110,20 @@ class ItemController extends Controller
      */
     public function show($id)
     {
+        $expiration = 5;
+        $data1 = Cache::remember('my_data1', $expiration, function () {
+            return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
+        });
+
+
         return view('dashboard.item.show', [
             "item" => item::with(['category'])->findOrFail($id),
-            "items" => item::with(['category'])->latest()
-                ->paginate(20)
+            "items" => item::with(['category'])
+                ->Filter(request(['search', 'categories', 'status']))
+                ->latest()
+                ->paginate(20),
+            "categories" => $data1,
+
         ]);
     }
 
@@ -202,7 +191,6 @@ class ItemController extends Controller
     public function import(Request $request)
     {
 
-        // $csv = Reader::createFromPath($request->file('file')->getPathname());
         if ($request->hasFile('file')) {
             $request->validate([
                 'file' => 'required|file|mimes:csv,txt',
@@ -222,11 +210,41 @@ class ItemController extends Controller
             return redirect()->back()->with('fail', 'Silahkan pilih file yang ingin diupload terlebih dahulu');
         }
     }
-    public function detail(Request $request, $name){
-        $a = item::where('name', $name)->get();
+    public function detail(Request $request, $name)
+    {
+        $expiration = 5;
+        $data1 = Cache::remember('my_data1', $expiration, function () {
+            return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
+        });
+
+        $category1 = category::where('categoryCode', 'like', '02.06.03.01' . '%')->get();
+        $category2 = category::where('categoryCode', 'like', '02.06.03.02' . '%')->get();
+        $category3 = category::where('categoryCode', 'like', '02.06.03.03' . '%')->get();
+        $category4 = category::where('categoryCode', 'like', '02.06.03.04' . '%')->get();
+        $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
+        $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
+
+        $items = item::where('name', $name)->get();
+
+
+        // dd(  $items);
 
         return view('dashboard.item.detail', [
-            "a" => $a,
+            "categories" => $data1,
+            "a" => $items,
+            "items" => item::with(['category'])
+                ->orderBy('id', 'DESC')
+                ->Filter(request(['search', 'categories', 'status']))
+                ->where('name', $name) 
+                ->paginate(20)
+                ->withQueryString(),
+
+            'categories' => $category1,
+            'categories1' => $category2,
+            'categories2' => $category3,
+            'categories3' => $category4,
+            'categories4' => $category5,
+            'categories5' => $category6,
         ]);
     }
 }

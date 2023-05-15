@@ -1,6 +1,7 @@
 @extends('dashboard.layout.main')
 @Section('tittle')
-    <title> Sisda | Item </title>
+    <title>
+        Sisda | Item </title>
 @Section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Inventarisasi</h1>
@@ -55,9 +56,9 @@
         {{-- End Button Import --}}
 
         {{-- Form Pencarian --}}
-        {{-- <form action="/dashboard/item">
+        <form action="/dashboard/item">
             <div class="row">
-                <label for="">Form Pencarian</label>
+                {{-- <label for="">Form Pencarian</label>
                 <div class="col-6 col-sm-4">
                     <select name="categories" id="categories" class="form-select " placeholder="Category">
                         <option value="">Category</option>
@@ -127,9 +128,9 @@
                         <option value="terpinjam">Terpinjam</option>
                         <option value="in stock">In Stock</option>
                     </select>
-                </div>
+                </div> --}}
 
-                <div class="col-6 col-sm-4">
+                <div class="col-6 col-sm-8">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
                             value="{{ request('search') }}">
@@ -137,20 +138,9 @@
                     </div>
                 </div>
             </div>
-        </form> --}}
+        </form>
         {{-- End form Pencarian --}}
-        {{-- {{ $a}} --}}
 
-        {{-- @foreach ($a as $item)
-            <table>
-                <tr>
-                    <td> nama {{ $item->name }}</td>
-                    <td> total {{ $item->total }}</td>
-                </tr>
-            </table>
-            <a href="/dashboard/item/detail/{{ $item->name }}" class="badge bg-danger border-0 d-inline"><span
-                    data-feather="eye"></span></a>
-        @endforeach --}}
 
         {{-- Form Index --}}
         <div class="table-responsive-sm">
@@ -158,8 +148,9 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">Unit</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">total </th>
+                        <th scope="col">Total Unit </th>
                         <th scope="col">Aksi </th>
                     </tr>
                 </thead>
@@ -167,11 +158,18 @@
                     @foreach ($a as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>
+                                @if ($item->image)
+                                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                                        width="100">
+                                @endif
+                            </td>
                             <td> {{ $item->name }}</td>
                             <td> {{ $item->total }}</td>
                             <td>
                                 <a href="/dashboard/item/detail/{{ $item->name }}"
-                                    class="badge bg-danger border-0 d-inline"><span data-feather="eye"></span></a>
+                                    class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
+
                             </td>
                         </tr>
                     @endforeach

@@ -77,6 +77,7 @@
     </div>
 
     {{-- Form Index --}}
+
     <div class="x_content">
         <h1> Daftar Barang</h1>
         <table class="table table-striped table-sm mt-2">
@@ -84,6 +85,7 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
+                    <th scope="col">Kode Kategori</th>
                     <th scope="col">Status </th>
                     <th scope="col">category </th>
                     <th scope="col">Action</th>
@@ -91,9 +93,16 @@
             </thead>
             <tbody>
                 @foreach ($items as $barang)
-                    <tr>
+                    <tr   class="{{ $barang->status == 'in stock'
+                        ? ''
+                        : ($barang->status == 'Terpinjam'
+                            ? 'bg-success'
+                            : ($barang->status == 'rusak'
+                                ? 'bg-warning'
+                                : 'bg-danger')) }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $barang->name }}</td>
+                        <td>{{ $barang->item_code }}</td>
                         <td>{{ $barang->status }}</td>
                         <td>{{ $barang->category->name }}</td>
                         <td>
