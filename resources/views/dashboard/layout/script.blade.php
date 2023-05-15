@@ -60,4 +60,5 @@
     $(document).ready(function() {
         $('.userBox').select2();
     });
+
 </script>
