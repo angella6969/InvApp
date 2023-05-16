@@ -82,17 +82,6 @@
                         </div>
                     @enderror
                 </div>
-
-                {{-- <div class="col-6 col-sm-4">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="kode" placeholder="Sub-Kelompok">
-                    </div>
-                    @error('kode')
-                        <div class="invalit-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div> --}}
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

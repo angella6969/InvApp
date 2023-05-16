@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
        
         User::factory(10)->create();
         // category::factory(48)->create();
-        role::factory(3)->create();
+        // role::factory(3)->create();
         // item::factory(400)->create();
       
         user::create([
@@ -33,6 +33,15 @@ class DatabaseSeeder extends Seeder
             'role_id' => '1',
             'status' => 'active',
 
+        ]);
+        role::create([
+            'name' => 'Super Admin',
+        ]);
+        role::create([
+            'name' => 'Admin',
+        ]);
+        role::create([
+            'name' => 'Client',
         ]);
     }
 }

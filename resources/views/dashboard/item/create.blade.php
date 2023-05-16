@@ -12,96 +12,96 @@
     {{-- Body --}}
     <div class="col-lg-8 ms-4">
 
-
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         {{-- Field Create --}}
 
         <form method="post" action="/dashboard/item" enctype="multipart/form-data">
             @csrf
 
-
             {{-- Field Item Category --}}
             <div class="mb-2">
-                <label for="Item Code" class="form-label ">Kategori Barang</label>
-                <select class="form-select userbox" name=category_id placeholder="Choose one thing">
+                <label class="form-label ">Kategori Barang</label>
+                <select class="form-select userbox" name="category_id">
                     <option value="">Category</option>
-                    <optgroup label="Komputer Unit/Jaringan">
-                        @foreach ($categories as $item)
-                            @if (old('category_id') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
-                    </optgroup>
-                    <optgroup label="Personal Komputer">
-                        @foreach ($categories1 as $item)
-                            @if (old('category_id') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
-                    </optgroup>
-                    <optgroup label="Peralatan Komputer Mainframe">
-                        @foreach ($categories2 as $item)
-                            @if (old('category_id') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
-                    </optgroup>
-                    <optgroup label="Peralatan Mini Komputer">
-                        @foreach ($categories3 as $item)
-                            @if (old('category_id') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
-                    </optgroup>
-                    <optgroup label="Peralatan Personal Komputer">
-                        @foreach ($categories4 as $item)
-                            @if (old('category_id') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
-                    </optgroup>
-                    <optgroup label="Peralatan Jaringan">
-                        @foreach ($categories5 as $item)
-                            @if (old('category_id') == $item->id)
-                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
-                        @endforeach
-                    </optgroup>
+                    @if (count($categories) > 0)
+                        <optgroup label="Komputer Unit/Jaringan">
+                            @foreach ($categories as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if (count($categories1) > 0)
+                        <optgroup label="Personal Komputer">
+                            @foreach ($categories1 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if (count($categories2) > 0)
+                        <optgroup label="Peralatan Komputer Mainframe">
+                            @foreach ($categories2 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if (count($categories3) > 0)
+                        <optgroup label="Peralatan Mini Komputer">
+                            @foreach ($categories3 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if (count($categories4) > 0)
+                        <optgroup label="Peralatan Personal Komputer">
+                            @foreach ($categories4 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if (count($categories5) > 0)
+                        <optgroup label="Peralatan Jaringan">
+                            @foreach ($categories5 as $item)
+                                @if (old('category_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
+                            @endforeach
+                        </optgroup>
+                    @endif
+
                 </select>
                 @error('category_id')
-                    <div class="invalit-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                <div class="invalit-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
             </div>
             {{-- End Field Item Category --}}
 
             {{-- Field Item Name --}}
             <div class="mb-2">
                 <label for="name" class="form-label ">Nama Barang</label>
-                <input placeholder="Item Name" type="text" name='name'
+                <input placeholder="Nama Barang" type="text" name='name'
                     class="form-control @error('name') is-invalid @enderror" id="name" required
                     value="{{ old('name') }}">
                 @error('name')
@@ -115,8 +115,11 @@
             {{-- Field Tahun Pengadaan --}}
             <div class="mb-2">
                 <label for="brand" class="form-label ">Tahun Pengadaan</label>
-                <input placeholder="Tahun Pengadaan" type="text" name='brand'
-                    class="form-control @error('brand') is-invalid @enderror" id="brand" required
+                <input placeholder="Hanya Angka Saja" name='brand' type="text"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    class="form-control @error('brand')
+is-invalid
+@enderror" id="brand" required
                     value="{{ old('brand') }}">
                 @error('brand')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -124,16 +127,15 @@
             </div>
             {{-- End Tahun Pengadaan --}}
 
-
-
             {{-- Field Unit --}}
             <div class="mb-2">
                 <label for="unit" class="form-label ">Unit</label>
-                <input placeholder="unit" type="text" name='unit'
+                <input placeholder="Hanya Angka Saja" name='unit' type="text"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                     class="form-control @error('unit') is-invalid @enderror" id="unit" required
                     value="{{ old('unit') }}">
                 @error('unit')
-                    <div class="invalit-feedback">
+                    <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
@@ -143,11 +145,11 @@
             {{-- Field Item Location --}}
             <div class="mb-2">
                 <label for="location" class="form-label ">Lokasi Barang/ Keterangan</label>
-                <input placeholder="Item location" type="text" name='location'
+                <input placeholder="Keterangan Lokasi" type="text" name='location'
                     class="form-control @error('location') is-invalid @enderror" id="location" required
                     value="{{ old('location') }}">
                 @error('location')
-                    <div class="invalit-feedback">
+                    <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
@@ -157,11 +159,11 @@
             {{-- Field Item Owner --}}
             <div class="mb-2">
                 <label for="owner" class="form-label ">Sumber Dana</label>
-                <input placeholder="Item owner" type="text" name='owner'
+                <input placeholder="Sumber Pendanaan Barang" type="text" name='owner'
                     class="form-control @error('owner') is-invalid @enderror" id="owner" required
                     value="{{ old('owner') }}">
                 @error('owner')
-                    <div class="invalit-feedback">
+                    <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
@@ -191,6 +193,7 @@
 
     </div>
     {{-- End Body --}}
+
 
     <script>
         function showDropdowns() {

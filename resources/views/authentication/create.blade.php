@@ -83,7 +83,7 @@
                         @can('SuperAdmin')
                             <div class="mb-2">
                                 <select class="form-select" name=role_id>
-
+                                    <option value=""> awd </option>
                                     @foreach ($roles as $item)
                                         @if (old('role_id') == $item->id)
                                             <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
@@ -111,7 +111,7 @@
                         <div class="clearfix"></div>
 
                         {{-- Footer --}}
-                        
+
                         {{-- End Footer --}}
                     </form>
                 </section>
