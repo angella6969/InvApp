@@ -70,13 +70,13 @@
                                             class="badge bg-warning border-0 d-inline"><span data-feather="eye"></span></a> --}}
 
                                         <a href="/dashboard/item/{{ $item->id }}/edit"
-                                            class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+                                            class="badge bg-warning border-0 "><span data-feather="edit"></span>Edit</a>
                                         <form action="/dashboard/item/{{ $item->id }}" class="d-inline" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="badge bg-danger border-0"
                                                 onclick="return confirm('Yakin Ingin Menghapus Data? {{ $item->nama }}')"><span
-                                                    data-feather="file-minus"></span></button>
+                                                    data-feather="file-minus"></span>Hapus</button>
                                         </form>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                         <td>{{ $barang->status }}</td>
                         <td>{{ $barang->category->name }}</td>
                         <td>
-                            <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
+                            <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-success border-0"><span
                                     data-feather="eye"></span></a>
 
                             {{-- <a href="/dashboard/item/{{ $barang->id }}/edit"

@@ -27,8 +27,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $a = item::select('name', 'image', 'brand','category_id', DB::raw('count(*) as total'))
-            ->groupBy('name', 'image', 'brand','category_id')
+        $a = item::select('name', 'image', 'brand', 'category_id', DB::raw('count(*) as total'))
+            ->groupBy('name', 'image', 'brand', 'category_id')
             ->Filter(request(['search']))
             ->get();
         // dd($a);
@@ -207,7 +207,6 @@ class ItemController extends Controller
     }
     public function detail(Request $request, $name, $category)
     {
-        // dd(  $items);
         return view('dashboard.item.detail', [
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
@@ -217,5 +216,24 @@ class ItemController extends Controller
                 ->paginate(20)
                 ->withQueryString(),
         ]);
+    }
+    public function massDestroy(Request $request, $name, $category)
+    {
+        try {
+            // Lakukan penghapusan masal berdasarkan nama dan kategori
+
+            $itemImage = item::select('image')->where('category_id', $category)
+                ->where('name', $name)->value('image');
+            if ($itemImage) {
+                Storage::delete($itemImage);
+            }
+            Item::whereIn('name', [$name])
+                ->whereIn('category_id', [$category])
+                ->delete();
+
+            return redirect()->back()->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 }

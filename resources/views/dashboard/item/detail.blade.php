@@ -159,13 +159,11 @@
                             <td>{{ $barang->category->name }}</td>
 
                             <td>
-                                <a href="/dashboard/item/{{ $barang->id }}"
-                                    class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
-                                {{-- <a href="/dashboard/item/detail" class="badge bg-danger border-0 d-inline"><span
-                                        data-feather="eye"></span></a> --}}
+                                <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-success border-0 "><span
+                                        data-feather="eye"></span></a>
 
-                                <a href="/dashboard/item/{{ $barang->id }}/edit"
-                                    class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+                                <a href="/dashboard/item/{{ $barang->id }}/edit" class="badge bg-warning border-0 "><span
+                                        data-feather="edit"></span></a>
                                 @can('SuperAdmin')
                                     <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
                                         @csrf

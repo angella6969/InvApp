@@ -43,9 +43,9 @@
                         <td>{{ $barang->role->name }}</td>
                         @can('Admin')
                             <td>
-                                <a href="/users/{{ $barang->id }}" class="badge bg-info border-0 d-inline w-100">
+                                <a href="/users/{{ $barang->id }}" class="badge bg-success border-0">
                                     <span data-feather="eye"></span></a>
-                                <a href="/users/{{ $barang->id }}/edit" class="badge bg-warning border-0 d-inline w-100">
+                                <a href="/users/{{ $barang->id }}/edit" class="badge bg-warning border-0">
                                     <span data-feather="user-check"></span></a>
 
                                 @can('SuperAdmin')

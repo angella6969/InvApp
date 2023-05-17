@@ -78,8 +78,8 @@
                         <th scope="col">No</th>
                         <th scope="col">Unit</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Tahun Pengadaan</th>
                         <th scope="col">Total Unit </th>
+                        <th scope="col">Tahun Pengadaan</th>
                         <th scope="col">Aksi </th>
                     </tr>
                 </thead>
@@ -94,12 +94,19 @@
                                 @endif
                             </td>
                             <td> {{ $item->name }}</td>
-                            <td> {{ $item->brand }}</td>
                             <td> {{ $item->total }}</td>
+                            <td> {{ $item->brand }}</td>
                             <td>
-                                <a href="/dashboard/item/detail/{{ $item->name }}/{{$item->category_id}}"
-                                    class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
+                                <a href="/dashboard/item/detail/{{ $item->name }}/{{ $item->category_id }}"
+                                    class="badge bg-success border-0 "><span data-feather="eye"></span></a>
 
+                                <form action="/dashboard/item/{{ $item->name }}/{{ $item->category_id }}" class="d-inline" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="badge bg-danger border-0"
+                                        onclick="return confirm('Yakin Ingin Menghapus Data yang berhubungan dengan? {{ $item->name }}')"><span
+                                            data-feather="file-minus"></span></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
