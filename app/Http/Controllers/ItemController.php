@@ -27,8 +27,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $a = item::select('name', 'image', DB::raw('count(*) as total'))
-            ->groupBy('name', 'image')
+        $a = item::select('name', 'image', 'brand','category_id', DB::raw('count(*) as total'))
+            ->groupBy('name', 'image', 'brand','category_id')
             ->Filter(request(['search']))
             ->get();
         // dd($a);
@@ -81,21 +81,18 @@ class ItemController extends Controller
 
             $itemCategory = category::where('id', $validatedData['category_id'])->value('categoryCode');
             $item = item::where('item_code', 'like', $itemCategory . '%')->pluck('item_code')->max();
-            // dd($itemCategory);
             if ($item != null) {
                 $parts = explode('.', $item);
                 $b = intval($parts[5]) + 1;
                 $itemCodePrefix = $itemCategory . '.';
             } else {
                 $b = 1;
-                
+
                 $itemCodePrefix = $itemCategory . '.';
-                
             }
 
             for ($i = 1; $i <= $validatedData['unit']; $i++) {
                 $validatedData['item_code'] = $itemCodePrefix . str_pad($b++, 3, "0", STR_PAD_LEFT);
-                // dd($validatedData['item_code']);
                 item::create($validatedData);
             }
 
@@ -114,8 +111,6 @@ class ItemController extends Controller
         $data1 = Cache::remember('my_data1', $expiration, function () {
             return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
         });
-
-
         return view('dashboard.item.show', [
             "item" => item::with(['category'])->findOrFail($id),
             "items" => item::with(['category'])
@@ -210,41 +205,17 @@ class ItemController extends Controller
             return redirect()->back()->with('fail', 'Silahkan pilih file yang ingin diupload terlebih dahulu');
         }
     }
-    public function detail(Request $request, $name)
+    public function detail(Request $request, $name, $category)
     {
-        $expiration = 5;
-        $data1 = Cache::remember('my_data1', $expiration, function () {
-            return category::orderByRaw('SUBSTRING(name,1,5) ASC')->get();
-        });
-
-        $category1 = category::where('categoryCode', 'like', '02.06.03.01' . '%')->get();
-        $category2 = category::where('categoryCode', 'like', '02.06.03.02' . '%')->get();
-        $category3 = category::where('categoryCode', 'like', '02.06.03.03' . '%')->get();
-        $category4 = category::where('categoryCode', 'like', '02.06.03.04' . '%')->get();
-        $category5 = category::where('categoryCode', 'like', '02.06.03.05' . '%')->get();
-        $category6 = category::where('categoryCode', 'like', '02.06.03.06' . '%')->get();
-
-        $items = item::where('name', $name)->get();
-
-
         // dd(  $items);
-
         return view('dashboard.item.detail', [
-            "categories" => $data1,
-            "a" => $items,
             "items" => item::with(['category'])
                 ->orderBy('id', 'DESC')
                 ->Filter(request(['search', 'categories', 'status']))
-                ->where('name', $name) 
+                ->where('category_id', $category)
+                ->where('name', $name)
                 ->paginate(20)
                 ->withQueryString(),
-
-            'categories' => $category1,
-            'categories1' => $category2,
-            'categories2' => $category3,
-            'categories3' => $category4,
-            'categories4' => $category5,
-            'categories5' => $category6,
         ]);
     }
 }

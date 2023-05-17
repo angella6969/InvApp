@@ -55,7 +55,7 @@ Route::post('/rent-item/return/{id}', [RentLogController::class, 'returnItem'])-
 
 
 Route::middleware(['Admin', 'auth'])->group(function () {
-    Route::get('/dashboard/item/detail/{name}', [ItemController::class, 'detail']);
+    Route::get('/dashboard/item/detail/{name}/{category}', [ItemController::class, 'detail']);
 
 
     Route::resource('/dashboard/item', ItemController::class);

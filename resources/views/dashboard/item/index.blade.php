@@ -58,78 +58,6 @@
         {{-- Form Pencarian --}}
         <form action="/dashboard/item">
             <div class="row">
-                {{-- <label for="">Form Pencarian</label>
-                <div class="col-6 col-sm-4">
-                    <select name="categories" id="categories" class="form-select " placeholder="Category">
-                        <option value="">Category</option>
-                        <optgroup label="Komputer Unit/Jaringan">
-                            @foreach ($categories as $item)
-                                @if (old('category_id') == $item->id)
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @else
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="Personal Komputer">
-                            @foreach ($categories1 as $item)
-                                @if (old('category_id') == $item->id)
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @else
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="Peralatan Komputer Mainframe">
-                            @foreach ($categories2 as $item)
-                                @if (old('category_id') == $item->id)
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @else
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="Peralatan Mini Komputer">
-                            @foreach ($categories3 as $item)
-                                @if (old('category_id') == $item->id)
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @else
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="Peralatan Personal Komputer">
-                            @foreach ($categories4 as $item)
-                                @if (old('category_id') == $item->id)
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @else
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                        <optgroup label="Peralatan Jaringan">
-                            @foreach ($categories5 as $item)
-                                @if (old('category_id') == $item->id)
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @else
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                    </select>
-                </div>
-
-
-                <div class="col-6 col-sm-4">
-                    <select name="status" id="status" class="form-select" placeholder="Category">
-                        <option value="">Status</option>
-                        <option value="rusak">Rusak</option>
-                        <option value="hilang">Hilang</option>
-                        <option value="terpinjam">Terpinjam</option>
-                        <option value="in stock">In Stock</option>
-                    </select>
-                </div> --}}
-
                 <div class="col-6 col-sm-8">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search By Item Name..." name="search"
@@ -150,6 +78,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Unit</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Tahun Pengadaan</th>
                         <th scope="col">Total Unit </th>
                         <th scope="col">Aksi </th>
                     </tr>
@@ -165,9 +94,10 @@
                                 @endif
                             </td>
                             <td> {{ $item->name }}</td>
+                            <td> {{ $item->brand }}</td>
                             <td> {{ $item->total }}</td>
                             <td>
-                                <a href="/dashboard/item/detail/{{ $item->name }}"
+                                <a href="/dashboard/item/detail/{{ $item->name }}/{{$item->category_id}}"
                                     class="badge bg-success border-0 d-inline"><span data-feather="eye"></span></a>
 
                             </td>
