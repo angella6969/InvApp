@@ -117,7 +117,7 @@ class ItemController extends Controller
                 ->Filter(request(['search', 'categories', 'status']))
                 ->latest()
                 ->paginate(20),
-            "categories" => $data1,
+            // "categories" => $data1,
 
         ]);
     }
@@ -161,7 +161,7 @@ class ItemController extends Controller
 
         item::where('id', $item)->update($validatedData);
 
-        return redirect('/dashboard/item')->with('success', 'Berhasil Merubah Data');
+        return redirect("/dashboard/item/$item")->with('success', 'Berhasil Merubah Data');
     }
 
     /**
@@ -177,7 +177,7 @@ class ItemController extends Controller
             }
 
             $item->delete();
-            return redirect('/dashboard/item')->with('success', 'Berhasil Menghapus Data');
+            return redirect()->back()->with('success', 'Berhasil Menghapus Data');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }

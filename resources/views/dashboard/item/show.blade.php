@@ -66,6 +66,18 @@
                                                 <td>{{ $item->category->name }}</td>
                                             </tr>
                                         </table>
+                                        {{-- <a href="/dashboard/item/{{ $item->id }}"
+                                            class="badge bg-warning border-0 d-inline"><span data-feather="eye"></span></a> --}}
+
+                                        <a href="/dashboard/item/{{ $item->id }}/edit"
+                                            class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
+                                        <form action="/dashboard/item/{{ $item->id }}" class="d-inline" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="badge bg-danger border-0"
+                                                onclick="return confirm('Yakin Ingin Menghapus Data? {{ $item->nama }}')"><span
+                                                    data-feather="file-minus"></span></button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -93,13 +105,14 @@
             </thead>
             <tbody>
                 @foreach ($items as $barang)
-                    <tr   class="{{ $barang->status == 'in stock'
-                        ? ''
-                        : ($barang->status == 'Terpinjam'
-                            ? 'bg-success'
-                            : ($barang->status == 'rusak'
-                                ? 'bg-warning'
-                                : 'bg-danger')) }}">
+                    <tr
+                        class="{{ $barang->status == 'in stock'
+                            ? ''
+                            : ($barang->status == 'Terpinjam'
+                                ? 'bg-success'
+                                : ($barang->status == 'rusak'
+                                    ? 'bg-warning'
+                                    : 'bg-danger')) }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $barang->name }}</td>
                         <td>{{ $barang->item_code }}</td>
@@ -109,7 +122,7 @@
                             <a href="/dashboard/item/{{ $barang->id }}" class="badge bg-warning border-0 d-inline"><span
                                     data-feather="eye"></span></a>
 
-                            <a href="/dashboard/item/{{ $barang->id }}/edit"
+                            {{-- <a href="/dashboard/item/{{ $barang->id }}/edit"
                                 class="badge bg-warning border-0 d-inline"><span data-feather="edit"></span></a>
                             <form action="/dashboard/item/{{ $barang->id }}" class="d-inline" method="POST">
                                 @csrf
@@ -117,7 +130,7 @@
                                 <button class="badge bg-danger border-0"
                                     onclick="return confirm('Yakin Ingin Menghapus Data? {{ $barang->nama }}')"><span
                                         data-feather="file-minus"></span></button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach
