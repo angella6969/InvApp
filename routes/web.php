@@ -58,6 +58,8 @@ Route::middleware(['Admin', 'auth'])->group(function () {
     Route::get('/dashboard/item/detail/{name}/{category}', [ItemController::class, 'detail']);
     Route::delete('/dashboard/item/{name}/{category}', [ItemController::class, 'massDestroy']);
 
+    Route::get('/dashboard/item/update/{name}/{category}', [ItemController::class, 'massUpdate']);
+
 
 
 

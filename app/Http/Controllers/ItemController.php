@@ -236,4 +236,36 @@ class ItemController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
+
+
+
+    public function massEdit(string $id)
+    {
+
+        return view('dashboard.item.edit', [
+            "items" => item::findOrFail($id),
+            'categories' => category::all()
+        ]);
+    }
+    public function massUpdate(Request $request, $name, $category)
+    {
+        dd('dalam pengembangan');
+        try {
+            // Lakukan penghapusan masal berdasarkan nama dan kategori
+
+            $itemImage = item::select('image')->where('category_id', $category)
+                ->where('name', $name)->value('image');
+            if ($itemImage) {
+                Storage::delete($itemImage);
+            }
+            Item::whereIn('name', [$name])
+                ->whereIn('category_id', [$category])
+                ->delete();
+
+            return redirect()->back()->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
 }

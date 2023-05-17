@@ -100,6 +100,9 @@
                                 <a href="/dashboard/item/detail/{{ $item->name }}/{{ $item->category_id }}"
                                     class="badge bg-success border-0 "><span data-feather="eye"></span></a>
 
+                                <a href="/dashboard/item/update/{{ $item->name }}/{{ $item->category_id }}"
+                                    class="badge bg-warning border-0 "><span data-feather="edit"></span></a>
+
                                 <form action="/dashboard/item/{{ $item->name }}/{{ $item->category_id }}" class="d-inline" method="POST">
                                     @csrf
                                     @method('DELETE')
