@@ -1,11 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-3">
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
-        {{-- <img src="image/PvQJoc4a_400x400.jpg" class="brand-image img-circle elevation-3" style="opacity: 1"> --}}
         <img src="{{ asset('storage/images/LOGO%20SISDA.png') }}" alt="LOGO%20SISDA.png" width="200"
             class="img-thumbnail ">
-        {{-- <h1 class="justfy-conten-center"> S . I . S . D . A</h1> --}}
-        {{-- <span class="brand-text font-weight-light">Sisda</span> --}}
     </a>
 
     <!-- Sidebar -->
@@ -46,17 +43,6 @@
                         @endcan
                     </ul>
                 </li>
-                {{-- <li class="nav-item menu-open">
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a  href="/dashboard/formlaporan"
-                                class="nav-link {{ Request::is('/dashboard/formlaporan') ? 'active' : '' }}">
-                                <span data-feather="file-text"></span>
-                                <p>Form Pelaporan</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
                 <li>
                     <form action="/logout" method="post">
                         @csrf

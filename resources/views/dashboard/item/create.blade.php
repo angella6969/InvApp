@@ -21,7 +21,7 @@
             <div class="mb-2">
                 <label class="form-label ">Kategori Barang</label>
                 <select class="form-select userbox" name="category_id">
-                    <option value="">Category</option>
+                    <option value="">Category</option> 
                     @if (count($categories) > 0)
                         <optgroup label="Komputer Unit/Jaringan">
                             @foreach ($categories as $item)
