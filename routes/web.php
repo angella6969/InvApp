@@ -16,6 +16,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FormPelaporanController;
 use App\Http\Controllers\RentLogController;
 use Illuminate\Routing\RouteGroup;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,9 @@ Route::middleware(['Admin', 'auth'])->group(function () {
     Route::resource('/rent-item', RentLogController::class);
 });
 
-
+Route::get('/tes', function () {
+    Artisan::call('storage:link');
+});
 // Route::POST('/item/import', [ItemController::class, 'import']);
 Route::post('/item/import', [ItemController::class, 'import']);
 

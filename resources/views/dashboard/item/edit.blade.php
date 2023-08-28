@@ -83,7 +83,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+            </div> 
             {{-- End Field Item Status --}}
 
             {{-- Field Item Code --}}

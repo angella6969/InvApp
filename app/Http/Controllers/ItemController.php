@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      */
     public function index()
@@ -117,8 +117,6 @@ class ItemController extends Controller
                 ->Filter(request(['search', 'categories', 'status']))
                 ->latest()
                 ->paginate(20),
-            // "categories" => $data1,
-
         ]);
     }
 

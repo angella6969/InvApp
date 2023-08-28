@@ -117,9 +117,7 @@
                 <label for="brand" class="form-label ">Tahun Pengadaan</label>
                 <input placeholder="Hanya Angka Saja" name='brand' type="text"
                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                    class="form-control @error('brand')
-is-invalid
-@enderror" id="brand" required
+                    class="form-control @error('brand') is-invalid @enderror" id="brand" required
                     value="{{ old('brand') }}">
                 @error('brand')
                     <div class="invalid-feedback">{{ $message }}</div>
